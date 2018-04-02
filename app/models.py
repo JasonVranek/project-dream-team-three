@@ -44,7 +44,7 @@ class Quotation(UserMixin, db.Model):
     __tablename__ = 'quotations'
 
     q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
-    c_id = db.Column(db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
+    c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.Integer)
     date = db.Column('Quotaton Date', db.String(50))
     q_num = db.Column('Quotation Number', db.Integer)
@@ -68,8 +68,8 @@ class Quotation(UserMixin, db.Model):
     opportunities = db.relationship('Opportunity', backref='quotation',
                                 lazy='dynamic')
 
-    # quote_details = db.relationship('Quotation_Detail', backref='quote_detail',
-    #                             lazy='dynamic')
+    quote_details = db.relationship('Quotation_Detail', backref='quotation',
+                                lazy='dynamic')
 
     def __repr__(self):
         return '<Quotation: {}>'.format(self.q_id)
@@ -82,8 +82,8 @@ class Opportunity(UserMixin, db.Model):
     __tablename__ = 'opportunities'
 
     o_id = db.Column('OpportunityID', db.Integer, primary_key=True)  
-    q_id = db.Column(db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
-    source_of_lead = db.Column('Source of Lead', db.Sting(50))
+    q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
+    source_of_lead = db.Column('Source of Lead', db.String(50))
     sale_ref_fee = db.Column('Sales referal Fee', db.Float)
     competitors = db.Column('Competitors', db.Integer)
     sales_stage = db.Column('Sales Stage', db.Integer)
@@ -103,6 +103,25 @@ class Opportunity(UserMixin, db.Model):
 
     def __repr__(self):
         return '<Opportunity: {}>'.format(self.o_id)
+
+
+class Quotation_Detail(UserMixin, db.Model):
+    """
+    Create an Opportunity table
+    """
+    __tablename__ = 'quotation_details'
+
+    quote_detail_id = db.Column('QuotationDetailID', db.Integer, primary_key=True)  
+    q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
+    p_id = db.Column('ProductID', db.String(50))    # Foreign key of Products
+    p_name = db.Column('Product Name', db.String(50))
+    quantity = db.Column('Quantity', db.Float)
+    discount = db.Column('Discount', db.Float)
+    q_price = db.Column('Quote Price', db.Float)       
+    option = db.Column('Option', db.Float)
+    
+    def __repr__(self):
+        return '<Quotation Detail: {}>'.format(self.quote_detail_id)
 
 
 
