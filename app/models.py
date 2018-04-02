@@ -11,11 +11,11 @@ class Customer(UserMixin, db.Model):
     __tablename__ = 'customers'
 
     c_id = db.Column('CustomerID', db.Integer, index=True, unique=True)
-    acc_code = db.Column('Account Code', db.Integer, primary_key=True, index=True, unique=True)
+    acc_code = db.Column('Account Code', db.Integer, primary_key=True)
     comp_name = db.Column('CompanyName', db.String(50))
-    cont_first_name = db.Column('ContactFirstName', db.String(50))
-    cont_last_name = db.Column('ContactLastName', db.String(50))
-    bill_address = db.Column('BillingAddress', db.String(50))
+    f_name = db.Column('ContactFirstName', db.String(50))
+    l_name = db.Column('ContactLastName', db.String(50))
+    b_address = db.Column('BillingAddress', db.String(50))
     city = db.Column('City', db.String(50))
     state_province = db.Column('StateOrProvince', db.String(50))
     post_code = db.Column('PostalCode', db.String(50))
@@ -30,6 +30,9 @@ class Customer(UserMixin, db.Model):
     status = db.Column('Status', db.String(50))
     rating = db.Column('Rating', db.String(50))
 
+    quotations = db.relationship('Quotation', backref='customer',
+                                lazy='dynamic')
+
     def __repr__(self):
         return '<Customer: {}>'.format(self.c_id)
 
@@ -40,8 +43,8 @@ class Quotation(UserMixin, db.Model):
     """
     __tablename__ = 'quotations'
 
-    q_id = db.Column('QuotationID', db.Integer, primary=True, index=True, unique=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
-    c_id = db.Column(db.Integer, db.ForeignKey('customers.c_id'))                       # FOREIGN KEY CHILD OF CUSTOMERS
+    q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
+    c_id = db.Column(db.Integer, db.ForeignKey('customers.CustomerID'))                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.String(50))
     date = db.Column('Quotaton Date', db.String(50))
     q_num = db.Column('Quotation Number', db.String(50))
@@ -63,7 +66,7 @@ class Quotation(UserMixin, db.Model):
     q_amount = db.Column('Quote Amount', db.String(50))
 
     def __repr__(self):
-        return '<Customer: {}>'.format(self.c_id)
+        return '<Quotation: {}>'.format(self.q_id)
 
 
 class Employee(UserMixin, db.Model):
