@@ -65,8 +65,45 @@ class Quotation(UserMixin, db.Model):
     q_note = db.Column('Quotation Note', db.String(50))
     q_amount = db.Column('Quote Amount', db.Integer)
 
+    opportunities = db.relationship('Opportunity', backref='quotation',
+                                lazy='dynamic')
+
+    # quote_details = db.relationship('Quotation_Detail', backref='quote_detail',
+    #                             lazy='dynamic')
+
     def __repr__(self):
         return '<Quotation: {}>'.format(self.q_id)
+
+
+class Opportunity(UserMixin, db.Model):
+    """
+    Create an Opportunity table
+    """
+    __tablename__ = 'opportunities'
+
+    o_id = db.Column('OpportunityID', db.Integer, primary_key=True)  
+    q_id = db.Column(db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
+    source_of_lead = db.Column('Source of Lead', db.Sting(50))
+    sale_ref_fee = db.Column('Sales referal Fee', db.Float)
+    competitors = db.Column('Competitors', db.Integer)
+    sales_stage = db.Column('Sales Stage', db.Integer)
+    close_date = db.Column('Close Date', db.Date)       
+    probability = db.Column('Probability', db.Float)
+    rev_category = db.Column('Revenue Category', db.String(50))
+    proj_note = db.Column('Project Note', db.String(100))
+    application = db.Column('Application', db.String(50))
+    family = db.Column('Family', db.String(50))
+    potential_money = db.Column('Potential $', db.Float)
+    probable_money = db.Column('Probable $', db.Float)
+    actual_money = db.Column('Actual $', db.Float)
+    revenue = db.Column('Revenue $', db.Float)
+    integrator = db.Column('Integrator', db.String(50))
+    region = db.Column('Region', db.String(50))
+
+
+    def __repr__(self):
+        return '<Opportunity: {}>'.format(self.o_id)
+
 
 
 class Employee(UserMixin, db.Model):
