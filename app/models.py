@@ -75,6 +75,34 @@ class Quotation(UserMixin, db.Model):
         return '<Quotation: {}>'.format(self.q_id)
 
 
+class Product(UserMixin, db.Model):
+    """
+    Create a Quotation table
+    """
+    __tablename__ = 'products'
+
+    p_id = db.Column('ProductID', db.Integer, primary_key=True) 
+    p_number = db.Column('Part Number', db.String(50))                    
+    p_name = db.Column('ProductName', db.String(50))
+    unit_price = db.Column('UnitPrice', db.Float)
+    p_note = db.Column('Product Note to show', db.String(200))
+    cost_native = db.Column('Cost Native', db.Float)
+    exchange_rate = db.Column('Exchange Rate used', db.Float)
+    unit_cost = db.Column('Unit Cost', db.Float)
+    supplier = db.Column('Supplier', db.String(50))
+    p_category = db.Column('Product Category', db.String(50))
+    p_status = db.Column('Product Status', db.String(50))
+    date_created = db.Column('Date Created', db.Date)
+    person_created = db.Column('Person Created', db.String(50))
+    remarks = db.Column('Remarks', db.String(50))
+    
+    quote_details = db.relationship('Quotation_Detail', backref='product',
+                                lazy='dynamic')
+
+    def __repr__(self):
+        return '<Product: {}>'.format(self.p_id)
+
+
 class Opportunity(UserMixin, db.Model):
     """
     Create an Opportunity table
@@ -113,7 +141,7 @@ class Quotation_Detail(UserMixin, db.Model):
 
     quote_detail_id = db.Column('QuotationDetailID', db.Integer, primary_key=True)  
     q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
-    p_id = db.Column('ProductID', db.String(50))    # Foreign key of Products
+    p_id = db.Column('ProductID', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
     p_name = db.Column('Product Name', db.String(50))
     quantity = db.Column('Quantity', db.Float)
     discount = db.Column('Discount', db.Float)
