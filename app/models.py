@@ -10,21 +10,21 @@ class Customer(UserMixin, db.Model):
     """
     __tablename__ = 'customers'
 
-    c_id = db.Column('CustomerID', db.Integer, index=True, unique=True)
-    acc_code = db.Column('Account Code', db.Integer, primary_key=True)
-    comp_name = db.Column('CompanyName', db.String(50))
-    f_name = db.Column('ContactFirstName', db.String(50))
-    l_name = db.Column('ContactLastName', db.String(50))
-    b_address = db.Column('BillingAddress', db.String(50))
-    city = db.Column('City', db.String(50))
-    state_province = db.Column('StateOrProvince', db.String(50))
-    post_code = db.Column('PostalCode', db.String(50))
-    count_region = db.Column('Country/Region', db.String(50))
-    cont_title = db.Column('ContactTitle', db.String(50))
-    phone = db.Column('PhoneNumber', db.String(50))
-    fax = db.Column('FaxNumber', db.String(50))
-    email = db.Column('EmailAddress', db.String(50))
-    notes = db.Column('Notes', db.String(50))
+    c_id = db.Column('CustomerID', db.Integer, primary_key=True)
+    acc_code = db.Column('Account Code', db.String(20), unique=True, nullable=False)
+    comp_name = db.Column('CompanyName', db.String(20))
+    f_name = db.Column('ContactFirstName', db.String(20))
+    l_name = db.Column('ContactLastName', db.String(20))
+    b_address = db.Column('BillingAddress', db.String(40))
+    city = db.Column('City', db.String(20))
+    state_province = db.Column('StateOrProvince', db.String(20))
+    post_code = db.Column('PostalCode', db.String(10))
+    count_region = db.Column('Country/Region', db.String(20))
+    cont_title = db.Column('ContactTitle', db.String(30))
+    phone = db.Column('PhoneNumber', db.String(20))
+    fax = db.Column('FaxNumber', db.String(20))
+    email = db.Column('EmailAddress', db.String(20), unique=True)
+    notes = db.Column('Notes', db.String(100))
     order = db.Column('Order', db.String(50))
     state = db.Column('State', db.String(50))
     status = db.Column('Status', db.String(50))
@@ -44,10 +44,10 @@ class Quotation(UserMixin, db.Model):
     __tablename__ = 'quotations'
 
     q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
-    c_id = db.Column(db.Integer, db.ForeignKey('customers.CustomerID'))                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
-    e_id = db.Column('EmployeeID', db.String(50))
+    c_id = db.Column(db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
+    e_id = db.Column('EmployeeID', db.Integer)
     date = db.Column('Quotaton Date', db.String(50))
-    q_num = db.Column('Quotation Number', db.String(50))
+    q_num = db.Column('Quotation Number', db.Integer)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))
     title = db.Column('Title', db.String(50))
@@ -63,7 +63,7 @@ class Quotation(UserMixin, db.Model):
     s_term = db.Column('Shipment Term', db.String(50))
     q_title = db.Column('Quotation title', db.String(50))
     q_note = db.Column('Quotation Note', db.String(50))
-    q_amount = db.Column('Quote Amount', db.String(50))
+    q_amount = db.Column('Quote Amount', db.Integer)
 
     def __repr__(self):
         return '<Quotation: {}>'.format(self.q_id)
