@@ -2,9 +2,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm
+from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm
 from .. import db
-from ..models import Department, Employee, Role, Customer
+from ..models import Department, Employee, Role, Customer, Product
 
 
 def check_admin():
@@ -209,7 +209,7 @@ def edit_customer(id):
         db.session.commit()
         flash('You have successfully edited the customer.')
 
-        # redirect to the departments page
+        # redirect to the customers page
         return redirect(url_for('admin.list_customers'))
 
     # fill the form with current data to show what changes are to be made
@@ -393,3 +393,138 @@ def assign_employee(id):
     return render_template('admin/employees/employee.html',
                            employee=employee, form=form,
                            title='Assign Employee')
+
+
+# Product Views
+
+
+@admin.route('/products', methods=['GET', 'POST'])
+@login_required
+def list_products():
+    """
+    List all products
+    """
+    check_admin()
+
+    products = Product.query.all()
+
+    return render_template('admin/products/products.html',
+                           products=products, title="Products")
+
+
+@admin.route('/products/add', methods=['GET', 'POST'])
+@login_required
+def add_product():
+    """
+    Add a product to the database
+    """
+    check_admin()
+
+    add_product = True
+
+    form = ProductForm()
+    if form.validate_on_submit():
+        product = Product(p_number=form.p_number.data,
+                                p_name = form.p_name.data,
+                                unit_price = form.unit_price.data,
+                                p_note = form.p_note.data,
+                                cost_native = form.cost_native.data,
+                                exchange_rate = form.exchange_rate.data,
+                                unit_cost = form.unit_cost.data,
+                                supplier = form.supplier.data,
+                                p_category = form.p_category.data,
+                                p_status = form.p_status.data,
+                                date_created = form.date_created.data,
+                                person_created = form.person_created.data,
+                                remarks = form.remarks.data)
+                                
+        try:
+            # add product to the database
+            db.session.add(product)
+            db.session.commit()
+            flash('You have successfully added a new product.')
+        except:
+            # in case Product already exists
+            flash('Error: Product already exists.')
+
+        # redirect to products page
+        return redirect(url_for('admin.list_products'))
+
+    # load product template
+    return render_template('admin/products/product.html', action="Add",
+                           add_product=add_product, form=form,
+                           title="Add Product")
+
+
+@admin.route('/products/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_product(id):
+    """
+    Edit a product
+    """
+    check_admin()
+
+    add_product = False
+
+    product = Product.query.get_or_404(id)
+    form = ProductForm(obj=product)
+    if form.validate_on_submit():
+        product.p_number = form.p_number.data
+        product.p_name = form.p_name.data
+        product.unit_price = form.unit_price.data
+        product.p_note = form.p_note.data
+        product.cost_native = form.cost_native.data
+        product.exchange_rate = form.exchange_rate.data
+        product.unit_cost = form.unit_cost.data
+        product.unit_cost = form.unit_cost.data
+        product.supplier = form.supplier.data
+        product.p_category = form.p_category.data
+        product.p_status = form.p_status.data
+        product.date_created = form.date_created.data
+        product.person_created = form.person_created.data
+        product.remarks = form.remarks.data
+
+        db.session.commit()
+        flash('You have successfully edited the product.')
+
+        # redirect to the products page
+        return redirect(url_for('admin.list_products'))
+
+    # fill the form with current data to show what changes are to be made
+    form.p_number.data = product.p_number 
+    form.p_name.data = product.p_name 
+    form.unit_price.data = product.unit_price 
+    form.p_note.data = product.p_note
+    form.cost_native.data = product.cost_native
+    form.exchange_rate.data = product.exchange_rate
+    form.unit_cost.data = product.unit_cost
+    form.unit_cost.data = product.unit_cost
+    form.supplier.data = product.supplier 
+    form.p_category.data = product.p_category
+    form.p_status.data = product.p_status
+    form.date_created.data = product.date_created
+    form.person_created.data = product.person_created
+    form.remarks.data = product.remarks
+
+    return render_template('admin/products/product.html', action="Edit",
+                           add_product=add_product, form=form,
+                           product=product, title="Edit Product")
+
+
+@admin.route('/products/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_product(id):
+    """
+    Delete a product from the database
+    """
+    check_admin()
+
+    product = Product.query.get_or_404(id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('You have successfully deleted the product.')
+
+    # redirect to the products page
+    return redirect(url_for('admin.list_products'))
+
+    return render_template(title="Delete Product")

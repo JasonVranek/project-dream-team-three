@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, FloatField, DateField, TextField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
 
-from ..models import Department, Role, Customer
+from ..models import Department, Role, Customer, Employee, Product
 
 
 class DepartmentForm(FlaskForm):
@@ -40,18 +40,18 @@ class CustomerForm(FlaskForm):
     Form for admin to add or edit a customer
     """
     acc_code = StringField('Account Code', validators=[DataRequired()])
-    comp_name = StringField('CompanyName', validators=[DataRequired()])
-    f_name = StringField('ContactFirstName', validators=[DataRequired()])
-    l_name = StringField('ContactLastName', validators=[DataRequired()])
-    phone = StringField('PhoneNumber', validators=[DataRequired()])
-    email = StringField('EmailAddress', validators=[DataRequired()])
-    b_address = StringField('BillingAddress')
+    comp_name = StringField('Company Name', validators=[DataRequired()])
+    f_name = StringField('First Name', validators=[DataRequired()])
+    l_name = StringField('Last Name', validators=[DataRequired()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
+    b_address = StringField('Billing Address')
     city = StringField('City')
-    state_province = StringField('StateOrProvince')
-    post_code = StringField('PostalCode')          #implicitly fill from city?
+    state_province = StringField('State or Province')
+    post_code = StringField('Postal Code')          #implicitly fill from city?
     count_region = StringField('Country/Region')   #query from list of regions?
-    cont_title = StringField('ContactTitle')
-    fax = StringField('FaxNumber')
+    cont_title = StringField('Contact Title')
+    fax = StringField('Fax Number')
     notes = StringField('Notes')
     order = StringField('Order')
     state = StringField('State')
@@ -59,5 +59,28 @@ class CustomerForm(FlaskForm):
     rating = StringField('Rating')
 
     submit = SubmitField('Submit')
+
+
+class ProductForm(FlaskForm):
+    """
+    Form for admin to add or edit a product
+    """
+    p_number = StringField('Part Number', validators=[DataRequired()])                    
+    p_name = StringField('Product Name', validators=[DataRequired()])
+    unit_price = FloatField('Unit Price', validators=[DataRequired()])
+    p_note = StringField('Product Note to show')
+    cost_native = FloatField('Cost Native')
+    exchange_rate = FloatField('Exchange Rate used')
+    unit_cost = FloatField('Unit Cost', validators=[DataRequired()])
+    supplier = StringField('Supplier')
+    p_category = StringField('Product Category')
+    p_status = StringField('Product Status')
+    date_created = DateField('Date Created')  #date field?
+    person_created = QuerySelectField(query_factory=lambda: Employee.query.all(),
+                            get_label="username")
+    remarks = TextField('Remarks')
+    
+    submit = SubmitField('Submit')
+
 
     
