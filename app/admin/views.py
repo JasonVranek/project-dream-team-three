@@ -2,9 +2,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm
+from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm, QuotationForm
 from .. import db
-from ..models import Department, Employee, Role, Customer, Product
+from ..models import Department, Employee, Role, Customer, Product, Quotation
 
 
 def check_admin():
@@ -528,3 +528,154 @@ def delete_product(id):
     return redirect(url_for('admin.list_products'))
 
     return render_template(title="Delete Product")
+
+
+# Quotation Views
+
+
+@admin.route('/quotations', methods=['GET', 'POST'])
+@login_required
+def list_quotations():
+    """
+    List all quotations
+    """
+    check_admin()
+
+    quotations = Quotation.query.all()
+
+    return render_template('admin/quotations/quotations.html',
+                           quotations=quotations, title="Quotations")
+
+
+@admin.route('/quotations/add', methods=['GET', 'POST'])
+@login_required
+def add_quotation():
+    """
+    Add a quotation to the database
+    """
+    check_admin()
+
+    add_quotation = True
+
+    form = QuotationForm()
+    if form.validate_on_submit():
+        quotation = Quotation(q_num=form.q_num.data,
+                                e_id = form.e_id.data,
+                                date = form.date.data,
+                                revision = form.revision.data,
+                                pay_terms = form.pay_terms.data,
+                                title = form.title.data,
+                                f_name = form.f_name.data,
+                                l_name = form.l_name.data,
+                                address = form.address.data,
+                                city = form.city.data,
+                                state = form.state.data,
+                                country = form.country.data,
+                                postal = form.postal.data,
+                                tel = form.tel.data,
+                                s_sched = form.s_sched.data,
+                                s_term = form.s_term.data,
+                                q_title = form.q_title.data,
+                                q_note = form.q_note.data,
+                                q_amount = form.q_amount.data)
+                                
+        try:
+            # add quotation to the database
+            db.session.add(quotation)
+            db.session.commit()
+            flash('You have successfully added a new quotation.')
+        except:
+            # in case Quotation already exists
+            flash('Error: Quotation already exists.')
+
+        # redirect to quotations page
+        return redirect(url_for('admin.list_quotations'))
+
+    # load quotation template
+    return render_template('admin/quotations/quotation.html', action="Add",
+                           add_quotation=add_quotation, form=form,
+                           title="Add Quotation")
+
+
+@admin.route('/quotations/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_quotation(id):
+    """
+    Edit a quotation
+    """
+    check_admin()
+
+    add_quotation = False
+
+    quotation = Quotation.query.get_or_404(id)
+    form = QuotationForm(obj=quotation)
+    if form.validate_on_submit():
+        quotation.q_num = form.q_num.data           #TODO: AUTO FILL SOME OF THESE FROM DATABASE RELATIONS
+        quotation.e_id = form.e_id.data
+        quotation.date = form.date.data
+        quotation.revision = form.revision.data
+        quotation.pay_terms = form.pay_terms.data
+        quotation.title = form.title.data
+        quotation.f_name = form.f_name.data
+        quotation.l_name = form.l_name.data
+        quotation.address = form.address.data
+        quotation.city = form.city.data
+        quotation.state = form.state.data
+        quotation.country = form.country.data
+        quotation.postal = form.postal.data
+        quotation.tel = form.tel.data
+        quotation.s_sched = form.s_sched.data
+        quotation.s_term = form.s_term.data
+        quotation.q_title = form.q_title.data
+        quotation.q_note = form.q_note.data
+        quotation.q_amount = form.q_amount.data
+
+        db.session.commit()
+        flash('You have successfully edited the quotation.')
+
+        # redirect to the quotations page
+        return redirect(url_for('admin.list_quotations'))
+
+    # fill the form with current data to show what changes are to be made
+    form.q_num.data = quotation.q_num
+    form.e_id.data = quotation.e_id
+    form.date.data = quotation.date
+    form.revision.data = quotation.revision
+    form.pay_terms.data = quotation.pay_terms
+    form.title.data = quotation.title
+    form.f_name.data = quotation.f_name
+    form.l_name.data = quotation.l_name
+    form.address.data = quotation.address
+    form.city.data = quotation.city
+    form.state.data = quotation.state
+    form.country.data = quotation.country 
+    form.postal.data = quotation.postal
+    form.tel.data = quotation.tel
+    form.s_sched.data = quotation.s_sched
+    form.s_term.data = quotation.s_term
+    form.q_title.data = quotation.q_title
+    form.q_note.data = quotation.q_note
+    form.q_amount.data = quotation.q_amount
+
+    return render_template('admin/quotations/quotation.html', action="Edit",
+                           add_quotation=add_quotation, form=form,
+                           quotation=quotation, title="Edit Quotation")
+
+
+@admin.route('/quotations/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_quotation(id):
+    """
+    Delete a quotation from the database
+    """
+    check_admin()
+
+    quotation = Quotation.query.get_or_404(id)
+    db.session.delete(quotation)
+    db.session.commit()
+    flash('You have successfully deleted the quotation.')
+
+    # redirect to the quotations page
+    return redirect(url_for('admin.list_quotations'))
+
+    return render_template(title="Delete Quotation")

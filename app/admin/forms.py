@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, DateField, TextField
+from wtforms import StringField, SubmitField, FloatField, DateField, TextField, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
 
@@ -79,7 +79,35 @@ class ProductForm(FlaskForm):
     person_created = QuerySelectField(query_factory=lambda: Employee.query.all(),
                             get_label="username")
     remarks = TextField('Remarks')
-    
+
+    submit = SubmitField('Submit')
+
+
+class QuotationForm(FlaskForm):
+    """
+    Form for admin to add or edit a quotation
+    """
+    q_num = IntegerField('Quotation Number')
+    e_id = QuerySelectField(query_factory=lambda: Employee.query.all(),
+                            get_label="username")
+    date = DateField('Quotaton Date')
+    revision = StringField('Revision')
+    pay_terms = StringField('Payment Terms')
+    title = StringField('Title')
+    f_name = StringField('First Name')
+    l_name = StringField('Last Name')
+    address = StringField('Address')
+    city = StringField('City')
+    state = StringField('State')
+    country = StringField('Country')
+    postal = StringField('Zip')
+    tel = StringField('TEL')
+    s_sched = StringField('Ship Schedule')
+    s_term = StringField('Shipment Term')
+    q_title = StringField('Quotation title')
+    q_note = TextField('Quotation Note')
+    q_amount = IntegerField('Quote Amount')
+
     submit = SubmitField('Submit')
 
 
