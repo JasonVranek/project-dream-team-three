@@ -2,7 +2,7 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DepartmentForm, EmployeeAssignForm, RoleForm
+from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm
 from .. import db
 from ..models import Department, Employee, Role, Customer
 
@@ -112,97 +112,148 @@ def delete_department(id):
 # Customer Views
 
 
-# @admin.route('/customers', methods=['GET', 'POST'])
-# @login_required
-# def list_customers():
-#     """
-#     List all customers
-#     """
-#     check_admin()
+@admin.route('/customers', methods=['GET', 'POST'])
+@login_required
+def list_customers():
+    """
+    List all customers
+    """
+    check_admin()
 
-#     customers = Customer.query.all()
+    customers = Customer.query.all()
 
-#     return render_template('admin/customers/customers.html',
-#                            customers=customers, title="Customers")
-
-
-# @admin.route('/customers/add', methods=['GET', 'POST'])
-# @login_required
-# def add_customer():
-#     """
-#     Add a customer to the database
-#     """
-#     check_admin()
-
-#     add_customer = True
-
-#     form = CustomerForm()
-#     if form.validate_on_submit():
-#         customer = Customer(name=form.name.data,
-#                                 description=form.description.data) # ADD ALL THE RELEVANT CLASS FIELDS FROM CUSTOMER
-#         try:
-#             # add customer to the database
-#             db.session.add(customer)
-#             db.session.commit()
-#             flash('You have successfully added a new customer.')
-#         except:
-#             # in case department name already exists
-#             flash('Error: Customer Account Code already exists.')
-
-#         # redirect to departments page
-#         return redirect(url_for('admin.list_customers'))
-
-#     # load department template
-#     return render_template('admin/customers/customer.html', action="Add",
-#                            add_customer=add_customer, form=form,
-#                            title="Add Customer")
+    return render_template('admin/customers/customers.html',
+                           customers=customers, title="Customers")
 
 
-# @admin.route('/customers/edit/<int:id>', methods=['GET', 'POST'])
-# @login_required
-# def edit_customer(id):
-#     """
-#     Edit a customer
-#     """
-#     check_admin()
+@admin.route('/customers/add', methods=['GET', 'POST'])
+@login_required
+def add_customer():
+    """
+    Add a customer to the database
+    """
+    check_admin()
 
-#     add_customer = False
+    add_customer = True
 
-#     customer = Customer.query.get_or_404(id)
-#     form = CustomerForm(obj=customer)
-#     if form.validate_on_submit():
-#         customer.name = form.name.data  # ADD ALL THE RELEVANT CLASS FIELDS FROM CUSTOMER
-#         customer.description = form.description.data
-#         db.session.commit()
-#         flash('You have successfully edited the department.')
+    form = CustomerForm()
+    if form.validate_on_submit():
+        customer = Customer(acc_code=form.acc_code.data,
+                                comp_name = form.comp_name.data,
+                                f_name = form.f_name.data,
+                                l_name = form.l_name.data,
+                                phone = form.phone.data,
+                                email = form.email.data,
+                                b_address = form.b_address.data,
+                                city = form.city.data,
+                                state_province = form.state_province.data,
+                                post_code = form.post_code.data,
+                                count_region = form.count_region.data,
+                                cont_title = form.cont_title.data,
+                                fax = form.fax.data,
+                                notes = form.notes.data,
+                                order = form.order.data,
+                                state = form.state.data,
+                                status = form.status.data,
+                                rating = form.rating.data)
+        try:
+            # add customer to the database
+            db.session.add(customer)
+            db.session.commit()
+            flash('You have successfully added a new customer.')
+        except:
+            # in case Customer Account Code already exists
+            flash('Error: Customer Account Code already exists.')
 
-#         # redirect to the departments page
-#         return redirect(url_for('admin.list_customers'))
+        # redirect to customers page
+        return redirect(url_for('admin.list_customers'))
 
-#     form.description.data = customer.description
-#     form.name.data = customer.name
-#     return render_template('admin/customers/customer.html', action="Edit",
-#                            add_department=add_department, form=form,
-#                            customer=customer, title="Edit Customer")
+    # load customer template
+    return render_template('admin/customers/customer.html', action="Add",
+                           add_customer=add_customer, form=form,
+                           title="Add Customer")
 
 
-# @admin.route('/customers/delete/<int:id>', methods=['GET', 'POST'])
-# @login_required
-# def delete_customer(id):
-#     """
-#     Delete a customer from the database
-#     """
-#     check_admin()
+@admin.route('/customers/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_customer(id):
+    """
+    Edit a customer
+    """
+    check_admin()
 
-#     customer = Customer.query.get_or_404(id)
-#     db.session.delete(customer)
-#     db.session.commit()
-#     flash('You have successfully deleted the customer.')
+    add_customer = False
 
-#     # redirect to the departments page
-#     return redirect(url_for('admin.list_customers'))
+    customer = Customer.query.get_or_404(id)
+    form = CustomerForm(obj=customer)
+    if form.validate_on_submit():
+        customer.acc_code = form.acc_code.data
+        customer.comp_name = form.comp_name.data
+        customer.f_name = form.f_name.data
+        customer.l_name = form.l_name.data
+        customer.phone = form.phone.data
+        customer.email = form.email.data
+        customer.b_address = form.b_address.data
+        customer.city = form.city.data
+        customer.state_province = form.state_province.data
+        customer.post_code = form.post_code.data
+        customer.count_region = form.count_region.data
+        customer.cont_title = form.cont_title.data
+        customer.fax = form.fax.data
+        customer.notes = form.notes.data
+        customer.order = form.order.data
+        customer.state = form.state.data
+        customer.status = form.status.data
+        customer.rating = form.rating.data
 
-#     return render_template(title="Delete Customer")
+        db.session.commit()
+        flash('You have successfully edited the customer.')
+
+        # redirect to the departments page
+        return redirect(url_for('admin.list_customers'))
+
+    # fill the form with current data to show what changes are to be made
+    form.acc_code.data = customer.acc_code 
+    form.comp_name.data = customer.comp_name 
+    form.f_name.data = customer.f_name 
+    form.l_name.data = customer.l_name
+    form.phone.data = customer.phone
+    form.email.data = customer.email
+    form.b_address.data = customer.b_address 
+    form.city.data = customer.city
+    form.state_province.data = customer.state_province
+    form.post_code.data = customer.post_code
+    form.count_region.data = customer.count_region
+    form.cont_title.data = customer.cont_title
+    form.fax.data = customer.fax 
+    form.notes.data = customer.notes 
+    form.order.data = customer.order 
+    form.state.data = customer.state
+    form.status.data = customer.status
+    form.rating.data = customer.rating
+
+    return render_template('admin/customers/customer.html', action="Edit",
+                           add_customer=add_customer, form=form,
+                           customer=customer, title="Edit Customer")
+
+
+@admin.route('/customers/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_customer(id):
+    """
+    Delete a customer from the database
+    """
+    check_admin()
+
+    customer = Customer.query.get_or_404(id)
+    db.session.delete(customer)
+    db.session.commit()
+    flash('You have successfully deleted the customer.')
+
+    # redirect to the customers page
+    return redirect(url_for('admin.list_customers'))
+
+    return render_template(title="Delete Customer")
 
 
 # Role Views
