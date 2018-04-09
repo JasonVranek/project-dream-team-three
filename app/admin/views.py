@@ -863,7 +863,7 @@ def add_quotation_detail():
         # When using foreign keys as queries in forms, q_id returns the quotation object, so must extract q_id from object
         quotation_detail = Quotation_Detail(q_id = form.q_id.data.q_id,     # special
                                 p_id = form.p_id.data.p_id,                 # special
-                                p_name = form.p_name.data.p_name,           # special
+                                p_name = form.p_name.data,           # special??
                                 quantity = form.quantity.data,
                                 discount = form.discount.data,
                                 q_price = form.q_price.data,
@@ -902,7 +902,7 @@ def edit_quotation_detail(id):
     if form.validate_on_submit():
         quotation_detail.q_id = form.q_id.data.q_id                 # special
         quotation_detail.p_id = form.p_id.data.p_id                 # special
-        quotation_detail.p_name = form.p_name.data.p_name           # special
+        quotation_detail.p_name = form.p_name.data           # special??
         quotation_detail.quantity = form.quantity.data
         quotation_detail.discount = form.discount.data
         quotation_detail.q_price = form.q_price.data
