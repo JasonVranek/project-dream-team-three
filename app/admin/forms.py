@@ -76,7 +76,7 @@ class ProductForm(FlaskForm):
     p_category = StringField('Product Category')
     p_status = StringField('Product Status')
     date_created = DateField('Date Created')  #date field?
-    person_created = QuerySelectField(query_factory=lambda: Employee.query.all(),
+    person_created = QuerySelectField('Person Created', query_factory=lambda: Employee.query.all(),
                             get_label="username")
     remarks = TextField('Remarks')
 
@@ -87,8 +87,10 @@ class QuotationForm(FlaskForm):
     """
     Form for admin to add or edit a quotation
     """
-    q_num = IntegerField('Quotation Number')
-    e_id = QuerySelectField(query_factory=lambda: Employee.query.all(),
+    c_id = QuerySelectField('Customer Id', query_factory=lambda: Customer.query.all(),
+                            get_label="c_id")
+    q_num = IntegerField('Quotation Number', validators=[DataRequired()])
+    e_id = QuerySelectField('Employee', query_factory=lambda: Employee.query.all(),
                             get_label="username")
     date = DateField('Quotaton Date')
     revision = StringField('Revision')

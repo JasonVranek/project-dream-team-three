@@ -559,8 +559,10 @@ def add_quotation():
 
     form = QuotationForm()
     if form.validate_on_submit():
-        quotation = Quotation(q_num=form.q_num.data,
-                                e_id = form.e_id.data,
+        # When using foreign keys as queries in forms, c_id returns the customer object, so must extract c_id from object
+        quotation = Quotation(c_id = form.c_id.data.c_id,           # special
+                                q_num = form.q_num.data,
+                                e_id = form.e_id.data.id,           # special
                                 date = form.date.data,
                                 revision = form.revision.data,
                                 pay_terms = form.pay_terms.data,
@@ -610,8 +612,9 @@ def edit_quotation(id):
     quotation = Quotation.query.get_or_404(id)
     form = QuotationForm(obj=quotation)
     if form.validate_on_submit():
-        quotation.q_num = form.q_num.data           #TODO: AUTO FILL SOME OF THESE FROM DATABASE RELATIONS
-        quotation.e_id = form.e_id.data
+        quotation.c_id = form.c_id.data.c_id        # special
+        quotation.q_num = form.q_num.data        
+        quotation.e_id = form.e_id.data.id          # special
         quotation.date = form.date.data
         quotation.revision = form.revision.data
         quotation.pay_terms = form.pay_terms.data
@@ -637,6 +640,7 @@ def edit_quotation(id):
         return redirect(url_for('admin.list_quotations'))
 
     # fill the form with current data to show what changes are to be made
+    form.c_id.data = quotation.c_id
     form.q_num.data = quotation.q_num
     form.e_id.data = quotation.e_id
     form.date.data = quotation.date

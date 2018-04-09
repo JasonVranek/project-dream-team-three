@@ -36,6 +36,9 @@ class Customer(UserMixin, db.Model):
     def __repr__(self):
         return '<Customer: {}>'.format(self.c_id)
 
+    def get_id(self): 
+        return (self.c_id)
+
 
 class Quotation(UserMixin, db.Model):
     """
@@ -47,7 +50,7 @@ class Quotation(UserMixin, db.Model):
     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.Integer)
     date = db.Column('Quotaton Date', db.String(50))
-    q_num = db.Column('Quotation Number', db.Integer)
+    q_num = db.Column('Quotation Number', db.Integer, unique=True)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))
     title = db.Column('Title', db.String(50))
@@ -73,6 +76,9 @@ class Quotation(UserMixin, db.Model):
 
     def __repr__(self):
         return '<Quotation: {}>'.format(self.q_id)
+
+    def get_id(self): 
+        return (self.q_id)
 
 
 class Product(UserMixin, db.Model):
@@ -101,6 +107,9 @@ class Product(UserMixin, db.Model):
 
     def __repr__(self):
         return '<Product: {}>'.format(self.p_id)
+
+    def get_id(self): 
+        return (self.p_id)
 
 
 class Opportunity(UserMixin, db.Model):
@@ -132,6 +141,9 @@ class Opportunity(UserMixin, db.Model):
     def __repr__(self):
         return '<Opportunity: {}>'.format(self.o_id)
 
+    def get_id(self): 
+        return (self.o_id)
+
 
 class Quotation_Detail(UserMixin, db.Model):
     """
@@ -150,6 +162,9 @@ class Quotation_Detail(UserMixin, db.Model):
     
     def __repr__(self):
         return '<Quotation Detail: {}>'.format(self.quote_detail_id)
+
+    def get_id(self): 
+        return (self.quote_detail_id)
 
 
 
