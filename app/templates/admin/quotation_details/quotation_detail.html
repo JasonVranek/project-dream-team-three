@@ -1,21 +1,21 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Edit Quotation{% endblock %}
+{% block title %}Edit Quotation Detail{% endblock %}
 {% block body %}
 <div class="content-section">
  <div class="outer">
     <div class="middle">
       <div class="inner">
         <div class="center">
-            {% if add_quotation %}
-                <h1> Add a Quotation </h1>
+            {% if add_quotation_detail %}
+                <h1> Add a Quotation Detail</h1>
             {% else %}
-                <h1> Edit a Quotation </h1>
+                <h1> Edit a Quotation Detail</h1>
                 <br/>
                 <p>
                     Select parameters to edit for: 
                     <span style="color: #aec251;">
-                        {{ quotation.q_id }} {{ quotation.q_num }} {{ quotation.title }}
+                        {{ quotation_detail.quote_detail_id }} {{ quotation_detail.q_id }} {{ quotation_detail.p_id }}
                     </span>
                 </p>
                 <br/>

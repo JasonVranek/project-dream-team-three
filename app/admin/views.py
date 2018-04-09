@@ -2,9 +2,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm, QuotationForm, OpportunityForm
+from forms import *
 from .. import db
-from ..models import Department, Employee, Role, Customer, Product, Quotation, Opportunity
+from ..models import *
 
 
 def check_admin():
@@ -830,3 +830,118 @@ def delete_opportunity(id):
 
     return render_template(title="Delete Opportunity")
 
+
+# Quotation_Detail Views
+
+
+@admin.route('/quotation_details', methods=['GET', 'POST'])
+@login_required
+def list_quotation_details():
+    """
+    List all quotation_details
+    """
+    check_admin()
+
+    quotation_details = Quotation_Detail.query.all()
+
+    return render_template('admin/quotation_details/quotation_details.html',
+                           quotation_details=quotation_details, title="Quotation_Details")
+
+
+@admin.route('/quotation_details/add', methods=['GET', 'POST'])
+@login_required
+def add_quotation_detail():
+    """
+    Add a quotation_detail to the database
+    """
+    check_admin()
+
+    add_quotation_detail = True
+
+    form = Quotation_DetailForm()
+    if form.validate_on_submit():
+        # When using foreign keys as queries in forms, q_id returns the quotation object, so must extract q_id from object
+        quotation_detail = Quotation_Detail(q_id = form.q_id.data.q_id,     # special
+                                p_id = form.p_id.data.p_id,                 # special
+                                p_name = form.p_name.data.p_name,           # special
+                                quantity = form.quantity.data,
+                                discount = form.discount.data,
+                                q_price = form.q_price.data,
+                                option = form.option.data)
+                                
+        try:
+            # add quotation_detail to the database
+            db.session.add(quotation_detail)
+            db.session.commit()
+            flash('You have successfully added a new quotation_detail.')
+        except:
+            # in case Quotation_Detail already exists
+            flash('Error: Quotation_Detail already exists.')
+
+        # redirect to quotation_details page
+        return redirect(url_for('admin.list_quotation_details'))
+
+    # load quotation_detail template
+    return render_template('admin/quotation_details/quotation_detail.html', action="Add",
+                           add_quotation_detail=add_quotation_detail, form=form,
+                           title="Add Quotation_Detail")
+
+
+@admin.route('/quotation_details/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_quotation_detail(id):
+    """
+    Edit a quotation_detail
+    """
+    check_admin()
+
+    add_quotation_detail = False
+
+    quotation_detail = Quotation_Detail.query.get_or_404(id)
+    form = Quotation_DetailForm(obj=quotation_detail)
+    if form.validate_on_submit():
+        quotation_detail.q_id = form.q_id.data.q_id                 # special
+        quotation_detail.p_id = form.p_id.data.p_id                 # special
+        quotation_detail.p_name = form.p_name.data.p_name           # special
+        quotation_detail.quantity = form.quantity.data
+        quotation_detail.discount = form.discount.data
+        quotation_detail.q_price = form.q_price.data
+        quotation_detail.option = form.option.data
+
+        db.session.commit()
+        flash('You have successfully edited the quotation_detail.')
+
+        # redirect to the quotation_details page
+        return redirect(url_for('admin.list_quotation_details'))
+
+    # fill the form with current data to show what changes are to be made
+    form.q_id.data = quotation_detail.q_id          
+    form.p_id.data = quotation_detail.p_id                
+    form.p_name.data = quotation_detail.p_name
+    form.quantity.data = quotation_detail.quantity
+    form.discount.data = quotation_detail.discount
+    form.q_price.data = quotation_detail.q_price 
+    form.option.data = quotation_detail.option
+
+    return render_template('admin/quotation_details/quotation_detail.html', action="Edit",
+                           add_quotation_detail=add_quotation_detail, form=form,
+                           quotation_detail=quotation_detail, title="Edit Quotation_Detail")
+
+
+@admin.route('/quotation_details/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_quotation_detail(id):
+    """
+    Delete a quotation_detail from the database
+    """
+    check_admin()
+
+    quotation_detail = Quotation_Detail.query.get_or_404(id)
+    db.session.delete(quotation_detail)
+    db.session.commit()
+    flash('You have successfully deleted the quotation_detail.')
+
+    # redirect to the quotation_details page
+    return redirect(url_for('admin.list_quotation_details'))
+
+    return render_template(title="Delete Quotation_Detail")

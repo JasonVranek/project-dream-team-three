@@ -1,6 +1,6 @@
 {% import "bootstrap/utils.html" as utils %}
 {% extends "base.html" %}
-{% block title %}Quotations{% endblock %}
+{% block title %}Quotation Details{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -9,37 +9,37 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Quotations</h1>
-        {% if quotations %}
+        <h1 style="text-align:center;">Quotation Details</h1>
+        {% if quotation_details %}
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Quote ID </th>
-                  <th width="15%"> Customer ID </th>
-                  <th width="15%"> Employee ID </th>
-                  <th width="15%"> Quote Number </th>
-                  <th width="15%"> Quote Date </th>
-                  <th width="15%"> Quote Amount </th>
+                  <th width="15%"> Quote Detail ID </th>
+                  <th width="15%"> Quotation ID </th>
+                  <th width="15%"> Product ID </th>
+                  <th width="15%"> Product Name </th>
+                  <th width="15%"> Quantity </th>
+                  <th width="15%"> Quote Price </th>
                 </tr>
               </thead>
               <tbody>
-              {% for quotation in quotations %}
+              {% for quotation_detail in quotation_details %}
                 <tr>
-                  <td> {{ quotation.q_id }} </td>
-                  <td> {{ quotation.c_id }} </td>
-                  <td> {{ quotation.e_id }}</td>
-                  <td> {{ quotation.q_num }}</td>
-                  <td> {{ quotation.date }} </td>
-                  <td> {{ quotation.q_amount }} </td>
+                  <td> {{ quotation_detail.quote_detail_id }} </td>
+                  <td> {{ quotation_detail.q_id }} </td>
+                  <td> {{ quotation_detail.p_id }}</td>
+                  <td> {{ quotation_detail.p_name }}</td>
+                  <td> {{ quotation_detail.quantity }} </td>
+                  <td> {{ quotation_detail.q_price }} </td>
                   <td>
-                    <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}">
+                    <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}">
                       <i class="fa fa-user-plus"></i> Edit
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
+                    <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}">
                       <i class="fa fa-trash"></i> Delete
                     </a>
                   </td>
@@ -50,9 +50,9 @@
           </div>
         {% endif %}
         <div style="text-align: center">
-        <a href="{{ url_for('admin.add_quotation') }}" class="btn btn-default btn-lg">
+        <a href="{{ url_for('admin.add_quotation_detail') }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Quotation
+            Add Quotation Detail
           </a>
         </div>
       </div>
