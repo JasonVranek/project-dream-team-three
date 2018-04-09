@@ -2,9 +2,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm, QuotationForm
+from forms import DepartmentForm, EmployeeAssignForm, RoleForm, CustomerForm, ProductForm, QuotationForm, OpportunityForm
 from .. import db
-from ..models import Department, Employee, Role, Customer, Product, Quotation
+from ..models import Department, Employee, Role, Customer, Product, Quotation, Opportunity
 
 
 def check_admin():
