@@ -683,3 +683,150 @@ def delete_quotation(id):
     return redirect(url_for('admin.list_quotations'))
 
     return render_template(title="Delete Quotation")
+
+
+# Opportunity Views
+
+
+@admin.route('/opportunities', methods=['GET', 'POST'])
+@login_required
+def list_opportunities():
+    """
+    List all opportunities
+    """
+    check_admin()
+
+    opportunities = Opportunity.query.all()
+
+    return render_template('admin/opportunities/opportunities.html',
+                           opportunities=opportunities, title="Opportunities")
+
+
+@admin.route('/opportunities/add', methods=['GET', 'POST'])
+@login_required
+def add_opportunity():
+    """
+    Add an opportunity to the database
+    """
+    check_admin()
+
+    add_opportunity = True
+
+    form = OpportunityForm()
+    if form.validate_on_submit():
+        # When using foreign keys as queries in forms, q_id returns the quotation object, so must extract q_id from object
+        opportunity = Opportunity(q_id = form.q_id.data.q_id,           # special
+                                    source_of_lead = form.source_of_lead.data,           
+                                    sale_ref_fee = form.sale_ref_fee.data,
+                                    competitors = form.competitors.data,
+                                    sales_stage = form.sales_stage.data,
+                                    close_date = form.close_date.data,
+                                    probability = form.probability.data,
+                                    rev_category = form.rev_category.data,
+                                    proj_note = form.proj_note.data,
+                                    application = form.application.data,
+                                    family = form.family.data,
+                                    potential_money = form.potential_money.data,
+                                    probable_money = form.probable_money.data,
+                                    actual_money = form.actual_money.data,
+                                    revenue = form.revenue.data,
+                                    integrator = form.integrator.data,
+                                    region = form.region.data)
+                                
+        try:
+            # add opportunity to the database
+            db.session.add(opportunity)
+            db.session.commit()
+            flash('You have successfully added a new opportunity.')
+        except:
+            # in case Opportunity already exists
+            flash('Error: Opportunity already exists.')
+
+        # redirect to opportunities page
+        return redirect(url_for('admin.list_opportunities'))
+
+    # load opportunity template
+    return render_template('admin/opportunities/opportunity.html', action="Add",
+                           add_opportunity=add_opportunity, form=form,
+                           title="Add Opportunity")
+
+
+@admin.route('/opportunities/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_opportunity(id):
+    """
+    Edit an opportunity
+    """
+    check_admin()
+
+    add_opportunity = False
+
+    opportunity = Opportunity.query.get_or_404(id)
+    form = OpportunityForm(obj=opportunity)
+    if form.validate_on_submit():
+        opportunity.q_id = form.q_id.data.q_id      # special
+        opportunity.source_of_lead = form.source_of_lead.data,          
+        opportunity.sale_ref_fee = form.sale_ref_fee.data
+        opportunity.competitors = form.competitors.data
+        opportunity.sales_stage = form.sales_stage.data
+        opportunity.close_date = form.close_date.data
+        opportunity.probability = form.probability.data
+        opportunity.rev_category = form.rev_category.data
+        opportunity.proj_note = form.proj_note.data
+        opportunity.application = form.application.data
+        opportunity.family = form.family.data
+        opportunity.potential_money = form.potential_money.data
+        opportunity.probable_money = form.probable_money.data
+        opportunity.actual_money = form.actual_money.data
+        opportunity.revenue = form.revenue.data
+        opportunity.integrator = form.integrator.data
+        opportunity.region = form.region.data
+
+        db.session.commit()
+        flash('You have successfully edited the opportunity.')
+
+        # redirect to the opportunities page
+        return redirect(url_for('admin.list_opportunities'))
+
+    # fill the form with current data to show what changes are to be made
+    form.q_id.data = opportunity.q_id       
+    form.source_of_lead.data = opportunity.source_of_lead       
+    form.sale_ref_fee.data = opportunity.sale_ref_fee
+    form.competitors.data = opportunity.competitors
+    form.sales_stage.data = opportunity.sales_stage
+    form.close_date.data = opportunity.close_date
+    form.probability.data = opportunity.probability
+    form.rev_category.data = opportunity.rev_category
+    form.proj_note.data = opportunity.proj_note
+    form.application.data = opportunity.application
+    form.family.data = opportunity.family
+    form.potential_money.data = opportunity.potential_money 
+    form.probable_money.data = opportunity.probable_money
+    form.actual_money.data = opportunity.actual_money 
+    form.revenue.data = opportunity.revenue
+    form.integrator.data = opportunity.integrator 
+    form.region.data = opportunity.region
+
+    return render_template('admin/opportunities/opportunity.html', action="Edit",
+                           add_opportunity=add_opportunity, form=form,
+                           opportunity=opportunity, title="Edit Opportunity")
+
+
+@admin.route('/opportunities/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_opportunity(id):
+    """
+    Delete an opportunity from the database
+    """
+    check_admin()
+
+    opportunity = Opportunity.query.get_or_404(id)
+    db.session.delete(opportunity)
+    db.session.commit()
+    flash('You have successfully deleted the opportunity.')
+
+    # redirect to the opportunities page
+    return redirect(url_for('admin.list_opportunities'))
+
+    return render_template(title="Delete Opportunity")
+
