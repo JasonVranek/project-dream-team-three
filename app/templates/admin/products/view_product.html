@@ -1,0 +1,105 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Product{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        {% if product %}
+        <h1 style="text-align:center;"> {{ product.p_name }} : {{ product.p_number }} </h1>
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <tr>
+                <thead>
+                  <th width="20%"> Product ID </th>
+                  <td> {{ product.p_id }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Part Number </th>
+                  <td> {{ product.p_number }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Product Name </th>
+                  <td> {{ product.p_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Product Note </th>
+                  <td> {{ product.p_note }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Exchange Rate Used </th>
+                  <td> {{ product.exchange_rate }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Unit Cost </th>
+                  <td> {{ product.unit_cost }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Supplier </th>
+                  <td> {{ product.supplier }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Product Category </th>
+                  <td> {{ product.p_category }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Product Status </th>
+                  <td> {{ product.p_status }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Date Created </th>
+                  <td> {{ product.date_created }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Person Created </th>
+                  <td> {{ product.person_created }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Remarks </th>
+                  <td> {{ product.remarks }} </td>
+                </thead>
+              </tr>
+          </div>
+          <div style="text-align: center">
+            <a href="{{ url_for('admin.edit_product', id=product.p_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-user-plus"></i>
+              Edit Product
+            </a>
+            <a href="{{ url_for('admin.delete_product', id=product.p_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-trash"></i>
+              Delete Product
+            </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

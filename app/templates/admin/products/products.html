@@ -41,6 +41,11 @@
                   <td> {{ product.p_category }} </td>
                   <td> {{ product.supplier }} </td>
                   <td>
+                    <a href="{{ url_for('admin.view_product', id=product.p_id) }}">
+                      <i class="fa fa-eye"></i> View
+                    </a>
+                  </td>
+                  <td>
                     <a href="{{ url_for('admin.edit_product', id=product.p_id) }}">
                       <i class="fa fa-user-plus"></i> Edit
                     </a>

@@ -412,6 +412,20 @@ def assign_employee(id):
 # Product Views
 
 
+@admin.route('/products/view/<int:id>', methods=['GET'])
+@login_required
+def view_product(id):
+    """
+    View a product
+    """
+    check_admin()
+
+    product = Product.query.filter_by(p_id=id).first()
+
+    return render_template('admin/products/view_product.html', action="View",
+                           product=product, title="View Product")
+
+
 @admin.route('/products', methods=['GET', 'POST'])
 @login_required
 def list_products():
