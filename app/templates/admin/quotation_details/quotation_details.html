@@ -28,11 +28,24 @@
               {% for quotation_detail in quotation_details %}
                 <tr>
                   <td> {{ quotation_detail.quote_detail_id }} </td>
-                  <td> {{ quotation_detail.q_id }} </td>
-                  <td> {{ quotation_detail.p_id }}</td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
+                      {{ quotation_detail.q_id }}
+                    </a>
+                  </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_product', id=quotation_detail.p_id) }}">
+                      {{ quotation_detail.p_id }}
+                    </a>
+                  </td>
                   <td> {{ quotation_detail.p_name }}</td>
                   <td> {{ quotation_detail.quantity }} </td>
                   <td> {{ quotation_detail.q_price }} </td>
+                  <td>
+                    <a href="{{ url_for('admin.view_quotation_detail', id=quotation_detail.quote_detail_id) }}">
+                      <i class="fa fa-eye"></i> View
+                    </a>
+                  </td>
                   <td>
                     <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}">
                       <i class="fa fa-user-plus"></i> Edit

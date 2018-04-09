@@ -890,6 +890,20 @@ def delete_opportunity(id):
 # Quotation_Detail Views
 
 
+@admin.route('/quotation_details/view/<int:id>', methods=['GET'])
+@login_required
+def view_quotation_detail(id):
+    """
+    View a quotation_detail
+    """
+    check_admin()
+
+    quotation_detail = Quotation_Detail.query.filter_by(quote_detail_id=id).first()
+
+    return render_template('admin/quotation_details/view_quotation_detail.html', action="View",
+                           quotation_detail=quotation_detail, title="View Quotation Detail")
+
+
 @admin.route('/quotation_details', methods=['GET', 'POST'])
 @login_required
 def list_quotation_details():
