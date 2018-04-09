@@ -1,0 +1,62 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Quotations{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Quotations</h1>
+        {% if quotations %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="15%"> Quote ID </th>
+                  <th width="15%"> Customer ID </th>
+                  <th width="15%"> Employee ID </th>
+                  <th width="15%"> Quote Number </th>
+                  <th width="15%"> Quote Date </th>
+                  <th width="15%"> Quote Amount </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for quotation in quotations %}
+                <tr>
+                  <td> {{ quotation.q_id }} </td>
+                  <td> {{ quotation.c_id }} </td>
+                  <td> {{ quotation.e_id }}</td>
+                  <td> {{ quotation.q_num }}</td>
+                  <td> {{ quotation.date }} </td>
+                  <td> {{ quotation.q_amount }} </td>
+                  <td>
+                    <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}">
+                      <i class="fa fa-user-plus"></i> Edit
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+        <div style="text-align: center">
+        <a href="{{ url_for('admin.add_quotation') }}" class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add Quotation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

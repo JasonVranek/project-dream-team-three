@@ -139,4 +139,22 @@ class OpportunityForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
+class Quotation_DetailForm(FlaskForm):
+    """
+    Form for admin to add or edit a quotation_detail
+    """
+    q_id = QuerySelectField('Quotation Id', query_factory=lambda: Quotation.query.all(),
+                            get_label="q_id")              
+    p_id = QuerySelectField('Product Id', query_factory=lambda: Product.query.all(),
+                            get_label="p_id")
+    p_name = StringField('Product Name', query_factory=lambda: Product.query.all(),
+                            get_label="p_name")
+    quantity = FloatField('Quantity', validators=[DataRequired()])
+    discount = FloatField('Discount', validators=[DataRequired()])
+    q_price = FloatField('Quote Price', validators=[DataRequired()])       
+    option = FloatField('Option')
+
+    submit = SubmitField('Submit')
+
+
     
