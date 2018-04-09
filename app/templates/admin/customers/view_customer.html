@@ -9,66 +9,119 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Customer</h1>
         {% if customer %}
+        <h1 style="text-align:center;"> {{ customer.f_name }} {{ customer.l_name }} </h1>
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th width="15%"> Account Code </th>
-                  <th width="10%"> Customer ID </th>
-                  <th width="30%"> Name </th>
-                  <th width="30%"> Company Name </th>
-                  <th width="15%"> Email </th>
-                  <th width="15%"> Phone </th>
-                  <th width="15%"> Billing Addres </th>
-                  <th width="10%"> City </th>
-                  <th width="30%"> State or Province </th>
-                  <th width="30%"> Postal Code </th>
-                  <th width="15%"> Country or Region </th>
-                  <th width="15%"> Contact Title </th>
-                  <th width="15%"> Fax Number </th>
-                  <th width="10%"> Notes </th>
-                  <th width="30%"> Order </th>
-                  <th width="30%"> State </th>
-                  <th width="15%"> Status </th>
-                  <th width="15%"> Rating </th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Account Code </th>
                   <td> {{ customer.acc_code }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Customer ID </th>
                   <td> {{ customer.c_id }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Name </th>
                   <td> {{ customer.f_name }} {{ customer.l_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Company Name </th>
                   <td> {{ customer.comp_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Email </th>
                   <td> {{ customer.email }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Phone </th>
                   <td> {{ customer.phone }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Billing Address </th>
                   <td> {{ customer.b_address }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> City </th>
                   <td> {{ customer.city }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> State or Province </th>
                   <td> {{ customer.state_province }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Postal Code </th>
                   <td> {{ customer.post_code }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Country or Region </th>
                   <td> {{ customer.count_region }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Contact Title </th>
                   <td> {{ customer.cont_title }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Fax Number </th>
                   <td> {{ customer.fax }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Notes </th>
                   <td> {{ customer.notes }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Order </th>
                   <td> {{ customer.order }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> State </th>
                   <td> {{ customer.state }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Status </th>
                   <td> {{ customer.status }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Rating </th>
                   <td> {{ customer.rating }} </td>
-                  <td>
-                    <a href="{{ url_for('admin.edit_customer', id=customer.c_id) }}">
-                      <i class="fa fa-user-plus"></i> Edit
-                    </a>
-                  </td>
-                  <td>
-                    <a href="{{ url_for('admin.delete_customer', id=customer.c_id) }}">
-                      <i class="fa fa-trash"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
+                </thead>
+              </tr>
             </table>
           </div>
         {% endif %}
