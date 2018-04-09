@@ -123,7 +123,7 @@ class OpportunityForm(FlaskForm):
     sale_ref_fee = StringField('Sales referal Fee')
     competitors = IntegerField('Competitors')
     sales_stage = IntegerField('Sales Stage')
-    close_date = DateField('Close Date')
+    close_date = DateField('Close Date', validators=[DataRequired()])
     probability = FloatField('Probability')
     rev_category = StringField('Revenue Category')
     proj_note = StringField('Project Note')
