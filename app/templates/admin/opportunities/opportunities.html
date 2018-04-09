@@ -1,0 +1,64 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Opportunities{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Opportunities</h1>
+        {% if opportunities %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="15%"> Opportunity ID </th>
+                  <th width="15%"> Quotation ID </th>
+                  <th width="15%"> Close Date </th>
+                  <th width="15%"> Potential $ </th>
+                  <th width="15%"> Probable $ </th>
+                  <th width="15%"> Actual $ </th>
+                  <th width="15%"> Revenue $ </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for opportunity in opportunities %}
+                <tr>
+                  <td> {{ opportunity.o_id }} </td>
+                  <td> {{ opportunity.q_id }} </td>
+                  <td> {{ opportunity.close_date }}</td>
+                  <td> {{ opportunity.potential_money }}</td>
+                  <td> {{ opportunity.probable_money }} </td>
+                  <td> {{ opportunity.actual_money }} </td>
+                  <td> {{ opportunity.revenue }} </td>
+                  <td>
+                    <a href="{{ url_for('admin.edit_opportunity', id=opportunity.o_id) }}">
+                      <i class="fa fa-user-plus"></i> Edit
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ url_for('admin.delete_opportunity', id=opportunity.o_id) }}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+        <div style="text-align: center">
+        <a href="{{ url_for('admin.add_opportunity') }}" class="btn btn-default btn-lg">
+            <i class="fa fa-plus"></i>
+            Add Opportunity
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

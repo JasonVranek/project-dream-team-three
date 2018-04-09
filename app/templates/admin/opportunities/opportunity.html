@@ -1,0 +1,29 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Edit Opportunity{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+            {% if add_opportunity %}
+                <h1> Add an Opportunity </h1>
+            {% else %}
+                <h1> Edit an Opportunity </h1>
+                <br/>
+                <p>
+                    Select parameters to edit for: 
+                    <span style="color: #aec251;">
+                        {{ opportunity.o_id }} {{ opportunity.q_id }} {{ opportunity.proj_note }}
+                    </span>
+                </p>
+                <br/>
+            {% endif %}
+            {{ wtf.quick_form(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
