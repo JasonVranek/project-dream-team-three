@@ -113,4 +113,30 @@ class QuotationForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
+class OpportunityForm(FlaskForm):
+    """
+    Form for admin to add or edit an opportunity
+    """
+    q_id = QuerySelectField('Quotation Id', query_factory=lambda: Quotation.query.all(),
+                            get_label="q_id")
+    source_of_lead = StringField('Source of Lead')
+    sale_ref_fee = StringField('Sales referal Fee')
+    competitors = IntegerField('Competitors')
+    sales_stage = IntegerField('Sales Stage')
+    close_date = DateField('Close Date')
+    probability = FloatField('Probability')
+    rev_category = StringField('Revenue Category')
+    proj_note = StringField('Project Note')
+    application = StringField('Application')
+    family = StringField('Family')
+    potential_money = FloatField('Potential $')
+    probable_money = FloatField('Probable $')
+    actual_money = FloatField('Actual $')
+    revenue = FloatField('Revenue $')
+    integrator = StringField('Integrator')
+    region = StringField('Region')
+    
+    submit = SubmitField('Submit')
+
+
     
