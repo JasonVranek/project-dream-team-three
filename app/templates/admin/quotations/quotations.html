@@ -28,7 +28,11 @@
               {% for quotation in quotations %}
                 <tr>
                   <td> {{ quotation.q_id }} </td>
-                  <td> {{ quotation.c_id }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">
+                      {{ quotation.c_id }}
+                    </a>
+                  </td>
                   <td> {{ quotation.e_id }}</td>
                   <td> {{ quotation.q_num }}</td>
                   <td> {{ quotation.date }} </td>
