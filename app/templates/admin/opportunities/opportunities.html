@@ -29,12 +29,21 @@
               {% for opportunity in opportunities %}
                 <tr>
                   <td> {{ opportunity.o_id }} </td>
-                  <td> {{ opportunity.q_id }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_quotation', id=opportunity.q_id) }}">
+                      {{ opportunity.q_id }}
+                    </a>
+                  </td>
                   <td> {{ opportunity.close_date }}</td>
                   <td> {{ opportunity.potential_money }}</td>
                   <td> {{ opportunity.probable_money }} </td>
                   <td> {{ opportunity.actual_money }} </td>
                   <td> {{ opportunity.revenue }} </td>
+                  <td>
+                    <a href="{{ url_for('admin.view_opportunity', id=opportunity.o_id) }}">
+                      <i class="fa fa-eye"></i> View
+                    </a>
+                  </td>
                   <td>
                     <a href="{{ url_for('admin.edit_opportunity', id=opportunity.o_id) }}">
                       <i class="fa fa-user-plus"></i> Edit
