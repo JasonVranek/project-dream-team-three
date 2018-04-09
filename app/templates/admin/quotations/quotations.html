@@ -34,6 +34,11 @@
                   <td> {{ quotation.date }} </td>
                   <td> {{ quotation.q_amount }} </td>
                   <td>
+                    <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">
+                      <i class="fa fa-eye"></i> View
+                    </a>
+                  </td>
+                  <td>
                     <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}">
                       <i class="fa fa-user-plus"></i> Edit
                     </a>

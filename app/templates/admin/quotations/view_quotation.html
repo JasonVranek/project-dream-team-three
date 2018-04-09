@@ -1,0 +1,160 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Quotation{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        {% if quotation %}
+        <h1 style="text-align:center;"> {{ quotation.q_num }} </h1>
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <tr>
+                <thead>
+                  <th width="20%"> Quotation ID </th>
+                  <td> {{ quotation.q_id }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Customer ID </th>
+                  <td> {{ quotation.c_id }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Employee ID </th>
+                  <td> {{ quotation.e_id }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Date </th>
+                  <td> {{ quotation.date }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Quotation Number </th>
+                  <td> {{ quotation.q_num }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Revision </th>
+                  <td> {{ quotation.revision }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Payment Terms </th>
+                  <td> {{ quotation.pay_terms }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Title </th>
+                  <td> {{ quotation.title }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> First Name </th>
+                  <td> {{ quotation.f_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Last Name </th>
+                  <td> {{ quotation.l_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Address </th>
+                  <td> {{ quotation.address }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> City </th>
+                  <td> {{ quotation.city }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> State </th>
+                  <td> {{ quotation.state }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Country </th>
+                  <td> {{ quotation.country }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Postal Code </th>
+                  <td> {{ quotation.postal }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Tel </th>
+                  <td> {{ quotation.tel }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Ship Schedule </th>
+                  <td> {{ quotation.s_sched }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Shipment Term </th>
+                  <td> {{ quotation.s_term }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Quotation Title </th>
+                  <td> {{ quotation.q_title }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Quotation Note </th>
+                  <td> {{ quotation.q_note }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Quotation Amount </th>
+                  <td> {{ quotation.q_amount }} </td>
+                </thead>
+              </tr>
+            </table>
+          </div>
+          <div style="text-align: center">
+            <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-user-plus"></i>
+              Edit Quotation
+            </a>
+            <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-trash"></i>
+              Delete Quotation
+            </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

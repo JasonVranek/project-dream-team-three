@@ -561,6 +561,20 @@ def delete_product(id):
 # Quotation Views
 
 
+@admin.route('/quotations/view/<int:id>', methods=['GET'])
+@login_required
+def view_quotation(id):
+    """
+    View a quotation
+    """
+    check_admin()
+
+    quotation = Quotation.query.filter_by(q_id=id).first()
+
+    return render_template('admin/quotations/view_quotation.html', action="View",
+                           quotation=quotation, title="View Quotation")
+
+
 @admin.route('/quotations', methods=['GET', 'POST'])
 @login_required
 def list_quotations():
