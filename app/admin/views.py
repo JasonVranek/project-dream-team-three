@@ -112,6 +112,20 @@ def delete_department(id):
 # Customer Views
 
 
+@admin.route('/customers/view/<int:id>', methods=['GET'])
+@login_required
+def view_customer(id):
+    """
+    View a customer
+    """
+    check_admin()
+
+    customer = Customer.query.filter_by(c_id=id).first()
+
+    return render_template('admin/customers/view_customer.html', action="View",
+                           customer=customer, title="View Customer")
+
+
 @admin.route('/customers', methods=['GET', 'POST'])
 @login_required
 def list_customers():
