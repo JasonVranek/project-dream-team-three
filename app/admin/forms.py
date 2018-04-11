@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, DateField, TextField, IntegerField
+from wtforms import StringField, SubmitField, FloatField, TextField, IntegerField#, DateField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
+from wtforms.fields.html5 import DateField
 # Import fixes issues parsing DateFields:
 import wtforms.ext.dateutil
 
