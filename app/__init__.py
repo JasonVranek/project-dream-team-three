@@ -35,6 +35,14 @@ def create_app(config_name):
 
     from app import models
 
+    # ADDED BY JASON 4/11/18
+    import flask_whooshalchemy as wa
+    from models import Department
+    wa.whoosh_index(app, Department)
+
+
+    # END JASON
+
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
 

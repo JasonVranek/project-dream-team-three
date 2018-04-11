@@ -221,6 +221,7 @@ class Department(db.Model):
     """
     Create a Department table
     """
+    __searchable__ = ['name', 'description']
 
     __tablename__ = 'departments'
 
