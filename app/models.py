@@ -8,6 +8,7 @@ class Customer(UserMixin, db.Model):
     """
     Create a Employee table
     """
+    
     __tablename__ = 'customers'
 
     c_id = db.Column('CustomerID', db.Integer, primary_key=True)

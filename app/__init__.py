@@ -7,6 +7,9 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+# ADDED BY JASON 4/11/18
+import flask_whooshalchemyplus
+
 # local imports
 from config import app_config
 
@@ -36,12 +39,7 @@ def create_app(config_name):
     from app import models
 
     # ADDED BY JASON 4/11/18
-    import flask_whooshalchemy as wa
-    from models import Department
-    wa.whoosh_index(app, Department)
-
-
-    # END JASON
+    flask_whooshalchemyplus.init_app(app)
 
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
