@@ -31,7 +31,7 @@ class Customer(UserMixin, db.Model):
     rating = db.Column('Rating', db.String(50))
 
     quotations = db.relationship('Quotation', backref='customer',
-                                lazy='dynamic', cascade='all, delete, delete-orphan')
+                                lazy='dynamic')
 
     def __repr__(self):
         return '<Customer: {}>'.format(self.c_id)
