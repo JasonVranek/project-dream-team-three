@@ -1,6 +1,6 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Edit Quotation{% endblock %}
+{% block title %}Quotation PDF{% endblock %}
 {% block body %}
 <div class="content-section">
  <div class="outer">
@@ -17,6 +17,25 @@
                 <h3>Product ID {{ products[key].p_id }} {{ products[key].p_name }} </h3>
             {% endfor %}
         </div>
+        <div class="row">
+          <div class="col-xs-6 col-sm-2">Item</div>
+          <div class="col-xs-6 col-sm-2">Description</div>
+          <div class="col-xs-6 col-sm-2">Part Number</div>
+          <div class="col-xs-6 col-sm-2">Unit Price</div>
+          <div class="col-xs-6 col-sm-2">Qty</div>
+          <div class="col-xs-6 col-sm-2">Total Price</div>
+        </div>
+        <!-- for each quote detail append the above with the quote details values -->
+        {% for detail in quote_details %}
+            <div class="row">
+              <div class="col-xs-6 col-sm-2">{{ loop.index }}</div>
+              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].p_note }}</div>
+              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].p_name }}</div>
+              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].unit_price }}</div>
+              <div class="col-xs-6 col-sm-2">{{ detail.quantity }}</div>
+              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].unit_price * detail.quantity }}</div>
+            </div>
+        {% endfor %}
       </div>
     </div>
   </div>
