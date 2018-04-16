@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-              {% for customer in customers %}
+              {% for customer in customers.items %}
                 <tr>
                   <td> {{ customer.acc_code }} </td>
                   <td> {{ customer.c_id }} </td>
@@ -60,6 +60,15 @@
             <i class="fa fa-plus"></i>
             Add Customer
           </a>
+        </div>
+        <div style="text-align: center">
+        {% for page in customers.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_customers', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>

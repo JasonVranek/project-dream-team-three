@@ -25,7 +25,6 @@ def list_departments(page_num):
     check_admin()
 
     # departments = Department.query.all()
-    # page_num = 3
     departments = Department.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/departments/departments.html',
@@ -128,15 +127,16 @@ def view_customer(id):
                            customer=customer, title="View Customer")
 
 
-@admin.route('/customers', methods=['GET', 'POST'])
+@admin.route('/customers/<int:page_num>/', methods=['GET', 'POST'])
 @login_required
-def list_customers():
+def list_customers(page_num):
     """
     List all customers
     """
     check_admin()
 
-    customers = Customer.query.all()
+    # customers = Customer.query.all()
+    customers = Customer.query.paginate(per_page=1, page=page_num, error_out=True)
 
     return render_template('admin/customers/customers.html',
                            customers=customers, title="Customers")
@@ -182,7 +182,7 @@ def add_customer():
             flash('Error: Customer Account Code already exists.')
 
         # redirect to customers page
-        return redirect(url_for('admin.list_customers'))
+        return redirect(url_for('admin.list_customers', page_num=1))
 
     # load customer template
     return render_template('admin/customers/customer.html', action="Add",
@@ -226,7 +226,7 @@ def edit_customer(id):
         flash('You have successfully edited the customer.')
 
         # redirect to the customers page
-        return redirect(url_for('admin.list_customers'))
+        return redirect(url_for('admin.list_customers', page_num=1))
 
     # fill the form with current data to show what changes are to be made
     form.acc_code.data = customer.acc_code 
@@ -267,7 +267,7 @@ def delete_customer(id):
     flash('You have successfully deleted the customer.')
 
     # redirect to the customers page
-    return redirect(url_for('admin.list_customers'))
+    return redirect(url_for('admin.list_customers', page_num=1))
 
     return render_template(title="Delete Customer")
 
