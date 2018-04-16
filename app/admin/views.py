@@ -370,15 +370,17 @@ def delete_role(id):
 
 # Employee Views
 
-@admin.route('/employees')
+@admin.route('/employees/<int:page_num>')
 @login_required
-def list_employees():
+def list_employees(page_num):
     """
     List all employees
     """
     check_admin()
 
-    employees = Employee.query.all()
+    # employees = Employee.query.all()
+    employees = Employee.query.paginate(per_page=1, page=page_num, error_out=True)
+
     return render_template('admin/employees/employees.html',
                            employees=employees, title='Employees')
 
@@ -406,7 +408,7 @@ def assign_employee(id):
         flash('You have successfully assigned a department and role.')
 
         # redirect to the roles page
-        return redirect(url_for('admin.list_employees'))
+        return redirect(url_for('admin.list_employees', page_num=1))
 
     return render_template('admin/employees/employee.html',
                            employee=employee, form=form,

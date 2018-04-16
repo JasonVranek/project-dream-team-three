@@ -23,7 +23,7 @@
                 </tr>
               </thead>
               <tbody>
-              {% for employee in employees %}
+              {% for employee in employees.items %}
                 {% if employee.is_admin %}
                     <tr style="background-color: #aec251; color: white;">
                         <td> <i class="fa fa-key"></i> Admin </td>
@@ -60,6 +60,15 @@
             </table>
           </div>
         {% endif %}
+        <div style="text-align: center">
+        {% for page in employees.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_employees', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
+        </div>
         </div>
       </div>
     </div>
