@@ -48,13 +48,13 @@
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                    <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}">
+                      <i class="fa fa-quora"></i> PDF
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}">
-                      <i class="fa fa-trash"></i> PDF
+                    <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
+                      <i class="fa fa-trash"></i> Delete
                     </a>
                   </td>
                 </tr>

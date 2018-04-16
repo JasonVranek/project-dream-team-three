@@ -1,0 +1,24 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Edit Quotation{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+            <h3> Quote ID {{ quotation.q_id}} {{ quotation.q_num }}</h3>
+            <h3>Customer ID {{ customer.c_id}} {{customer.f_name }} {{ customer.l_name }} </h3>
+            {% for detail in quote_details %}
+                <h3>Quote Detail ID {{ detail.quote_detail_id}} {{ detail.quantity }}</h3>
+            {% endfor %}
+
+            {% for key in products %}
+                <h3>Product ID {{ products[key].p_id }} {{ products[key].p_name }} </h3>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

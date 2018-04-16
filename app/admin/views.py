@@ -738,7 +738,28 @@ def delete_quotation(id):
 @admin.route('/quotations/pdf/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def gen_pdf(id):
-    return "hello " + str(id)
+
+    # Get the quotation from its unique id
+    quotation = Quotation.query.filter_by(q_id=id).first()
+
+    # Get the customer from the Quotation's Customer ID
+    customer = Customer.query.filter_by(c_id=quotation.c_id).first()    
+
+    # Get all of the Quotation Details that are tied to this Quotation
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+
+    # Get each product associated with each Quote Detail and save to dictionary
+    products = {}
+    for detail in quote_details:
+        qd_id = detail.quote_detail_id
+        products[qd_id] = Product.query.filter_by(p_id=detail.p_id).first()
+
+    return render_template('admin/quotations/pdf.html', 
+                            quotation=quotation,
+                            customer=customer,
+                            quote_details=quote_details,
+                            products=products, 
+                            title="PDF")
 
 
 
