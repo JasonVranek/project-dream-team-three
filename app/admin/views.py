@@ -16,15 +16,17 @@ def check_admin():
 # Department Views
 
 
-@admin.route('/departments', methods=['GET', 'POST'])
+@admin.route('/departments/<int:page_num>/', methods=['GET', 'POST'])
 @login_required
-def list_departments():
+def list_departments(page_num):
     """
     List all departments
     """
     check_admin()
 
-    departments = Department.query.all()
+    # departments = Department.query.all()
+    # page_num = 3
+    departments = Department.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/departments/departments.html',
                            departments=departments, title="Departments")
@@ -54,7 +56,7 @@ def add_department():
             flash('Error: department name already exists.')
 
         # redirect to departments page
-        return redirect(url_for('admin.list_departments'))
+        return redirect(url_for('admin.list_departments', 1))
 
     # load department template
     return render_template('admin/departments/department.html', action="Add",
@@ -62,7 +64,7 @@ def add_department():
                            title="Add Department")
 
 
-@admin.route('/departments/edit/<int:id>', methods=['GET', 'POST'])
+@admin.route('/departments/edit/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def edit_department(id):
     """
@@ -81,7 +83,7 @@ def edit_department(id):
         flash('You have successfully edited the department.')
 
         # redirect to the departments page
-        return redirect(url_for('admin.list_departments'))
+        return redirect(url_for('admin.list_departments', 1))
 
     form.description.data = department.description
     form.name.data = department.name
@@ -90,7 +92,7 @@ def edit_department(id):
                            department=department, title="Edit Department")
 
 
-@admin.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/departments/delete/<int:id>/', methods=['GET', 'POST'])
 @login_required
 def delete_department(id):
     """
@@ -104,7 +106,7 @@ def delete_department(id):
     flash('You have successfully deleted the department.')
 
     # redirect to the departments page
-    return redirect(url_for('admin.list_departments'))
+    return redirect(url_for('admin.list_departments', 1))
 
     return render_template(title="Delete Department")
 

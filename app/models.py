@@ -8,8 +8,10 @@ class Customer(UserMixin, db.Model):
     """
     Create a Employee table
     """
-    
     __tablename__ = 'customers'
+
+    __searchable__ = ['acc_code', 'f_name', 'l_name', 'comp_name', 'email']
+
 
     c_id = db.Column('CustomerID', db.Integer, primary_key=True)
     acc_code = db.Column('Account Code', db.String(20), unique=True, nullable=False)
@@ -113,7 +115,7 @@ class Product(UserMixin, db.Model):
         return (self.p_id)
 
 
-class Opportunity(UserMixin, db.Model):
+class Opportunity(UserMixin, db.Model):             
     """
     Create an Opportunity table
     """
