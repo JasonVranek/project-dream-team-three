@@ -735,6 +735,14 @@ def delete_quotation(id):
     return render_template(title="Delete Quotation")
 
 
+@admin.route('/quotations/pdf/<int:id>/', methods=['GET', 'POST'])
+@login_required
+def gen_pdf(id):
+    return "hello " + str(id)
+
+
+
+
 # Opportunity Views
 
 
