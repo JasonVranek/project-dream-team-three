@@ -56,7 +56,7 @@ def add_department():
             flash('Error: department name already exists.')
 
         # redirect to departments page
-        return redirect(url_for('admin.list_departments', 1))
+        return redirect(url_for('admin.list_departments', page_num=1))
 
     # load department template
     return render_template('admin/departments/department.html', action="Add",
@@ -83,7 +83,7 @@ def edit_department(id):
         flash('You have successfully edited the department.')
 
         # redirect to the departments page
-        return redirect(url_for('admin.list_departments', 1))
+        return redirect(url_for('admin.list_departments', page_num=1))
 
     form.description.data = department.description
     form.name.data = department.name
@@ -106,7 +106,7 @@ def delete_department(id):
     flash('You have successfully deleted the department.')
 
     # redirect to the departments page
-    return redirect(url_for('admin.list_departments', 1))
+    return redirect(url_for('admin.list_departments', page_num=1))
 
     return render_template(title="Delete Department")
 
