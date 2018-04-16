@@ -275,14 +275,16 @@ def delete_customer(id):
 # Role Views
 
 
-@admin.route('/roles')
+@admin.route('/roles/<int:page_num>/')
 @login_required
-def list_roles():
+def list_roles(page_num):
     check_admin()
     """
     List all roles
     """
-    roles = Role.query.all()
+    # roles = Role.query.all()
+    roles = Role.query.paginate(per_page=1, page=page_num, error_out=True)
+
     return render_template('admin/roles/roles.html',
                            roles=roles, title='Roles')
 
@@ -312,7 +314,7 @@ def add_role():
             flash('Error: role name already exists.')
 
         # redirect to the roles page
-        return redirect(url_for('admin.list_roles'))
+        return redirect(url_for('admin.list_roles', page_num=1))
 
     # load role template
     return render_template('admin/roles/role.html', add_role=add_role,
@@ -339,7 +341,7 @@ def edit_role(id):
         flash('You have successfully edited the role.')
 
         # redirect to the roles page
-        return redirect(url_for('admin.list_roles'))
+        return redirect(url_for('admin.list_roles', page_num=1))
 
     form.description.data = role.description
     form.name.data = role.name
@@ -361,7 +363,7 @@ def delete_role(id):
     flash('You have successfully deleted the role.')
 
     # redirect to the roles page
-    return redirect(url_for('admin.list_roles'))
+    return redirect(url_for('admin.list_roles', page_num=1))
 
     return render_template(title="Delete Role")
 

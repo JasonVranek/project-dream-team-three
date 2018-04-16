@@ -24,7 +24,7 @@
                 </tr>
               </thead>
               <tbody>
-              {% for role in roles %}
+              {% for role in roles.items %}
                 <tr>
                   <td> {{ role.name }} </td>
                   <td> {{ role.description }} </td>
@@ -60,6 +60,15 @@
             <i class="fa fa-plus"></i>
             Add Role
           </a>
+        </div>
+        <div style="text-align: center">
+        {% for page in roles.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_roles', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
