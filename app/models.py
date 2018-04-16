@@ -52,7 +52,7 @@ class Quotation(UserMixin, db.Model):
     q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.Integer)
-    date = db.Column('Quotaton Date', db.String(50))
+    date = db.Column('Quotaton Date', db.Date)          # CHANGE 4/16/18 from string to date
     q_num = db.Column('Quotation Number', db.Integer, unique=True)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))
