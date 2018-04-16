@@ -582,15 +582,16 @@ def view_quotation(id):
                            quotation=quotation, title="View Quotation")
 
 
-@admin.route('/quotations', methods=['GET', 'POST'])
+@admin.route('/quotations/<int:page_num>', methods=['GET', 'POST'])
 @login_required
-def list_quotations():
+def list_quotations(page_num):
     """
     List all quotations
     """
     check_admin()
 
-    quotations = Quotation.query.all()
+    # quotations = Quotation.query.all()
+    quotations = Quotation.query.paginate(per_page=1, page=page_num, error_out=True)
 
     return render_template('admin/quotations/quotations.html',
                            quotations=quotations, title="Quotations")
@@ -640,7 +641,7 @@ def add_quotation():
             flash('Error: Quotation already exists.')
 
         # redirect to quotations page
-        return redirect(url_for('admin.list_quotations'))
+        return redirect(url_for('admin.list_quotations', page_num=1))
 
     # load quotation template
     return render_template('admin/quotations/quotation.html', action="Add",
@@ -686,7 +687,7 @@ def edit_quotation(id):
         flash('You have successfully edited the quotation.')
 
         # redirect to the quotations page
-        return redirect(url_for('admin.list_quotations'))
+        return redirect(url_for('admin.list_quotations', page_num=1))
 
     # fill the form with current data to show what changes are to be made
     form.c_id.data = quotation.c_id
@@ -729,7 +730,7 @@ def delete_quotation(id):
     flash('You have successfully deleted the quotation.')
 
     # redirect to the quotations page
-    return redirect(url_for('admin.list_quotations'))
+    return redirect(url_for('admin.list_quotations', page_num=1))
 
     return render_template(title="Delete Quotation")
 
