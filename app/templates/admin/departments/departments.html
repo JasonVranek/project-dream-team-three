@@ -61,6 +61,15 @@
             Add Department
           </a>
         </div>
+        <div style="text-align: center">
+        {% for page in departments.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_departments', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
