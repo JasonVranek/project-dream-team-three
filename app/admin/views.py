@@ -432,15 +432,16 @@ def view_product(id):
                            product=product, title="View Product")
 
 
-@admin.route('/products', methods=['GET', 'POST'])
+@admin.route('/products/<int:page_num>', methods=['GET', 'POST'])
 @login_required
-def list_products():
+def list_products(page_num):
     """
     List all products
     """
     check_admin()
 
-    products = Product.query.all()
+    # products = Product.query.all()
+    products = Product.query.paginate(per_page=1, page=page_num, error_out=True)
 
     return render_template('admin/products/products.html',
                            products=products, title="Products")
@@ -482,7 +483,7 @@ def add_product():
             flash('Error: Product already exists.')
 
         # redirect to products page
-        return redirect(url_for('admin.list_products'))
+        return redirect(url_for('admin.list_products', page_num=1))
 
     # load product template
     return render_template('admin/products/product.html', action="Add",
@@ -522,7 +523,7 @@ def edit_product(id):
         flash('You have successfully edited the product.')
 
         # redirect to the products page
-        return redirect(url_for('admin.list_products'))
+        return redirect(url_for('admin.list_products', page_num=1))
 
     # fill the form with current data to show what changes are to be made
     form.p_number.data = product.p_number 
@@ -559,7 +560,7 @@ def delete_product(id):
     flash('You have successfully deleted the product.')
 
     # redirect to the products page
-    return redirect(url_for('admin.list_products'))
+    return redirect(url_for('admin.list_products', page_num=1))
 
     return render_template(title="Delete Product")
 
