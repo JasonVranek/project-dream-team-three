@@ -136,7 +136,7 @@ def list_customers(page_num):
     check_admin()
 
     # customers = Customer.query.all()
-    customers = Customer.query.paginate(per_page=1, page=page_num, error_out=True)
+    customers = Customer.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/customers/customers.html',
                            customers=customers, title="Customers")
@@ -283,7 +283,7 @@ def list_roles(page_num):
     List all roles
     """
     # roles = Role.query.all()
-    roles = Role.query.paginate(per_page=1, page=page_num, error_out=True)
+    roles = Role.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/roles/roles.html',
                            roles=roles, title='Roles')
@@ -379,7 +379,7 @@ def list_employees(page_num):
     check_admin()
 
     # employees = Employee.query.all()
-    employees = Employee.query.paginate(per_page=1, page=page_num, error_out=True)
+    employees = Employee.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/employees/employees.html',
                            employees=employees, title='Employees')
@@ -441,7 +441,7 @@ def list_products(page_num):
     check_admin()
 
     # products = Product.query.all()
-    products = Product.query.paginate(per_page=1, page=page_num, error_out=True)
+    products = Product.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/products/products.html',
                            products=products, title="Products")
@@ -591,7 +591,7 @@ def list_quotations(page_num):
     check_admin()
 
     # quotations = Quotation.query.all()
-    quotations = Quotation.query.paginate(per_page=1, page=page_num, error_out=True)
+    quotations = Quotation.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/quotations/quotations.html',
                            quotations=quotations, title="Quotations")
@@ -761,7 +761,7 @@ def list_opportunities(page_num):
     check_admin()
 
     # opportunities = Opportunity.query.all()
-    opportunities = Opportunity.query.paginate(per_page=1, page=page_num, error_out=True)
+    opportunities = Opportunity.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/opportunities/opportunities.html',
                            opportunities=opportunities, title="Opportunities")
@@ -922,7 +922,7 @@ def list_quotation_details(page_num):
     check_admin()
 
     # quotation_details = Quotation_Detail.query.all()
-    quotation_details = Quotation_Detail.query.paginate(per_page=1, page=page_num, error_out=True)
+    quotation_details = Quotation_Detail.query.paginate(per_page=5, page=page_num, error_out=True)
 
     return render_template('admin/quotation_details/quotation_details.html',
                            quotation_details=quotation_details, title="Quotation_Details")
