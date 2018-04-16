@@ -30,7 +30,7 @@
                       <li><a href="{{ url_for('admin.list_customers', page_num=1) }}">Customers</a></li>
                       <li><a href="{{ url_for('admin.list_products', page_num=1) }}">Products</a></li>
                       <li><a href="{{ url_for('admin.list_quotations', page_num=1) }}">Quotes</a></li>
-                      <li><a href="{{ url_for('admin.list_opportunities') }}">Opportunities</a></li>
+                      <li><a href="{{ url_for('admin.list_opportunities', page_num=1) }}">Opportunities</a></li>
                       <li><a href="{{ url_for('admin.list_quotation_details') }}">Quote Details</a></li>
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>

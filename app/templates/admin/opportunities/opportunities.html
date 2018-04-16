@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-              {% for opportunity in opportunities %}
+              {% for opportunity in opportunities.items %}
                 <tr>
                   <td> {{ opportunity.o_id }} </td>
                   <td> 
@@ -65,6 +65,15 @@
             <i class="fa fa-plus"></i>
             Add Opportunity
           </a>
+        </div>
+        <div style="text-align: center">
+        {% for page in opportunities.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_opportunities', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>

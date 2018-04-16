@@ -752,15 +752,16 @@ def view_opportunity(id):
                            opportunity=opportunity, title="View Opportunity")
 
 
-@admin.route('/opportunities', methods=['GET', 'POST'])
+@admin.route('/opportunities/<int:page_num>', methods=['GET', 'POST'])
 @login_required
-def list_opportunities():
+def list_opportunities(page_num):
     """
     List all opportunities
     """
     check_admin()
 
-    opportunities = Opportunity.query.all()
+    # opportunities = Opportunity.query.all()
+    opportunities = Opportunity.query.paginate(per_page=1, page=page_num, error_out=True)
 
     return render_template('admin/opportunities/opportunities.html',
                            opportunities=opportunities, title="Opportunities")
@@ -807,7 +808,7 @@ def add_opportunity():
             flash('Error: Opportunity already exists.')
 
         # redirect to opportunities page
-        return redirect(url_for('admin.list_opportunities'))
+        return redirect(url_for('admin.list_opportunities', page_num=1))
 
     # load opportunity template
     return render_template('admin/opportunities/opportunity.html', action="Add",
@@ -850,7 +851,7 @@ def edit_opportunity(id):
         flash('You have successfully edited the opportunity.')
 
         # redirect to the opportunities page
-        return redirect(url_for('admin.list_opportunities'))
+        return redirect(url_for('admin.list_opportunities', page_num=1))
 
     # fill the form with current data to show what changes are to be made
     form.q_id.data = opportunity.q_id       
@@ -890,7 +891,7 @@ def delete_opportunity(id):
     flash('You have successfully deleted the opportunity.')
 
     # redirect to the opportunities page
-    return redirect(url_for('admin.list_opportunities'))
+    return redirect(url_for('admin.list_opportunities', page_num=1))
 
     return render_template(title="Delete Opportunity")
 
