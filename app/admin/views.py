@@ -913,15 +913,16 @@ def view_quotation_detail(id):
                            quotation_detail=quotation_detail, title="View Quotation Detail")
 
 
-@admin.route('/quotation_details', methods=['GET', 'POST'])
+@admin.route('/quotation_details/<int:page_num>', methods=['GET', 'POST'])
 @login_required
-def list_quotation_details():
+def list_quotation_details(page_num):
     """
     List all quotation_details
     """
     check_admin()
 
-    quotation_details = Quotation_Detail.query.all()
+    # quotation_details = Quotation_Detail.query.all()
+    quotation_details = Quotation_Detail.query.paginate(per_page=1, page=page_num, error_out=True)
 
     return render_template('admin/quotation_details/quotation_details.html',
                            quotation_details=quotation_details, title="Quotation_Details")
@@ -958,7 +959,7 @@ def add_quotation_detail():
             flash('Error: Quotation_Detail already exists.')
 
         # redirect to quotation_details page
-        return redirect(url_for('admin.list_quotation_details'))
+        return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     # load quotation_detail template
     return render_template('admin/quotation_details/quotation_detail.html', action="Add",
@@ -991,7 +992,7 @@ def edit_quotation_detail(id):
         flash('You have successfully edited the quotation_detail.')
 
         # redirect to the quotation_details page
-        return redirect(url_for('admin.list_quotation_details'))
+        return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     # fill the form with current data to show what changes are to be made
     form.q_id.data = quotation_detail.q_id          
@@ -1021,6 +1022,6 @@ def delete_quotation_detail(id):
     flash('You have successfully deleted the quotation_detail.')
 
     # redirect to the quotation_details page
-    return redirect(url_for('admin.list_quotation_details'))
+    return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     return render_template(title="Delete Quotation_Detail")

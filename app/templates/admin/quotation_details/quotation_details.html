@@ -25,7 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-              {% for quotation_detail in quotation_details %}
+              {% for quotation_detail in quotation_details.items %}
                 <tr>
                   <td> {{ quotation_detail.quote_detail_id }} </td>
                   <td> 
@@ -67,6 +67,15 @@
             <i class="fa fa-plus"></i>
             Add Quotation Detail
           </a>
+        </div>
+        <div style="text-align: center">
+        {% for page in quotation_details.iter_pages() %}
+            {% if page %}
+              <a href="{{ url_for('admin.list_quotation_details', page_num=page) }}">{{ page }}</a>
+            {% else %}
+              ...
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
