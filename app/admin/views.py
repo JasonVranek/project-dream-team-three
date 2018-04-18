@@ -761,15 +761,18 @@ def gen_pdf(id):
             total += detail.quantity * product.unit_price * detail.discount
         else:
             total += detail.quantity * product.unit_price
-            
+
         subtotal += detail.quantity * product.unit_price
 
+    # Find the 'optional' items and pass them in
+    # optional = ...
 
     return render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
                             customer=customer,
                             quote_details=quote_details,
-                            products=products, 
+                            products=products,
+                            optional=quote_details, #change quote_details to optional 
                             title="PDF",
                             total=total,
                             subtotal=subtotal)

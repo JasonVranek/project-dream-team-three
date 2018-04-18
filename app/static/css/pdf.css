@@ -29,7 +29,8 @@
 }
 
 .container-middle {
-	/*display: flex;*/
+	display: flex;
+	flex-direction: column;
 }
 
 .container-bottom {
