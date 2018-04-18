@@ -2,40 +2,85 @@
 {% extends "base.html" %}
 {% block title %}Quotation PDF{% endblock %}
 {% block body %}
+<link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
 <div class="content-section">
  <div class="outer">
     <div class="middle">
       <div class="inner">
+        <h1>asdfafdafafadfafs</h1>
+        <h1>asdfafdafafadfafs</h1>
         <div class="center">
-            <h3> Quote ID {{ quotation.q_id}} {{ quotation.q_num }}</h3>
-            <h3>Customer ID {{ customer.c_id}} {{customer.f_name }} {{ customer.l_name }} </h3>
-            {% for detail in quote_details %}
-                <h3>Quote Detail ID {{ detail.quote_detail_id}} {{ detail.quantity }}</h3>
-            {% endfor %}
+            
+        <!-- top left box -->
+        <ul class="customer_box">
+          <li>{{customer.comp_name}}</li>
+          <li>{{customer.city}}</li>
+          <li>{{customer.b_address}}</li>
+          <li>{{customer.city}}</li>
+          <li>{{customer.state_province}}</li>
+           <li>{{customer.post_code}}</li>
+          <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
+          <li>Tel:{{customer.phone}}</li>
+        </ul>  
 
-            {% for key in products %}
-                <h3>Product ID {{ products[key].p_id }} {{ products[key].p_name }} </h3>
+        <div class="shipping_table">
+            <!-- top right box -->
+            <table>
+                <tr>
+                    <th>Quotatoin NO.:</th>
+                    <th>{{quotation.q_num}}</th>
+                </tr> 
+                <tr>
+                    <td>Quotation Data:</td>
+                    <td>{{quotation.date}}</td>
+                </tr>
+                <tr>
+                    <td>Ship Schedule:</td>
+                    <td>{{quotation.s_sched}}</td>
+                </tr>
+                <tr>
+                    <td>Terms of Payment:</td>
+                    <td>{{quotation.pay_terms}}</td>
+                </tr>
+                <tr>
+                    <td>Shipment Terms:</td>
+                    <td>{{quotation.s_term}}</td>
+                </tr>
+                <tr>
+                    <td>Shipping Method:</td>
+                    <td>where is this found</td>
+                </tr>
+            </table>
+        </div>  
+
+        <!-- main table -->
+        <table> 
+            <tr> 
+                <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
+            </tr>
+            <tr>
+                <th> Item </th>
+                <th> Description </th>
+                <th> Part Number </th>
+                <th> Unit Price </th>
+                <th> Qty </th>
+                <th> Total Price </th>
+            </tr>
+            {% for detail in quote_details %}
+            <tr>
+                <td> {{ loop.index }} </td>
+                <td> {{ products[detail.quote_detail_id].p_note }} </td>
+                <td> {{ products[detail.quote_detail_id].p_name }} </td>
+                <td> {{ products[detail.quote_detail_id].unit_price }} </td>
+                <td> {{ detail.quantity }} </td>
+                <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
+            </tr>
             {% endfor %}
+        </table>
+
+
+
         </div>
-        <div class="row">
-          <div class="col-xs-6 col-sm-2">Item</div>
-          <div class="col-xs-6 col-sm-2">Description</div>
-          <div class="col-xs-6 col-sm-2">Part Number</div>
-          <div class="col-xs-6 col-sm-2">Unit Price</div>
-          <div class="col-xs-6 col-sm-2">Qty</div>
-          <div class="col-xs-6 col-sm-2">Total Price</div>
-        </div>
-        <!-- for each quote detail append the above with the quote details values -->
-        {% for detail in quote_details %}
-            <div class="row">
-              <div class="col-xs-6 col-sm-2">{{ loop.index }}</div>
-              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].p_note }}</div>
-              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].p_name }}</div>
-              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].unit_price }}</div>
-              <div class="col-xs-6 col-sm-2">{{ detail.quantity }}</div>
-              <div class="col-xs-6 col-sm-2">{{ products[detail.quote_detail_id].unit_price * detail.quantity }}</div>
-            </div>
-        {% endfor %}
       </div>
     </div>
   </div>

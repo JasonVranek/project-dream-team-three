@@ -1,0 +1,34 @@
+table th {
+	text-align: center;
+	border: 1px solid #010101;
+	background-color: #ADBEED
+}
+
+table td {
+	border: 1px solid #e3e3e3;
+	padding: 4px 8px;
+}
+
+table tr:nth-child(even) td {
+	background-color: #e7edf0
+}
+
+.tabletitle {
+	font-style: italic;
+}
+
+.customer_box {
+	border: 1px solid #010101;
+	width: auto;
+	text-align: left;
+	background-color: #C89ACA;
+}
+
+.shipping_table : {
+	text-align: right;
+	background-color: #E20FE9
+}
+
+ul {
+	list-style-type: none;
+}
