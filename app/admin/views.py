@@ -1,5 +1,6 @@
-from flask import abort, flash, redirect, render_template, url_for
+from flask import abort, flash, redirect, render_template, url_for, make_response
 from flask_login import current_user, login_required
+import pdfkit
 
 from . import admin
 from forms import *
@@ -767,7 +768,8 @@ def gen_pdf(id):
     # Find the 'optional' items and pass them in
     # optional = ...
 
-    return render_template('admin/quotations/pdf.html', 
+    # Use the pdfkit library to convert HTML to PDF
+    rendered = render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
                             customer=customer,
                             quote_details=quote_details,
@@ -776,6 +778,29 @@ def gen_pdf(id):
                             title="PDF",
                             total=total,
                             subtotal=subtotal)
+    # False because we aren't sending it to the client yet
+    # css = [url_for('../../', filename='static/css/pdf.css')]
+    css = ['/media/sf_Ubuntu/quote/project-dream-team-three/app/static/css/pdf.css']
+    # print(css)
+    pdf = pdfkit.from_string(rendered, False, css=css)
+
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf' 
+    # modify inline to attachment for a download
+    response.headers['Content-Disposition'] = 'inline; filname=quotation-{}.pdf'.format(id)
+
+    return response
+
+
+    # return render_template('admin/quotations/pdf.html', 
+    #                         quotation=quotation,
+    #                         customer=customer,
+    #                         quote_details=quote_details,
+    #                         products=products,
+    #                         optional=quote_details, #change quote_details to optional 
+    #                         title="PDF",
+    #                         total=total,
+    #                         subtotal=subtotal)
 
 
 
