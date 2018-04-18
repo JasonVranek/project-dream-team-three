@@ -1,16 +1,9 @@
-{% import "bootstrap/wtf.html" as wtf %}
-{% extends "base.html" %}
-{% block title %}Quotation PDF{% endblock %}
-{% block body %}
-<link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
-<div class="content-section">
- <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <h1>asdfafdafafadfafs</h1>
-        <h1>asdfafdafafadfafs</h1>
-        <div class="center">
-            
+<head>
+    <link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container-top">     
         <!-- top left box -->
         <ul class="customer_box">
           <li>{{customer.comp_name}}</li>
@@ -52,46 +45,71 @@
                 </tr>
             </table>
         </div>  
-
-        <!-- main table -->
-        <table> 
-            <tr> 
-                <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
-            </tr>
-            <tr>
-                <th> Item </th>
-                <th> Description </th>
-                <th> Part Number </th>
-                <th> Unit Price </th>
-                <th> Qty </th>
-                <th> Total Price </th>
-            </tr>
-            {% for detail in quote_details %}
-            <tr>
-                <td> {{ loop.index }} </td>
-                <td> {{ products[detail.quote_detail_id].p_note }} </td>
-                <td> {{ products[detail.quote_detail_id].p_name }} </td>
-                <td> {{ products[detail.quote_detail_id].unit_price }} </td>
-                <td> {{ detail.quantity }} </td>
-                <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <!-- total box -->
-        <ul class="total_box">
-          <li>subtotal: ${{subtotal}}</li>
-          <li>discount: ${{subtotal - total}}</li>
-          <li>TOTAL: ${{total}} </li>
-        </ul> 
-
-        <!-- note box -->
-
-
-
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+
+    <!-- main table -->
+    <table> 
+        <tr> 
+            <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
+        </tr>
+        <tr>
+            <th> Item </th>
+            <th> Description </th>
+            <th> Part Number </th>
+            <th> Unit Price </th>
+            <th> Qty </th>
+            <th> Total Price </th>
+        </tr>
+        {% for detail in quote_details %}
+        <tr>
+            <td> {{ loop.index }} </td>
+            <td> {{ products[detail.quote_detail_id].p_note }} </td>
+            <td> {{ products[detail.quote_detail_id].p_name }} </td>
+            <td> {{ products[detail.quote_detail_id].unit_price }} </td>
+            <td> {{ detail.quantity }} </td>
+            <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- total box -->
+    <ul class="total_box">
+      <li>subtotal: ${{subtotal}}</li>
+      <li>discount: ${{subtotal - total}}</li>
+      <li>TOTAL: ${{total}} </li>
+    </ul> 
+
+    <!-- note box -->
+    <ul class="note_box">
+      <li class="tabletitle"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
+      <li>* Required delivery date</li>
+      <li>* Carrier TBD</li>
+      <li>* Ship to address</li>
+      <li>* Bill to address</li>
+    </ul>
+
+    <!-- IM address box -->
+    <ul class="address_box">
+      <li> Address order to: </li>
+      <li>Innovation Matrix, Inc</li>
+      <li>Attn: Sales Operations</li>
+      <li>3080 Olcott St., B105</li>
+      <li>Santa Clara CA 95054 USA</li>
+      <li>FAX: (408) 716-2553</li>
+    </ul>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
