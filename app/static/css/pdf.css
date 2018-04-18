@@ -1,18 +1,49 @@
 /*FLEXBOX HERE*/
+/*.container-all {
+	display: flex;
+}*/
+.container-title {
+	/*display: flex;*/
+	/*align-items: flex-start;*/
+	/*align-items: flex-end;*/
+}
+
+.container-title ul{
+	/*this modifies the main title*/
+	/*color: green;*/
+	float: center;
+	text-align: center;
+	/*flex:10;*/
+}
+
+.container-title img{
+	/*flex: 1;*/
+	float: left;
+	width: 120px;
+	height: 80px;
+}
+
 .container-top {
 	display: flex;
+	align-items: flex-end;
 }
 
 .container-middle {
-	display: flex;
+	/*display: flex;*/
 }
 
 .container-bottom {
 	display: flex;
 }
 
-/*GENERAL STYLES*/
+.container-authorize {
+	display: flex;
+}
 
+/*GENERAL STYLES*/
+table {
+	width: 100%;
+}
 table th {
 	text-align: center;
 	border: 1px solid #010101;
@@ -34,6 +65,11 @@ ul {
 
 
 /*LOWER LEVEL CLASSES*/
+.quote-title {
+	font-style: italic;
+	font-style: bold;
+	text-align: center;
+}
 
 .tabletitle {
 	font-style: italic;
@@ -44,27 +80,41 @@ ul {
 	width: auto;
 	text-align: left;
 	background-color: #C89ACA;
+	flex: 1;
 }
 
 .shipping_table {
 	text-align: right;
+	flex: 1;
 	/*background-color: #E20FE9*/
 }
 
 .total_box {
-	text-align: left;
-	width: 50%;
-	border: 1px solid #010101;
+	text-align: right;
+	padding: 10px;
+	margin-right: 20px;
+	width: 98%;
+	/*border: 1px solid #010101;*/
+	/*float: right;*/
 }
 
 .note_box {
 	text-align: left;
-	width: 50%;
-	border: 1px solid #010101;
+	/*border: 1px solid #010101;*/
+	flex: 2;
+	padding-right: 15px;
 }
 
 .address_box {
+	flex: 1;
 	text-align: left;
-	width: 50%;
 	border: 1px solid #010101;
+}
+
+.signature {
+    border: 0;
+    border-bottom: 1px solid #000;
+    width: 200px;
+    padding: 20px;
+    font-size: large;
 }

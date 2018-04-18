@@ -1,103 +1,144 @@
 <head>
     <link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
+    <!-- <link rel="shortcut icon" href="{{ url_for('static', filename='img/IMlogo.jpg') }}"> -->
 </head>
 <body>
-    
-    <div class="container-top">     
-        <!-- top left box -->
-        <ul class="customer_box">
-          <li>{{customer.comp_name}}</li>
-          <li>{{customer.city}}</li>
-          <li>{{customer.b_address}}</li>
-          <li>{{customer.city}}</li>
-          <li>{{customer.state_province}}</li>
-           <li>{{customer.post_code}}</li>
-          <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
-          <li>Tel:{{customer.phone}}</li>
-        </ul>  
+    <div class="container-all">
+        <div class="container-title">
+            <img src="{{ url_for('static', filename='img/IMlogo.jpg') }}">
+            <ul>
+                <li> <h2>Innovation Matrix, Inc.</h2> <li>
+                <li>3080 Olcott St., B105, Santa Clara, CA 95054</li>
+                <li>(408) 329-4422 FAX (408) 468-7537</li>
+            </ul>
+        </div>
 
-        <!-- top right box -->
-        <div class="shipping_table">
-            <table>
-                <tr>
-                    <th>Quotatoin NO.:</th>
-                    <th>{{quotation.q_num}}</th>
-                </tr> 
-                <tr>
-                    <td>Quotation Data:</td>
-                    <td>{{quotation.date}}</td>
+        <h3 class="quote-title">Quotation</h3>
+
+        <div class="container-top">     
+            <!-- top left box -->
+            <ul class="customer_box">
+              <li>{{customer.comp_name}}</li>
+              <li>{{customer.city}}</li>
+              <li>{{customer.b_address}}</li>
+              <li>{{customer.city}}</li>
+              <li>{{customer.state_province}}</li>
+               <li>{{customer.post_code}}</li>
+              <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
+              <li>Tel:{{customer.phone}}</li>
+            </ul>  
+
+            <!-- top right box -->
+            <div class="shipping_table">
+                <table>
+                    <tr>
+                        <th>Quotation NO.:</th>
+                        <th>{{quotation.q_num}}</th>
+                    </tr> 
+                    <tr>
+                        <td>Quotation Date:</td>
+                        <td>{{quotation.date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Schedule:</td>
+                        <td>{{quotation.s_sched}}</td>
+                    </tr>
+                    <tr>
+                        <td>Terms of Payment:</td>
+                        <td>{{quotation.pay_terms}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shipment Terms:</td>
+                        <td>{{quotation.s_term}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Method:</td>
+                        <td>where is this found</td>
+                    </tr>
+                </table>
+            </div>  
+        </div>
+
+        <div class="container-middle">
+            <!-- main table -->
+            <table> 
+                <tr> 
+                    <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
                 </tr>
                 <tr>
-                    <td>Ship Schedule:</td>
-                    <td>{{quotation.s_sched}}</td>
+                    <th> Item </th>
+                    <th> Description </th>
+                    <th> Part Number </th>
+                    <th> Unit Price </th>
+                    <th> Qty </th>
+                    <th> Total Price </th>
                 </tr>
+                {% for detail in quote_details %}
                 <tr>
-                    <td>Terms of Payment:</td>
-                    <td>{{quotation.pay_terms}}</td>
+                    <td> {{ loop.index }} </td>
+                    <td> {{ products[detail.quote_detail_id].p_note }} </td>
+                    <td> {{ products[detail.quote_detail_id].p_name }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price }} </td>
+                    <td> {{ detail.quantity }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
                 </tr>
-                <tr>
-                    <td>Shipment Terms:</td>
-                    <td>{{quotation.s_term}}</td>
-                </tr>
-                <tr>
-                    <td>Shipping Method:</td>
-                    <td>where is this found</td>
-                </tr>
+                {% endfor %}
             </table>
-        </div>  
+
+
+            <!-- optional table -->
+            <table> 
+                <tr> 
+                    <div class="tabletitle"> Optional </div>    
+                </tr>
+                {% for detail in quote_details %}
+                <tr>
+                    <td> {{ loop.index }} </td>
+                    <td> {{ products[detail.quote_detail_id].p_note }} </td>
+                    <td> {{ products[detail.quote_detail_id].p_name }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price }} </td>
+                    <td> {{ detail.quantity }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- total box -->
+        <ul class="total_box">
+          <li>subtotal: ${{subtotal}}</li>
+          <li>discount: (${{subtotal - total}})</li>
+          <li>TOTAL: ${{total}} </li>
+        </ul> 
+
+        <div class="container-bottom">
+            <!-- note box -->
+            <ul class="note_box">
+              <li class="tabletitle"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
+              <li>* Required delivery date</li>
+              <li>* Carrier TBD</li>
+              <li>* Ship to address</li>
+              <li>* Bill to address</li>
+            </ul>
+
+            <!-- IM address box -->
+            <ul class="address_box">
+              <li> Address order to: </li>
+              <li>Innovation Matrix, Inc</li>
+              <li>Attn: Sales Operations</li>
+              <li>3080 Olcott St., B105</li>
+              <li>Santa Clara CA 95054 USA</li>
+              <li>FAX: (408) 716-2553</li>
+            </ul>
+        </div>
+
+
+        <!-- authorize box -->
+        <div class="container-authorize">
+            <h3>Authorized by: </h3>
+            <input type="text" class="signature" />
+        </div>
     </div>
-
-    <!-- main table -->
-    <table> 
-        <tr> 
-            <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
-        </tr>
-        <tr>
-            <th> Item </th>
-            <th> Description </th>
-            <th> Part Number </th>
-            <th> Unit Price </th>
-            <th> Qty </th>
-            <th> Total Price </th>
-        </tr>
-        {% for detail in quote_details %}
-        <tr>
-            <td> {{ loop.index }} </td>
-            <td> {{ products[detail.quote_detail_id].p_note }} </td>
-            <td> {{ products[detail.quote_detail_id].p_name }} </td>
-            <td> {{ products[detail.quote_detail_id].unit_price }} </td>
-            <td> {{ detail.quantity }} </td>
-            <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <!-- total box -->
-    <ul class="total_box">
-      <li>subtotal: ${{subtotal}}</li>
-      <li>discount: ${{subtotal - total}}</li>
-      <li>TOTAL: ${{total}} </li>
-    </ul> 
-
-    <!-- note box -->
-    <ul class="note_box">
-      <li class="tabletitle"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
-      <li>* Required delivery date</li>
-      <li>* Carrier TBD</li>
-      <li>* Ship to address</li>
-      <li>* Bill to address</li>
-    </ul>
-
-    <!-- IM address box -->
-    <ul class="address_box">
-      <li> Address order to: </li>
-      <li>Innovation Matrix, Inc</li>
-      <li>Attn: Sales Operations</li>
-      <li>3080 Olcott St., B105</li>
-      <li>Santa Clara CA 95054 USA</li>
-      <li>FAX: (408) 716-2553</li>
-    </ul>
-
 </body>
 
 
