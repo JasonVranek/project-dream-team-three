@@ -750,16 +750,29 @@ def gen_pdf(id):
 
     # Get each product associated with each Quote Detail and save to dictionary
     products = {}
+    subtotal = 0
+    total = 0
     for detail in quote_details:
         qd_id = detail.quote_detail_id
-        products[qd_id] = Product.query.filter_by(p_id=detail.p_id).first()
+        product = Product.query.filter_by(p_id=detail.p_id).first()
+        products[qd_id] = product
+        # if detail.active:
+        if detail.discount:
+            total += detail.quantity * product.unit_price * detail.discount
+        else:
+            total += detail.quantity * product.unit_price
+            
+        subtotal += detail.quantity * product.unit_price
+
 
     return render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
                             customer=customer,
                             quote_details=quote_details,
                             products=products, 
-                            title="PDF")
+                            title="PDF",
+                            total=total,
+                            subtotal=subtotal)
 
 
 

@@ -23,8 +23,8 @@
           <li>Tel:{{customer.phone}}</li>
         </ul>  
 
+        <!-- top right box -->
         <div class="shipping_table">
-            <!-- top right box -->
             <table>
                 <tr>
                     <th>Quotatoin NO.:</th>
@@ -77,6 +77,15 @@
             </tr>
             {% endfor %}
         </table>
+
+        <!-- total box -->
+        <ul class="total_box">
+          <li>subtotal: ${{subtotal}}</li>
+          <li>discount: ${{subtotal - total}}</li>
+          <li>TOTAL: ${{total}} </li>
+        </ul> 
+
+        <!-- note box -->
 
 
 

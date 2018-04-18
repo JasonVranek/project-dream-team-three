@@ -13,6 +13,10 @@ table tr:nth-child(even) td {
 	background-color: #e7edf0
 }
 
+ul {
+	list-style-type: none;
+}
+
 .tabletitle {
 	font-style: italic;
 }
@@ -29,6 +33,3 @@ table tr:nth-child(even) td {
 	background-color: #E20FE9
 }
 
-ul {
-	list-style-type: none;
-}
