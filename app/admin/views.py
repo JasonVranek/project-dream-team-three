@@ -747,7 +747,7 @@ def gen_pdf(id):
     customer = Customer.query.filter_by(c_id=quotation.c_id).first()    
 
     # Get all of the Quotation Details that are tied to this Quotation
-    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+    quote_details = Quotation_Detail.query.filter_by(q_id=id, option=False).all()
 
     # Get each product associated with each Quote Detail and save to dictionary
     products = {}
@@ -766,7 +766,7 @@ def gen_pdf(id):
         subtotal += detail.quantity * product.unit_price
 
     # Find the 'optional' items and pass them in
-    # optional = ...
+    optional = Quotation_Detail.query.filter_by(q_id=id, option=True).all()
 
     # Use the pdfkit library to convert HTML to PDF
     # rendered = render_template('admin/quotations/pdf.html', 
@@ -797,7 +797,7 @@ def gen_pdf(id):
                             customer=customer,
                             quote_details=quote_details,
                             products=products,
-                            optional=quote_details, #change quote_details to optional 
+                            optional=optional,
                             title="PDF",
                             total=total,
                             subtotal=subtotal)
@@ -967,6 +967,19 @@ def delete_opportunity(id):
 
 
 # Quotation_Detail Views
+
+@admin.route('/quotation_details/toggle/<int:id>/<int:option>', methods=['GET', 'POST'])
+@login_required
+def optional_quotation_detail(id, option):
+    # Modify the option parameter of the quotation detail to boolean value: option
+    quotation_detail = Quotation_Detail.query.filter_by(quote_detail_id=id).first()
+    quotation_detail.option = bool(option)
+    db.session.commit()
+    # return "hello world" + str(id) + str(option)
+
+    # redirect to quotation_details page
+    return redirect(url_for('admin.list_quotation_details', page_num=1))
+
 
 
 @admin.route('/quotation_details/view/<int:id>', methods=['GET'])

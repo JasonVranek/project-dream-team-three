@@ -26,7 +26,11 @@
               </thead>
               <tbody>
               {% for quotation_detail in quotation_details.items %}
+                {% if quotation_detail.option %}
+                 <tr style="background-color: #808080; color: white;">
+                {% else %}
                 <tr>
+                {% endif %}
                   <td> {{ quotation_detail.quote_detail_id }} </td>
                   <td> 
                     <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
@@ -41,6 +45,19 @@
                   <td> {{ quotation_detail.p_name }}</td>
                   <td> {{ quotation_detail.quantity }} </td>
                   <td> {{ quotation_detail.q_price }} </td>
+                  {% if quotation_detail.option %}
+                  <td>
+                    <a href="{{ url_for('admin.optional_quotation_detail', id=quotation_detail.quote_detail_id, option=0) }}">
+                      <i class="fa fa-plus"></i> Make Required
+                    </a>
+                  </td>
+                  {% else %}
+                  <td>
+                    <a href="{{ url_for('admin.optional_quotation_detail', id=quotation_detail.quote_detail_id, option=1) }}">
+                      <i class="fa fa-minus"></i> Make Optional
+                    </a>
+                  </td>
+                  {% endif %}
                   <td>
                     <a href="{{ url_for('admin.view_quotation_detail', id=quotation_detail.quote_detail_id) }}">
                       <i class="fa fa-eye"></i> View
