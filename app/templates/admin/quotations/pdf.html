@@ -1,8 +1,11 @@
-
+<head>
+    <link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
+</head>
 <body>
     <div class="container-all">
         <div class="container-title">
             <img src="{{ url_for('static', filename='img/IMlogo.jpg') }}">
+            <!-- <img src="/media/sf_Ubuntu/quote/project-dream-team-three/app/static/img/IMlogo.jpg"> -->
             <ul>
                 <li> <h2>Innovation Matrix, Inc.</h2> <li>
                 <li>3080 Olcott St., B105, Santa Clara, CA 95054</li>
@@ -18,9 +21,7 @@
               <li>{{customer.comp_name}}</li>
               <li>{{customer.city}}</li>
               <li>{{customer.b_address}}</li>
-              <li>{{customer.city}}</li>
-              <li>{{customer.state_province}}</li>
-               <li>{{customer.post_code}}</li>
+              <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
               <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
               <li>Tel:{{customer.phone}}</li>
             </ul>  
@@ -68,6 +69,7 @@
                     <th> Part Number </th>
                     <th> Unit Price </th>
                     <th> Qty </th>
+                    <th> Discount </th> 
                     <th> Total Price </th>
                 </tr>
                 {% for detail in quote_details %}
@@ -77,7 +79,8 @@
                     <td> {{ products[detail.quote_detail_id].p_name }} </td>
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
+                    <td> %{{ 100 * detail.discount }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * detail.discount}} </td>
                 </tr>
                 {% endfor %}
             </table>
@@ -95,7 +98,8 @@
                     <td> {{ products[detail.quote_detail_id].p_name }} </td>
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity }} </td>
+                    <td> %{{ 100 * detail.discount }} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * detail.discount}} </td>
                 </tr>
                 {% endfor %}
             </table>
@@ -105,7 +109,7 @@
         <ul class="total_box">
           <li>subtotal: ${{subtotal}}</li>
           <li>discount: (${{subtotal - total}})</li>
-          <li>TOTAL: ${{total}} </li>
+          <li><h3>TOTAL: ${{total}} </h3></li>
         </ul> 
 
         <div class="container-bottom">
