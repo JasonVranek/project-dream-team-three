@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, TextField, IntegerField
+from wtforms import StringField, SubmitField, FloatField, TextField, IntegerField, BooleanField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
 from wtforms.fields.html5 import DateField
@@ -156,7 +156,7 @@ class Quotation_DetailForm(FlaskForm):
     quantity = FloatField('Quantity', validators=[DataRequired()])
     discount = FloatField('Discount', validators=[DataRequired()])
     q_price = FloatField('Quote Price', validators=[DataRequired()])       
-    option = FloatField('Option')
+    option = BooleanField('Option')
 
     submit = SubmitField('Submit')
 

@@ -161,8 +161,8 @@ class Quotation_Detail(UserMixin, db.Model):
     quantity = db.Column('Quantity', db.Float)
     discount = db.Column('Discount', db.Float)
     q_price = db.Column('Quote Price', db.Float)       
-    option = db.Column('Option', db.Float)
-    #is_active = db.Column('Active', db.Boolean)
+    # option = db.Column('Option', db.Float)
+    option = db.Column('Active (Y/N)', db.Boolean)
     
     def __repr__(self):
         return '<Quotation Detail: {}>'.format(self.quote_detail_id)
