@@ -91,7 +91,7 @@ class Product(UserMixin, db.Model):
     __tablename__ = 'products'
 
     p_id = db.Column('ProductID', db.Integer, primary_key=True) 
-    p_number = db.Column('Part Number', db.String(50))                    
+    p_number = db.Column('Part Number', db.String(50), unique=True)                    
     p_name = db.Column('ProductName', db.String(50))
     unit_price = db.Column('UnitPrice', db.Float)
     p_note = db.Column('Product Note to show', db.String(200))
