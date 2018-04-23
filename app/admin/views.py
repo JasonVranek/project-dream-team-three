@@ -1070,6 +1070,7 @@ def edit_quotation_detail(id):
 
     quotation_detail = Quotation_Detail.query.get_or_404(id)
     form = Quotation_DetailForm(obj=quotation_detail)
+
     if form.validate_on_submit():
         quotation_detail.q_id = form.q_id.data.q_id                 # special
         quotation_detail.p_id = form.p_id.data.p_id                 # special
