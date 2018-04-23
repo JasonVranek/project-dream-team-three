@@ -759,7 +759,7 @@ def gen_pdf(id):
         products[qd_id] = product
         # if detail.active:
         if detail.discount:
-            total += detail.quantity * product.unit_price * detail.discount
+            total += detail.quantity * product.unit_price * (1 - detail.discount)
         else:
             total += detail.quantity * product.unit_price
 
@@ -767,6 +767,27 @@ def gen_pdf(id):
 
     # Find the 'optional' items and pass them in
     optional = Quotation_Detail.query.filter_by(q_id=id, option=True).all()
+    for detail in optional:
+        qd_id = detail.quote_detail_id
+        product = Product.query.filter_by(p_id=detail.p_id).first()
+        products[qd_id] = product
+        # if detail.active:
+        # if detail.discount:
+        #     total += detail.quantity * product.unit_price * detail.discount
+        # else:
+        #     total += detail.quantity * product.unit_price
+
+        # subtotal += detail.quantity * product.unit_price
+
+    return render_template('admin/quotations/pdf.html', 
+                            quotation=quotation,
+                            customer=customer,
+                            quote_details=quote_details,
+                            products=products,
+                            optional=optional,
+                            title="PDF",
+                            total=total,
+                            subtotal=subtotal)
 
     # Use the pdfkit library to convert HTML to PDF
     # rendered = render_template('admin/quotations/pdf.html', 
@@ -790,19 +811,6 @@ def gen_pdf(id):
     # response.headers['Content-Disposition'] = 'inline; filname=quotation-{}.pdf'.format(id)
 
     # return response
-
-
-    return render_template('admin/quotations/pdf.html', 
-                            quotation=quotation,
-                            customer=customer,
-                            quote_details=quote_details,
-                            products=products,
-                            optional=optional,
-                            title="PDF",
-                            total=total,
-                            subtotal=subtotal)
-
-
 
 
 # Opportunity Views

@@ -80,7 +80,7 @@
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
                     <td> %{{ 100 * detail.discount }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * detail.discount}} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td>
                 </tr>
                 {% endfor %}
             </table>
@@ -91,7 +91,7 @@
                 <tr> 
                     <div class="tabletitle"> Optional </div>    
                 </tr>
-                {% for detail in quote_details %}
+                {% for detail in optional %}
                 <tr>
                     <td> {{ loop.index }} </td>
                     <td> {{ products[detail.quote_detail_id].p_note }} </td>
@@ -99,7 +99,7 @@
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
                     <td> %{{ 100 * detail.discount }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * detail.discount}} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td>
                 </tr>
                 {% endfor %}
             </table>
