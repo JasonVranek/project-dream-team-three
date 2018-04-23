@@ -74,13 +74,20 @@
                 </tr>
                 {% for detail in quote_details %}
                 <tr>
-                    <td> {{ loop.index }} </td>
+                    <!-- <td> {{ loop.index }} </td>
                     <td> {{ products[detail.quote_detail_id].p_note }} </td>
                     <td> {{ products[detail.quote_detail_id].p_name }} </td>
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
                     <td> %{{ 100 * detail.discount }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td> -->
+                    <td> {{ loop.index }} </td>
+                    <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
+                    <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_name }}'> </td>
+                    <td> <input type="text" size="10" value='{{ products[detail.quote_detail_id].unit_price }}'> </td>
+                    <td> <input type="text" size="5" value='{{ detail.quantity }}'> </td>
+                    <td> <input type="text" size="5" value='%{{ 100 * detail.discount }}'> </td>
+                    <td> <input type="text" size="10" value='{{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}}''> </td>
                 </tr>
                 {% endfor %}
             </table>
@@ -93,13 +100,20 @@
                 </tr>
                 {% for detail in optional %}
                 <tr>
-                    <td> {{ loop.index }} </td>
+                    <!-- <td> {{ loop.index }} </td>
                     <td> {{ products[detail.quote_detail_id].p_note }} </td>
                     <td> {{ products[detail.quote_detail_id].p_name }} </td>
                     <td> {{ products[detail.quote_detail_id].unit_price }} </td>
                     <td> {{ detail.quantity }} </td>
                     <td> %{{ 100 * detail.discount }} </td>
-                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td>
+                    <td> {{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}} </td> -->
+                    <td> {{ loop.index }} </td>
+                    <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
+                    <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_name }}'> </td>
+                    <td> <input type="text" size="10" value='{{ products[detail.quote_detail_id].unit_price }}'> </td>
+                    <td> <input type="text" size="5" value='{{ detail.quantity }}'> </td>
+                    <td> <input type="text" size="5" value='%{{ 100 * detail.discount }}'> </td>
+                    <td> <input type="text" size="10" value='{{ products[detail.quote_detail_id].unit_price * detail.quantity * (1-detail.discount)}}''> </td>
                 </tr>
                 {% endfor %}
             </table>

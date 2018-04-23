@@ -155,7 +155,7 @@ class Quotation_DetailForm(FlaskForm):
     # p_name = StringField('Product Name')
     quantity = FloatField('Quantity', validators=[DataRequired()])
     discount = FloatField('Discount', validators=[DataRequired()])
-    q_price = FloatField('Quote Price', validators=[DataRequired()])       
+    q_price = FloatField('Quote Price')#, validators=[DataRequired()])       
     option = BooleanField('Option')
 
     submit = SubmitField('Submit')
