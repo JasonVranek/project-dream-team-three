@@ -1072,8 +1072,15 @@ def edit_quotation_detail(id):
     form = Quotation_DetailForm(obj=quotation_detail)
 
     if form.validate_on_submit():
-        quotation_detail.q_id = form.q_id.data.q_id                 # special
-        quotation_detail.p_id = form.p_id.data.p_id                 # special
+        quotation_detail.q_id = form.q_id.data.q_id                 # special         REMOVE 4/25/18
+        quotation_detail.p_id = form.p_id.data.p_id                 # special         REMOVE 4/25/18
+        # Get the important foreign keys using the unique quotation number and product number 
+        # quotation_detail.q_num = form.q_num.data
+        # quotation_detail.p_num = form.p_num.data
+        # quote = Qutation.query.filter_by(q_num=form.q_num.data).first()
+        # quotation_detail.q_id = quote.q_id
+        # product = Product.query.filter_by(p_num=form.p_number.data).first()
+        # quotation_detail.p_id = product.p_number
         quotation_detail.p_name = form.p_name.data           # special??
         quotation_detail.quantity = form.quantity.data
         quotation_detail.discount = form.discount.data

@@ -154,6 +154,8 @@ class Quotation_DetailForm(FlaskForm):
                             get_label="p_id")
     p_name = QuerySelectField('Product Name', query_factory=lambda: Product.query.all(),
                             get_label="p_name")
+    p_name = QuerySelectField('Product Number', query_factory=lambda: Product.query.all(),
+                            get_label="p_number")
     # p_name = StringField('Product Name')
     quantity = FloatField('Quantity', validators=[DataRequired()])
     discount = FloatField('Discount', validators=[DataRequired()])

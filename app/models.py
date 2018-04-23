@@ -156,7 +156,9 @@ class Quotation_Detail(UserMixin, db.Model):
 
     quote_detail_id = db.Column('QuotationDetailID', db.Integer, primary_key=True)  
     q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
-    p_id = db.Column('ProductID', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
+    # p_id = db.Column('ProductID', db.Integer, nullable=False)         ADD 4/25/18
+    # q_num = db.Column('QuotationNumber', db.String(50), nullable=False)                 
+    p_num = db.Column('ProductNumber', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
     p_name = db.Column('Product Name', db.String(50))
     quantity = db.Column('Quantity', db.Float)
     discount = db.Column('Discount', db.Float)
