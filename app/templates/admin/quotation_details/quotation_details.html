@@ -17,8 +17,8 @@
               <thead>
                 <tr>
                   <th width="15%"> Quote Detail ID </th>
-                  <th width="15%"> Quotation ID </th>
-                  <th width="15%"> Product ID </th>
+                  <th width="15%"> Quotation Number </th>
+                  <th width="15%"> Product Number </th>
                   <th width="15%"> Product Name </th>
                   <th width="15%"> Quantity </th>
                   <th width="15%"> Quote Price </th>
@@ -34,12 +34,12 @@
                   <td> {{ quotation_detail.quote_detail_id }} </td>
                   <td> 
                     <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
-                      {{ quotation_detail.q_id }}
+                      {{ quotation_detail.q_num }}
                     </a>
                   </td>
                   <td> 
                     <a href="{{ url_for('admin.view_product', id=quotation_detail.p_id) }}">
-                      {{ quotation_detail.p_id }}
+                      {{ quotation_detail.p_num }}
                     </a>
                   </td>
                   <td> {{ quotation_detail.p_name }}</td>
