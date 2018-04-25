@@ -10,7 +10,7 @@
         {{ utils.flashed_messages() }}
         <br/>
         {% if quotation_detail %}
-        <h1 style="text-align:center;"> {{ quotation_detail.quote_detail_id }} </h1>
+        <h1 style="text-align:center;"> Detail #{{ quotation_detail.quote_detail_id }} for Quote #{{ quotation_detail.q_num }}</h1>
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">

@@ -610,15 +610,10 @@ def add_quotation():
 
     form = QuotationForm()
     if form.validate_on_submit():
-        # Get the customer ID from the account code for easier user experience
-        acc_code = form.acc_code.data.acc_code
-        customer = Customer.query.filter_by(acc_code=acc_code).first()
-        c_id = customer.c_id
-        # When using query selects in forms, c_id returns the customer object, so must extract c_id from object
-        quotation = Quotation(c_id = c_id,           # special
-                                acc_code = acc_code,
+        quotation = Quotation(c_id = form.acc_code.data.c_id,           
+                                acc_code = form.acc_code.data.acc_code,
                                 q_num = form.q_num.data,
-                                e_id = form.e_id.data.username,           # special
+                                e_id = form.e_id.data.username,           
                                 date = form.date.data,
                                 revision = form.revision.data,
                                 pay_terms = form.pay_terms.data,
@@ -668,15 +663,10 @@ def edit_quotation(id):
     quotation = Quotation.query.get_or_404(id)
     form = QuotationForm(obj=quotation)
     if form.validate_on_submit():
-        # Get the customer ID from the account code for easier user experience
-        acc_code = form.acc_code.data.acc_code
-        customer = Customer.query.filter_by(acc_code=acc_code).first()
-        quotation.c_id = customer.c_id
-
-        quotation.acc_code = acc_code
-        # quotation.c_id = form.c_id.data.c_id        # special
+        quotation.c_id = form.acc_code.data.c_id
+        quotation.acc_code = form.acc_code.data.acc_code
         quotation.q_num = form.q_num.data        
-        quotation.e_id = form.e_id.data.username          # special
+        quotation.e_id = form.e_id.data.username         
         quotation.date = form.date.data
         quotation.revision = form.revision.data
         quotation.pay_terms = form.pay_terms.data
@@ -702,7 +692,6 @@ def edit_quotation(id):
         return redirect(url_for('admin.list_quotations', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    # form.c_id.data = quotation.c_id
     form.acc_code.data = quotation.acc_code
     form.q_num.data = quotation.q_num
     form.e_id.data = quotation.e_id
@@ -1046,16 +1035,11 @@ def add_quotation_detail():
 
     form = Quotation_DetailForm()
     if form.validate_on_submit():
-        q_num = form.q_num.data.q_num           # Select form returns quotation object and not q_num, so must fetch it
-        p_num = form.p_num.data.p_number
-        quote = Quotation.query.filter_by(q_num=q_num).first_or_404()
-        product = Product.query.filter_by(p_number=p_num).first_or_404()
-
-        quotation_detail = Quotation_Detail(q_id = quote.q_id,     # special
-                                p_id = product.p_id,                 # special
-                                p_name = product.p_name,           # special??
-                                q_num = q_num,
-                                p_num = product.p_number,
+        quotation_detail = Quotation_Detail(q_id = form.q_num.data.q_id,     
+                                p_id = form.p_num.data.p_id,                
+                                p_name = form.p_num.data.p_name,           
+                                q_num = form.q_num.data.q_num,
+                                p_num = form.p_num.data.p_number,
                                 quantity = form.quantity.data,
                                 discount = form.discount.data,
                                 q_price = form.q_price.data,
@@ -1093,19 +1077,11 @@ def edit_quotation_detail(id):
     form = Quotation_DetailForm(obj=quotation_detail)
 
     if form.validate_on_submit():
-        # Get literals from objects
-        q_num = form.q_num.data.q_num           
-        p_num = form.p_num.data.p_number
-        # Fetch primary keys using above unique keys
-        quote = Quotation.query.filter_by(q_num=q_num).first_or_404()
-        product = Product.query.filter_by(p_number=p_num).first_or_404()
-
-        # update the quotation_detail
-        quotation_detail.q_num = q_num
-        quotation_detail.p_num = p_num
-        quotation_detail.q_id = quote.q_id
-        quotation_detail.p_id = product.p_id
-        quotation_detail.p_name = product.p_name
+        quotation_detail.q_num = form.q_num.data.q_num
+        quotation_detail.p_num = form.p_num.data.p_number
+        quotation_detail.q_id = form.q_num.data.q_id
+        quotation_detail.p_id = form.p_num.data.p_id
+        quotation_detail.p_name = form.p_num.data.p_name
         quotation_detail.quantity = form.quantity.data
         quotation_detail.discount = form.discount.data
         quotation_detail.q_price = form.q_price.data
