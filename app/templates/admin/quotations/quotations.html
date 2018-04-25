@@ -17,7 +17,7 @@
               <thead>
                 <tr>
                   <th width="15%"> Quote ID </th>
-                  <th width="15%"> Customer ID </th>
+                  <th width="15%"> Customer Code </th>
                   <th width="15%"> Employee ID </th>
                   <th width="15%"> Quote Number </th>
                   <th width="15%"> Quote Date </th>
@@ -30,7 +30,7 @@
                   <td> {{ quotation.q_id }} </td>
                   <td> 
                     <a href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">
-                      {{ quotation.c_id }}
+                      {{ quotation.acc_code }}
                     </a>
                   </td>
                   <td> {{ quotation.e_id }}</td>

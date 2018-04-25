@@ -610,8 +610,13 @@ def add_quotation():
 
     form = QuotationForm()
     if form.validate_on_submit():
-        # When using foreign keys as queries in forms, c_id returns the customer object, so must extract c_id from object
-        quotation = Quotation(c_id = form.c_id.data.c_id,           # special
+        # Get the customer ID from the account code for easier user experience
+        acc_code = form.acc_code.data.acc_code
+        customer = Customer.query.filter_by(acc_code=acc_code).first()
+        c_id = customer.c_id
+        # When using query selects in forms, c_id returns the customer object, so must extract c_id from object
+        quotation = Quotation(c_id = c_id,           # special
+                                acc_code = acc_code,
                                 q_num = form.q_num.data,
                                 e_id = form.e_id.data.id,           # special
                                 date = form.date.data,
@@ -663,7 +668,13 @@ def edit_quotation(id):
     quotation = Quotation.query.get_or_404(id)
     form = QuotationForm(obj=quotation)
     if form.validate_on_submit():
-        quotation.c_id = form.c_id.data.c_id        # special
+        # Get the customer ID from the account code for easier user experience
+        acc_code = form.acc_code.data.acc_code
+        customer = Customer.query.filter_by(acc_code=acc_code).first()
+        quotation.c_id = customer.c_id
+
+        quotation.acc_code = acc_code
+        # quotation.c_id = form.c_id.data.c_id        # special
         quotation.q_num = form.q_num.data        
         quotation.e_id = form.e_id.data.id          # special
         quotation.date = form.date.data
@@ -691,7 +702,8 @@ def edit_quotation(id):
         return redirect(url_for('admin.list_quotations', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.c_id.data = quotation.c_id
+    # form.c_id.data = quotation.c_id
+    form.acc_code.data = quotation.acc_code
     form.q_num.data = quotation.q_num
     form.e_id.data = quotation.e_id
     form.date.data = quotation.date
@@ -1103,9 +1115,6 @@ def edit_quotation_detail(id):
         return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    # form.q_id.data = quotation_detail.q_id          
-    # form.p_id.data = quotation_detail.p_id 
-    # form.p_name.data = quotation_detail.p_name
     form.q_num.data = quotation_detail.q_num
     form.p_num.data = quotation_detail.p_num               
     form.quantity.data = quotation_detail.quantity

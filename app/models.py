@@ -53,6 +53,7 @@ class Quotation(UserMixin, db.Model):
     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.Integer)
     date = db.Column('Quotaton Date', db.Date)          
+    acc_code = db.Column('Account Code', db.String(20), nullable=False)
     q_num = db.Column('Quotation Number', db.Integer, unique=True, nullable=False)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))
