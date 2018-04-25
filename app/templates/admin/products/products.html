@@ -17,7 +17,6 @@
               <thead>
                 <tr>
                   <th width="15%"> Part Number </th>
-                  <th width="15%"> Product ID </th>
                   <th width="15%"> Product Name </th>
                   <th width="15%"> Unit Price </th>
                   <th width="15%"> Unit Cost </th>
@@ -32,7 +31,6 @@
               {% for product in products.items %}
                 <tr>
                   <td> {{ product.p_number }} </td>
-                  <td> {{ product.p_id }} </td>
                   <td> {{ product.p_name }}</td>
                   <td> {{ product.unit_price }} </td>
                   <td> {{ product.unit_cost }} </td>

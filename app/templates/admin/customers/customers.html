@@ -17,7 +17,6 @@
               <thead>
                 <tr>
                   <th width="15%"> Account Code </th>
-                  <th width="10%"> Customer ID </th>
                   <th width="30%"> Name </th>
                   <th width="30%"> Company Name </th>
                   <th width="15%"> Email </th>
@@ -29,7 +28,6 @@
               {% for customer in customers.items %}
                 <tr>
                   <td> {{ customer.acc_code }} </td>
-                  <td> {{ customer.c_id }} </td>
                   <td> {{ customer.f_name }} {{ customer.l_name }} </td>
                   <td> {{ customer.comp_name }} </td>
                   <td> {{ customer.email }} </td>
