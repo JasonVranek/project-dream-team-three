@@ -23,7 +23,11 @@
               <tr>
                 <thead>
                   <th width="20%"> Quote Number </th>
-                  <td> {{ opportunity.q_num }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_quotation', id=opportunity.q_id) }}">
+                      {{ opportunity.q_num }}
+                    </a>
+                  </td>
                 </thead>
               </tr>
               <tr>

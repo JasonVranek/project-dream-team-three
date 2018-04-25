@@ -10,7 +10,7 @@
         {{ utils.flashed_messages() }}
         <br/>
         {% if quotation %}
-        <h1 style="text-align:center;"> {{ quotation.q_num }} </h1>
+        <h1 style="text-align:center;"> Quotation #{{ quotation.q_num }} </h1>
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">
@@ -23,7 +23,11 @@
               <tr>
                 <thead>
                   <th width="20%"> Customer Code </th>
-                  <td> {{ quotation.acc_code }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">
+                      {{ quotation.acc_code }}
+                    </a>
+                  </td>
                 </thead>
               </tr>
               <tr>

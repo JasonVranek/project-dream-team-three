@@ -23,13 +23,22 @@
               <tr>
                 <thead>
                   <th width="20%"> Quote Number </th>
-                  <td> {{ quotation_detail.q_num }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
+                      {{ quotation_detail.q_num }} 
+                    </a>
+
+                  </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
                   <th width="20%"> Product Number </th>
-                  <td> {{ quotation_detail.p_num }} </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_product', id=quotation_detail.p_id) }}">
+                      {{ quotation_detail.p_num }}
+                    </a>
+                  </td>
                 </thead>
               </tr>
               <tr>
