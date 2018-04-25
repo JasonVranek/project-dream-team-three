@@ -1078,16 +1078,19 @@ def edit_quotation_detail(id):
     form = Quotation_DetailForm(obj=quotation_detail)
 
     if form.validate_on_submit():
-        quotation_detail.q_id = form.q_id.data.q_id                 # special         REMOVE 4/25/18
-        quotation_detail.p_id = form.p_id.data.p_id                 # special         REMOVE 4/25/18
-        # Get the important foreign keys using the unique quotation number and product number 
-        # quotation_detail.q_num = form.q_num.data
-        # quotation_detail.p_num = form.p_num.data
-        # quote = Qutation.query.filter_by(q_num=form.q_num.data).first()
-        # quotation_detail.q_id = quote.q_id
-        # product = Product.query.filter_by(p_num=form.p_number.data).first()
-        # quotation_detail.p_id = product.p_number
-        quotation_detail.p_name = form.p_name.data           # special??
+        # Get literals from objects
+        q_num = form.q_num.data.q_num           
+        p_num = form.p_num.data.p_number
+        # Fetch primary keys using above unique keys
+        quote = Quotation.query.filter_by(q_num=q_num).first_or_404()
+        product = Product.query.filter_by(p_number=p_num).first_or_404()
+
+        # update the quotation_detail
+        quotation_detail.q_num = q_num
+        quotation_detail.p_num = p_num
+        quotation_detail.q_id = quote.q_id
+        quotation_detail.p_id = product.p_id
+        quotation_detail.p_name = product.p_name
         quotation_detail.quantity = form.quantity.data
         quotation_detail.discount = form.discount.data
         quotation_detail.q_price = form.q_price.data
@@ -1100,9 +1103,11 @@ def edit_quotation_detail(id):
         return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.q_id.data = quotation_detail.q_id          
-    form.p_id.data = quotation_detail.p_id                
-    form.p_name.data = quotation_detail.p_name
+    # form.q_id.data = quotation_detail.q_id          
+    # form.p_id.data = quotation_detail.p_id 
+    # form.p_name.data = quotation_detail.p_name
+    form.q_num.data = quotation_detail.q_num
+    form.p_num.data = quotation_detail.p_num               
     form.quantity.data = quotation_detail.quantity
     form.discount.data = quotation_detail.discount
     form.q_price.data = quotation_detail.q_price 
