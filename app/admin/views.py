@@ -618,7 +618,7 @@ def add_quotation():
         quotation = Quotation(c_id = c_id,           # special
                                 acc_code = acc_code,
                                 q_num = form.q_num.data,
-                                e_id = form.e_id.data.id,           # special
+                                e_id = form.e_id.data.username,           # special
                                 date = form.date.data,
                                 revision = form.revision.data,
                                 pay_terms = form.pay_terms.data,
@@ -676,7 +676,7 @@ def edit_quotation(id):
         quotation.acc_code = acc_code
         # quotation.c_id = form.c_id.data.c_id        # special
         quotation.q_num = form.q_num.data        
-        quotation.e_id = form.e_id.data.id          # special
+        quotation.e_id = form.e_id.data.username          # special
         quotation.date = form.date.data
         quotation.revision = form.revision.data
         quotation.pay_terms = form.pay_terms.data
@@ -869,8 +869,10 @@ def add_opportunity():
 
     form = OpportunityForm()
     if form.validate_on_submit():
-        # When using foreign keys as queries in forms, q_id returns the quotation object, so must extract q_id from object
-        opportunity = Opportunity(q_id = form.q_id.data.q_id,           # special
+        q_num = form.q_num.data.q_num           # Select form returns quotation object, not q_num field
+        q_id = form.q_num.data.q_id
+        opportunity = Opportunity(q_id = q_id,           # special
+                                    q_num = q_num,
                                     source_of_lead = form.source_of_lead.data,           
                                     sale_ref_fee = form.sale_ref_fee.data,
                                     competitors = form.competitors.data,
@@ -919,7 +921,8 @@ def edit_opportunity(id):
     opportunity = Opportunity.query.get_or_404(id)
     form = OpportunityForm(obj=opportunity)
     if form.validate_on_submit():
-        opportunity.q_id = form.q_id.data.q_id      # special
+        opportunity.q_id = form.q_num.data.q_id      # special
+        opportunity.q_num = form.q_num.data.q_num
         opportunity.source_of_lead = form.source_of_lead.data,          
         opportunity.sale_ref_fee = form.sale_ref_fee.data
         opportunity.competitors = form.competitors.data
@@ -944,7 +947,7 @@ def edit_opportunity(id):
         return redirect(url_for('admin.list_opportunities', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.q_id.data = opportunity.q_id       
+    form.q_num.data = opportunity.q_num       
     form.source_of_lead.data = opportunity.source_of_lead       
     form.sale_ref_fee.data = opportunity.sale_ref_fee
     form.competitors.data = opportunity.competitors

@@ -51,7 +51,7 @@ class Quotation(UserMixin, db.Model):
 
     q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
-    e_id = db.Column('EmployeeID', db.Integer)
+    e_id = db.Column('EmployeeID', db.String(20))
     date = db.Column('Quotaton Date', db.Date)          
     acc_code = db.Column('Account Code', db.String(20), nullable=False)
     q_num = db.Column('Quotation Number', db.Integer, unique=True, nullable=False)
@@ -123,7 +123,8 @@ class Opportunity(UserMixin, db.Model):
     __tablename__ = 'opportunities'
 
     o_id = db.Column('OpportunityID', db.Integer, primary_key=True)  
-    q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
+    q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False) 
+    q_num = db.Column('Quotation Number', db.Integer, nullable=False)                          
     source_of_lead = db.Column('Source of Lead', db.String(50))
     sale_ref_fee = db.Column('Sales referal Fee', db.Float)
     competitors = db.Column('Competitors', db.Integer)

@@ -90,8 +90,6 @@ class QuotationForm(FlaskForm):
     """
     Form for admin to add or edit a quotation
     """
-    # c_id = QuerySelectField('Customer Id', query_factory=lambda: Customer.query.all(),
-    #                         get_label="c_id")
     acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
                             get_label="acc_code")   
     q_num = IntegerField('Quotation Number', validators=[DataRequired()])
@@ -122,8 +120,8 @@ class OpportunityForm(FlaskForm):
     """
     Form for admin to add or edit an opportunity
     """
-    q_id = QuerySelectField('Quotation Id', query_factory=lambda: Quotation.query.all(),
-                            get_label="q_id")
+    q_num = QuerySelectField('Quotation Number', query_factory=lambda: Quotation.query.all(),
+                            get_label="q_num")       
     source_of_lead = StringField('Source of Lead')
     sale_ref_fee = StringField('Sales referal Fee')
     competitors = IntegerField('Competitors')
