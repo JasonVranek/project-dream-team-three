@@ -52,8 +52,8 @@ class Quotation(UserMixin, db.Model):
     q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
     e_id = db.Column('EmployeeID', db.Integer)
-    date = db.Column('Quotaton Date', db.Date)          # CHANGE 4/16/18 from string to date
-    q_num = db.Column('Quotation Number', db.Integer, unique=True)
+    date = db.Column('Quotaton Date', db.Date)          
+    q_num = db.Column('Quotation Number', db.Integer, unique=True, nullable=False)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))
     title = db.Column('Title', db.String(50))
@@ -91,7 +91,7 @@ class Product(UserMixin, db.Model):
     __tablename__ = 'products'
 
     p_id = db.Column('ProductID', db.Integer, primary_key=True) 
-    p_number = db.Column('Part Number', db.String(50), unique=True)                    
+    p_number = db.Column('Part Number', db.String(50), unique=True, nullable=False)                    
     p_name = db.Column('ProductName', db.String(50))
     unit_price = db.Column('UnitPrice', db.Float)
     p_note = db.Column('Product Note to show', db.String(200))
@@ -156,14 +156,13 @@ class Quotation_Detail(UserMixin, db.Model):
 
     quote_detail_id = db.Column('QuotationDetailID', db.Integer, primary_key=True)  
     q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
-    # p_id = db.Column('ProductID', db.Integer, nullable=False)         ADD 4/25/18
-    # q_num = db.Column('QuotationNumber', db.String(50), nullable=False)                 
-    p_num = db.Column('ProductNumber', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
+    p_id = db.Column('ProductID', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
+    q_num = db.Column('Quotation Number', db.Integer, nullable=False)               
+    p_num = db.Column('Product Number', db.String(50), nullable=False)        # ADD 4/25/18
     p_name = db.Column('Product Name', db.String(50))
     quantity = db.Column('Quantity', db.Float)
     discount = db.Column('Discount', db.Float)
     q_price = db.Column('Quote Price', db.Float)       
-    # option = db.Column('Option', db.Float)
     option = db.Column('Active (Y/N)', db.Boolean, default=False)
     
     def __repr__(self):
