@@ -21,6 +21,7 @@
                   <th width="15%"> Product Number </th>
                   <th width="15%"> Product Name </th>
                   <th width="15%"> Quantity </th>
+                  <th width="15%"> Discount </th>
                   <th width="15%"> Quote Price </th>
                 </tr>
               </thead>
@@ -44,6 +45,7 @@
                   </td>
                   <td> {{ quotation_detail.p_name }}</td>
                   <td> {{ quotation_detail.quantity }} </td>
+                  <td> %{{ 100 * quotation_detail.discount }}
                   <td> {{ quotation_detail.q_price }} </td>
                   {% if quotation_detail.option %}
                   <td>

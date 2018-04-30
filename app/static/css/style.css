@@ -69,8 +69,9 @@ p.copyright {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    /*background: url(../img/Logo_blue_web.gif) no-repeat center center;*/
     background-size: cover;
+    /*background-color: #3472b9;*/
     height: 100%;
 }
 
@@ -78,16 +79,17 @@ p.copyright {
     position: relative;
     padding-top: 20%;
     padding-bottom: 20%;
+    color: #3472b9;
 }
 
 .intro-message > h1 {
     margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    /*text-shadow: 2px 2px 3px rgba(0,0,0,0.6);*/
     font-size: 5em;
 }
 
 .intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    /*text-shadow: 2px 2px 3px rgba(0,0,0,0.6);*/
 }
 
 .lead {
