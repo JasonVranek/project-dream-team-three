@@ -2,6 +2,33 @@
 {% extends "base.html" %}
 {% block title %}Edit Quotation Detail{% endblock %}
 {% block body %}
+<head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script charset="utf-8" type="text/javascript">
+
+            $(function() {
+                // jQuery selection for the product input
+                var product = $('#product')
+
+                // call to update on load
+                updatePrice();
+
+                function updatePrice() {
+                    $.getJSON("{{ url_for('admin._get_unit_price') }}", {
+                  product_num: product.val(),
+                }, function(data) {
+                  $("#quote_price").text(data.price);
+                });
+                }
+                // event listener to state dropdown change
+                $('#product').change(function() {
+                    updatePrice();
+                });
+            });
+
+        </script>
+    </head>
 
 <div class="content-section">
  <div class="outer">

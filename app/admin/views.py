@@ -1126,3 +1126,24 @@ def delete_quotation_detail(id):
     return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     return render_template(title="Delete Quotation_Detail")
+
+
+@admin.route('/quotation_details/background_process')
+@login_required
+def _get_unit_price():
+    product_num = request.args.get('')
+    product = Product.query.filter_by(p_number=product_num).first()
+    price = product.unit_price
+    return jsonify(price=price)
+
+
+
+
+
+
+
+
+
+
+
+
