@@ -6,7 +6,7 @@ from app import db, login_manager
 
 class Customer(UserMixin, db.Model):
     """
-    Create a Employee table
+    Create a Customer table
     """
     __tablename__ = 'customers'
 
@@ -36,11 +36,43 @@ class Customer(UserMixin, db.Model):
     quotations = db.relationship('Quotation', backref='customer',
                                 lazy='dynamic')
 
+    # contacts = db.relationship('Contact', backref='customer',
+    #                             lazy='dynamic')
+
     def __repr__(self):
         return '<Customer: {}>'.format(self.c_id)
 
     def get_id(self): 
         return (self.c_id)
+
+
+# class Contact(UserMixin, db.Model):
+#     """
+#     Create a Contact table
+#     """
+#     __tablename__ = 'contacts'  
+#     contact_id = db.Column('ContactID', db.Integer, primary_key=True)
+#     c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)   
+#     acc_code = db.Column('Account Code', db.String(20), nullable=False)
+#     f_name = db.Column('ContactFirstName', db.String(20))
+#     l_name = db.Column('ContactLastName', db.String(20))
+#     b_address = db.Column('BillingAddress', db.String(40))
+#     city = db.Column('City', db.String(20))
+#     state_province = db.Column('StateOrProvince', db.String(20))
+#     post_code = db.Column('PostalCode', db.String(10))
+#     count_region = db.Column('Country/Region', db.String(20))
+#     cont_title = db.Column('ContactTitle', db.String(30))
+#     phone = db.Column('PhoneNumber', db.String(20))
+#     fax = db.Column('FaxNumber', db.String(20))
+#     email = db.Column('EmailAddress', db.String(20), unique=True)
+#     notes = db.Column('Notes', db.String(100))
+
+
+#     def __repr__(self):
+#         return '<Contact: {}>'.format(self.contact_id)
+
+#     def get_id(self): 
+#         return (self.contact_id)
 
 
 class Quotation(UserMixin, db.Model):
