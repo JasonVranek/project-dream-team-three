@@ -578,9 +578,10 @@ def view_quotation(id):
     check_admin()
 
     quotation = Quotation.query.filter_by(q_id=id).first()
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
 
     return render_template('admin/quotations/view_quotation.html', action="View",
-                           quotation=quotation, title="View Quotation")
+                           quotation=quotation, quote_details=quote_details, title="View Quotation")
 
 
 @admin.route('/quotations/<int:page_num>', methods=['GET', 'POST'])
@@ -1098,6 +1099,8 @@ def edit_quotation_detail(id):
     form.p_num.data = quotation_detail.p_num               
     form.quantity.data = quotation_detail.quantity
     form.discount.data = quotation_detail.discount
+
+    
     form.q_price.data = quotation_detail.q_price 
     form.option.data = quotation_detail.option
 

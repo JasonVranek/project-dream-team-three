@@ -97,7 +97,6 @@ class QuotationForm(FlaskForm):
                             get_label="username")
     date = DateField('Quotaton Date')
     revision = StringField('Revision')
-    # pay_terms = StringField('Payment Terms')
     pay_terms = SelectField('Payment Terms', choices=[('None', ''),
                                                     ('net15', 'Net 15'), 
                                                     ('net30', 'Net 30'), 
@@ -115,7 +114,6 @@ class QuotationForm(FlaskForm):
     postal = StringField('Zip')
     tel = StringField('TEL')
     s_sched = StringField('Ship Schedule')
-    # s_term = StringField('Shipment Term')
     s_term = SelectField('Shipment Term', choices=[('None', ''), ('ex', 'Ex-Works'), ('fob', 'FOB: Origin'), ('cif', 'CIF: Destination')])
     q_title = StringField('Quotation title')
     q_note = TextField('Quotation Note')
