@@ -62,7 +62,7 @@
         <div class="container-middle">
             <!-- main table -->
             <form method="post" action="#" name="main-form">
-                <table> 
+                <table id='required-table'> 
                     <tr> 
                         <div class="tabletitle"> Quotation Title: {{quotation.title}} </div>    
                     </tr>
@@ -91,7 +91,7 @@
 
 
             <!-- optional table -->
-                <table> 
+                <table id='optional-table'> 
                     <tr> 
                         <div class="tabletitle"> Optional </div>    
                     </tr>
@@ -100,10 +100,10 @@
                         <td> {{ loop.index }} </td>
                         <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
-                        <td> <input type="text" size="10" id='price{{detail.quote_detail_id}}' value='{{ detail.q_price }}'> </td>
-                        <td> <input type="text" size="5" id='quantity{{detail.quote_detail_id}}' value='{{ detail.quantity }}'> </td>
-                        <td> <input type="text" size="5" id='discount{{detail.quote_detail_id}}' value='%{{ 100 * detail.discount }}'> </td>
-                        <td> <input type="text" size="10" id='total{{detail.quote_detail_id}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
+                        <td> <input type="text" size="10" id='op_price{{loop.index}}' value='{{ detail.q_price }}'> </td>
+                        <td> <input type="text" size="5" id='op_quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
+                        <td> <input type="text" size="5" id='op_discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
+                        <td> <input type="text" size="10" id='op_total{{loop.index}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
                     </tr>
                     {% endfor %}
                 </table>
