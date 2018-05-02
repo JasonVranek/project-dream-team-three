@@ -903,13 +903,13 @@ def gen_pdf(id):
         qd_id = detail.quote_detail_id
         product = Product.query.filter_by(p_id=detail.p_id).first()
         products[qd_id] = product
-        # if detail.active:
-        if detail.discount:
-            total += detail.quantity * product.unit_price * (1 - detail.discount)
-        else:
-            total += detail.quantity * product.unit_price
 
-        subtotal += detail.quantity * product.unit_price
+        if detail.discount:
+            total += detail.quantity * detail.q_price * (1 - detail.discount)
+        else:
+            total += detail.quantity * detail.q_price
+
+        subtotal += detail.quantity * detail.q_price
 
     # Find the 'optional' items and pass them in
     optional = Quotation_Detail.query.filter_by(q_id=id, option=True).all()

@@ -1,5 +1,7 @@
 <head>
     <link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
 </head>
 <body>
     <div class="container-all">
@@ -79,10 +81,10 @@
                         <td> {{ loop.index }} </td>
                         <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
-                        <td> <input type="text" size="10" value='{{ detail.q_price }}'> </td>
-                        <td> <input type="text" size="5" value='{{ detail.quantity }}'> </td>
-                        <td> <input type="text" size="5" value='%{{ 100 * detail.discount }}'> </td>
-                        <td> <input type="text" size="10" value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
+                        <td> <input type="text" size="10" id='price{{loop.index}}' value='{{ detail.q_price }}'> </td>
+                        <td> <input type="text" size="5" id='quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
+                        <td> <input type="text" size="5" id='discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
+                        <td> <input type="text" size="10" id='total{{loop.index}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
                     </tr>
                     {% endfor %}
                 </table>
@@ -98,10 +100,10 @@
                         <td> {{ loop.index }} </td>
                         <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
-                        <td> <input type="text" size="10" value='{{ detail.q_price }}'> </td>
-                        <td> <input type="text" size="5" value='{{ detail.quantity }}'> </td>
-                        <td> <input type="text" size="5" value='%{{ 100 * detail.discount }}'> </td>
-                        <td> <input type="text" size="10" value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
+                        <td> <input type="text" size="10" id='price{{detail.quote_detail_id}}' value='{{ detail.q_price }}'> </td>
+                        <td> <input type="text" size="5" id='quantity{{detail.quote_detail_id}}' value='{{ detail.quantity }}'> </td>
+                        <td> <input type="text" size="5" id='discount{{detail.quote_detail_id}}' value='%{{ 100 * detail.discount }}'> </td>
+                        <td> <input type="text" size="10" id='total{{detail.quote_detail_id}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
                     </tr>
                     {% endfor %}
                 </table>
@@ -111,9 +113,9 @@
 
         <!-- total box -->
         <ul class="total_box">
-          <li>subtotal: ${{subtotal}}</li>
-          <li>discount: (${{subtotal - total}})</li>
-          <li><h3>TOTAL: ${{total}} </h3></li>
+          <li id='subtotal'>subtotal: ${{subtotal}}</li>
+          <li id='discount_total'>discount: (${{subtotal - total}})</li>
+          <li><h3 id='total_total'>TOTAL: ${{total}} </h3></li>
         </ul> 
 
         <div class="container-bottom">
