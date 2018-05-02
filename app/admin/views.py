@@ -1,4 +1,4 @@
-from flask import abort, flash, redirect, render_template, url_for, make_response
+from flask import abort, flash, redirect, render_template, url_for, make_response, request, jsonify
 from flask_login import current_user, login_required
 import pdfkit
 
@@ -1131,10 +1131,14 @@ def delete_quotation_detail(id):
 @admin.route('/quotation_details/background_process')
 @login_required
 def _get_unit_price():
-    product_num = request.args.get('')
-    product = Product.query.filter_by(p_number=product_num).first()
-    price = product.unit_price
-    return jsonify(price=price)
+    p_num = request.args.get('product_num', '1', type=str)
+    product = Product.query.filter_by(p_number=p_num).first()
+    print(p_num, product.unit_price)
+    try:
+        price = product.unit_price
+    except Exception as e:
+        price = 0
+    return jsonify(result=price)
 
 
 

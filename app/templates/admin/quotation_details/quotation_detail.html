@@ -8,21 +8,27 @@
         <script charset="utf-8" type="text/javascript">
 
             $(function() {
-                // jQuery selection for the product input
-                var product = $('#product')
-
+                // jQuery selection for the product product dropdown
+                var product_elt = document.getElementById('product');
+                var qp = document.getElementById('quote_price');
                 // call to update on load
                 updatePrice();
 
+                // function to call XHR and update county dropdown
                 function updatePrice() {
-                    $.getJSON("{{ url_for('admin._get_unit_price') }}", {
-                  product_num: product.val(),
-                }, function(data) {
-                  $("#quote_price").text(data.price);
-                });
+                    product_index = product_elt.selectedIndex;
+                    send = {
+                        product_num: product_elt.options[product_elt.selectedIndex].text
+                    };
+                    console.log(send);
+                    $.getJSON("{{ url_for('admin._get_unit_price') }}", send, function(data) {
+                        qp.value = data.result;
+                    });
+                    return false;
                 }
-                // event listener to state dropdown change
-                $('#product').change(function() {
+
+                // event listener to product dropdown change
+                $('#product').on('change', function() {
                     updatePrice();
                 });
             });
