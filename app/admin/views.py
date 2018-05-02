@@ -270,7 +270,151 @@ def delete_customer(id):
     # redirect to the customers page
     return redirect(url_for('admin.list_customers', page_num=1))
 
-    return render_template(title="Delete Customer")
+
+# Contact Views
+
+
+@admin.route('/contacts/view/<int:id>', methods=['GET'])
+@login_required
+def view_contact(id):
+    """
+    View a contact
+    """
+    check_admin()
+
+    contact = Contact.query.filter_by(contact_id=id).first()
+
+    return render_template('admin/contacts/view_contact.html', action="View",
+                           contact=contact, title="View Contact")
+
+
+@admin.route('/contacts/<int:page_num>/', methods=['GET', 'POST'])
+@login_required
+def list_contacts(page_num):
+    """
+    List all contacts
+    """
+    check_admin()
+
+    contacts = Contact.query.paginate(per_page=5, page=page_num, error_out=True)
+
+    return render_template('admin/contacts/contacts.html',
+                           contacts=contacts, title="Contacts")
+
+
+@admin.route('/contacts/add', methods=['GET', 'POST'])
+@login_required
+def add_contact():
+    """
+    Add a contact to the database
+    """
+    check_admin()
+
+    add_contact = True
+
+    form = ContactForm()
+    if form.validate_on_submit():
+        contact = Contact(c_id = form.acc_code.data.c_id,
+                                acc_code=form.acc_code.data.acc_code,
+                                f_name = form.f_name.data,
+                                l_name = form.l_name.data,
+                                phone = form.phone.data,
+                                email = form.email.data,
+                                b_address = form.b_address.data,
+                                city = form.city.data,
+                                state_province = form.state_province.data,
+                                post_code = form.post_code.data,
+                                count_region = form.count_region.data,
+                                cont_title = form.cont_title.data,
+                                fax = form.fax.data,
+                                notes = form.notes.data)
+        try:
+            # add contact to the database
+            db.session.add(contact)
+            db.session.commit()
+            flash('You have successfully added a new contact.')
+        except:
+            # in case Contact Account Code already exists
+            flash('Error: Customer Account Code already exists.')
+
+        # redirect to contacts page
+        return redirect(url_for('admin.list_contacts', page_num=1))
+
+    # load customer template
+    return render_template('admin/contacts/contact.html', action="Add",
+                           add_contact=add_contact, form=form,
+                           title="Add Contact")
+
+
+@admin.route('/contacts/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_contact(id):
+    """
+    Edit a contact
+    """
+    check_admin()
+
+    add_contact = False
+
+    contact = Contact.query.get_or_404(id)
+    form = ContactForm(obj=contact)
+    if form.validate_on_submit():
+        contact.c_id = form.acc_code.data.c_id
+        contact.acc_code = form.acc_code.data.acc_code
+        contact.f_name = form.f_name.data
+        contact.l_name = form.l_name.data
+        contact.phone = form.phone.data
+        contact.email = form.email.data
+        contact.b_address = form.b_address.data
+        contact.city = form.city.data
+        contact.state_province = form.state_province.data
+        contact.post_code = form.post_code.data
+        contact.count_region = form.count_region.data
+        contact.cont_title = form.cont_title.data
+        contact.fax = form.fax.data
+        contact.notes = form.notes.data
+
+        db.session.commit()
+        flash('You have successfully edited the contact.')
+
+        # redirect to the contacts page
+        return redirect(url_for('admin.list_contacts', page_num=1))
+
+    # fill the form with current data to show what changes are to be made
+    form.acc_code.data = contact.acc_code 
+    form.f_name.data = contact.f_name 
+    form.l_name.data = contact.l_name
+    form.phone.data = contact.phone
+    form.email.data = contact.email
+    form.b_address.data = contact.b_address 
+    form.city.data = contact.city
+    form.state_province.data = contact.state_province
+    form.post_code.data = contact.post_code
+    form.count_region.data = contact.count_region
+    form.cont_title.data = contact.cont_title
+    form.fax.data = contact.fax 
+    form.notes.data = contact.notes 
+
+    return render_template('admin/customers/contact.html', action="Edit",
+                           add_contact=add_contact, form=form,
+                           contact=contact, title="Edit Contact")
+
+
+@admin.route('/contacts/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_contact(id):
+    """
+    Delete a contact from the database
+    """
+    check_admin()
+
+    contact = Contact.query.get_or_404(id)
+    db.session.delete(contact)
+    db.session.commit()
+    flash('You have successfully deleted the contact.')
+
+    # redirect to the contacts page
+    return redirect(url_for('admin.list_contacts', page_num=1))
 
 
 # Role Views

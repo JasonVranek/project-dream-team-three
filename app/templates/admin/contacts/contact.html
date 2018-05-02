@@ -1,21 +1,21 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Edit Customer{% endblock %}
+{% block title %}Edit Contact{% endblock %}
 {% block body %}
 <div class="content-section">
  <div class="outer">
     <div class="middle">
       <div class="inner">
         <div class="center">
-            {% if add_customer %}
-                <h1> Add a Customer </h1>
+            {% if add_contact %}
+                <h1> Add a Contact </h1>
             {% else %}
-                <h1> Edit a Customer </h1>
+                <h1> Edit a Contact </h1>
                 <br/>
                 <p>
                     Select parameters to edit for: 
                     <span style="color: #aec251;">
-                        {{ customer.acc_code }} {{ customer.f_name }} {{ customer.l_name }}
+                        {{ contact.acc_code }} {{ contact.f_name }} {{ contact.l_name }}
                     </span>
                 </p>
                 <br/>
