@@ -395,7 +395,7 @@ def edit_contact(id):
     form.fax.data = contact.fax 
     form.notes.data = contact.notes 
 
-    return render_template('admin/customers/contact.html', action="Edit",
+    return render_template('admin/contacts/contact.html', action="Edit",
                            add_contact=add_contact, form=form,
                            contact=contact, title="Edit Contact")
 
