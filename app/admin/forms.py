@@ -113,7 +113,8 @@ class QuotationForm(FlaskForm):
     Form for admin to add or edit a quotation
     """
     acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
-                            get_label="acc_code")   
+                            get_label="acc_code", id='acc_code')   
+    contact = SelectField('Contact', validators=[DataRequired()], id='contacts')
     q_num = IntegerField('Quotation Number', validators=[DataRequired()])
     e_id = QuerySelectField('Employee', query_factory=lambda: Employee.query.all(),
                             get_label="username")
@@ -126,15 +127,15 @@ class QuotationForm(FlaskForm):
                                                     ('net60', 'Net60'),
                                                     ('prepaid', 'Prepaid T/T'),
                                                     ('lc', 'L/C')])
-    title = StringField('Title')
-    f_name = StringField('First Name')
-    l_name = StringField('Last Name')
-    address = StringField('Address')
-    city = StringField('City')
-    state = StringField('State')
-    country = StringField('Country')
-    postal = StringField('Zip')
-    tel = StringField('TEL')
+    title = StringField('Title', id='title')
+    f_name = StringField('First Name', id='f_name')
+    l_name = StringField('Last Name', id='l_name')
+    address = StringField('Address', id='address')
+    city = StringField('City', id='city')
+    state = StringField('State', id='state')
+    country = StringField('Country', id='country')
+    postal = StringField('Zip', id='zip')
+    tel = StringField('TEL', id='zip')
     s_sched = StringField('Ship Schedule')
     s_term = SelectField('Shipment Term', choices=[('None', ''), ('ex', 'Ex-Works'), ('fob', 'FOB: Origin'), ('cif', 'CIF: Destination')])
     q_title = StringField('Quotation title')

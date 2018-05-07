@@ -2,6 +2,54 @@
 {% extends "base.html" %}
 {% block title %}Edit Quotation{% endblock %}
 {% block body %}
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script charset="utf-8" type="text/javascript">
+
+        $(function() {
+            // jQuery selection for the product product dropdown
+            var account_elt = document.getElementById('acc_code');
+            // var contact_elt = document.getElementById('contacts');
+            var contact_elt = $('#contacts');
+            // call to update on load
+            updateContactInfo();
+
+            // function to call XHR and update contact dropdown
+            function updateContactInfo() {
+                acc_index = account_elt.selectedIndex;
+                send = {
+                    acc_code: account_elt.options[account_elt.selectedIndex].text
+                };
+                console.log(send);
+                contact_elt.attr('disabled', 'disabled');
+                contact_elt.empty();
+                $.getJSON("{{ url_for('admin._get_contact_info') }}", send, function(data) {
+                    data.forEach(function(item) {
+                        contact_elt.append(
+                            $('<option>', {
+                                value: item[0], //contact_id
+                                text: item[1]   //contact's first and last name
+                            })
+                        );
+                    });
+                    
+                    contact_elt.removeAttr('disabled');
+                });
+                return false;
+            }
+
+            // event listener to product dropdown change
+            $('#acc_code').on('change', function() {
+                updateContactInfo();
+            });
+        });
+
+    </script>
+</head>
+
+
 <div class="content-section">
  <div class="outer">
     <div class="middle">

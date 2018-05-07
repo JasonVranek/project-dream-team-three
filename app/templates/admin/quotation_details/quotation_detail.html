@@ -3,38 +3,38 @@
 {% block title %}Edit Quotation Detail{% endblock %}
 {% block body %}
 <head>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-        <script charset="utf-8" type="text/javascript">
+    <script charset="utf-8" type="text/javascript">
 
-            $(function() {
-                // jQuery selection for the product product dropdown
-                var product_elt = document.getElementById('product');
-                var qp = document.getElementById('quote_price');
-                // call to update on load
-                updatePrice();
+        $(function() {
+            // jQuery selection for the product product dropdown
+            var product_elt = document.getElementById('product');
+            var qp = document.getElementById('quote_price');
+            // call to update on load
+            updatePrice();
 
-                // function to call XHR and update county dropdown
-                function updatePrice() {
-                    product_index = product_elt.selectedIndex;
-                    send = {
-                        product_num: product_elt.options[product_elt.selectedIndex].text
-                    };
-                    console.log(send);
-                    $.getJSON("{{ url_for('admin._get_unit_price') }}", send, function(data) {
-                        qp.value = data.result;
-                    });
-                    return false;
-                }
-
-                // event listener to product dropdown change
-                $('#product').on('change', function() {
-                    updatePrice();
+            // function to call XHR and update county dropdown
+            function updatePrice() {
+                product_index = product_elt.selectedIndex;
+                send = {
+                    product_num: product_elt.options[product_elt.selectedIndex].text
+                };
+                console.log(send);
+                $.getJSON("{{ url_for('admin._get_unit_price') }}", send, function(data) {
+                    qp.value = data.result;
                 });
-            });
+                return false;
+            }
 
-        </script>
-    </head>
+            // event listener to product dropdown change
+            $('#product').on('change', function() {
+                updatePrice();
+            });
+        });
+
+    </script>
+</head>
 
 <div class="content-section">
  <div class="outer">

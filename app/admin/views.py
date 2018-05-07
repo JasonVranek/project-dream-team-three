@@ -274,6 +274,20 @@ def delete_customer(id):
 # Contact Views
 
 
+@admin.route('/contacts/background_process')
+@login_required
+def _get_contact_info():
+    """
+    Retrieve a list of contacts from a specified account code
+    """
+    check_admin()
+
+    acc_code = request.args.get('acc_code', '1', type=str)
+    contacts = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.filter_by(acc_code=acc_code).all()]
+
+    return jsonify(contacts)
+
+
 @admin.route('/contacts/view/<int:id>', methods=['GET'])
 @login_required
 def view_contact(id):
@@ -754,6 +768,7 @@ def add_quotation():
     add_quotation = True
 
     form = QuotationForm()
+    form.contact.choices = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.all()]
     if form.validate_on_submit():
         quotation = Quotation(c_id = form.acc_code.data.c_id,           
                                 acc_code = form.acc_code.data.acc_code,
