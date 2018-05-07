@@ -772,6 +772,7 @@ def add_quotation():
     if form.validate_on_submit():
         quotation = Quotation(c_id = form.acc_code.data.c_id,           
                                 acc_code = form.acc_code.data.acc_code,
+                                contact_id = form.contact.data,
                                 q_num = form.q_num.data,
                                 e_id = form.e_id.data.username,           
                                 date = form.date.data,
@@ -822,9 +823,11 @@ def edit_quotation(id):
 
     quotation = Quotation.query.get_or_404(id)
     form = QuotationForm(obj=quotation)
+    form.contact.choices = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.all()]
     if form.validate_on_submit():
         quotation.c_id = form.acc_code.data.c_id
         quotation.acc_code = form.acc_code.data.acc_code
+        quotation.contact_id = form.contact.data
         quotation.q_num = form.q_num.data        
         quotation.e_id = form.e_id.data.username         
         quotation.date = form.date.data

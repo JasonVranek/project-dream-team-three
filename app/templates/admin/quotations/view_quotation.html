@@ -52,6 +52,16 @@
               </tr>
               <tr>
                 <thead>
+                  <th width="20%"> Contact </th>
+                  <td> 
+                    <a href="{{ url_for('admin.view_contact', id=quotation.contact_id) }}">
+                      {{ quotation.contact_id }}
+                    </a>
+                  </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
                   <th width="20%"> Employee ID </th>
                   <td> {{ quotation.e_id }} </td>
                 </thead>

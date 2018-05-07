@@ -18,6 +18,7 @@
                 <tr>
                   <th width="15%"> Quote Number </th>
                   <th width="15%"> Customer Code </th>
+                  <th width="15%"> Contact </th>
                   <th width="15%"> Employee ID </th>
                   <th width="15%"> Quote Date </th>
                   <th width="15%"> Quote Amount </th>
@@ -30,6 +31,11 @@
                   <td> 
                     <a href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">
                       {{ quotation.acc_code }}
+                    </a>
+                  </td>
+                  <td> 
+                    <a href="{{ url_for('admin.view_contact', id=quotation.contact_id) }}">
+                      {{ quotation.contact_id }}
                     </a>
                   </td>
                   <td> {{ quotation.e_id }}</td>
