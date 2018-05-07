@@ -274,9 +274,23 @@ def delete_customer(id):
 # Contact Views
 
 
-@admin.route('/contacts/background_process')
+@admin.route('/contacts/background_process/info')
 @login_required
 def _get_contact_info():
+    """
+    Retrieve a list of contacts from a specified account code
+    """
+    check_admin()
+
+    contact_id = request.args.get('contact_id', '1', type=str)
+    contact = Contact.query.filter_by(contact_id=contact_id)
+
+    return jsonify(contact)
+
+
+@admin.route('/contacts/background_process')
+@login_required
+def _get_contact():
     """
     Retrieve a list of contacts from a specified account code
     """

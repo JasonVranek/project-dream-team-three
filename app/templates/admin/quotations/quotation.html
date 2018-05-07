@@ -11,13 +11,12 @@
         $(function() {
             // jQuery selection for the product product dropdown
             var account_elt = document.getElementById('acc_code');
-            // var contact_elt = document.getElementById('contacts');
             var contact_elt = $('#contacts');
             // call to update on load
-            updateContactInfo();
+            getContact();
 
             // function to call XHR and update contact dropdown
-            function updateContactInfo() {
+            function getContact() {
                 acc_index = account_elt.selectedIndex;
                 send = {
                     acc_code: account_elt.options[account_elt.selectedIndex].text
@@ -25,7 +24,7 @@
                 console.log(send);
                 contact_elt.attr('disabled', 'disabled');
                 contact_elt.empty();
-                $.getJSON("{{ url_for('admin._get_contact_info') }}", send, function(data) {
+                $.getJSON("{{ url_for('admin._get_contact') }}", send, function(data) {
                     data.forEach(function(item) {
                         contact_elt.append(
                             $('<option>', {
@@ -42,6 +41,47 @@
 
             // event listener to product dropdown change
             $('#acc_code').on('change', function() {
+                getContact();
+            });
+        });
+
+    </script>
+
+    <script charset="utf-8" type="text/javascript">
+
+        $(function() {
+            // jQuery selection for the product product dropdown
+            // var contact_elt = $('#contacts');
+            var contact_elt = document.getElementById('contacts');
+            var title = document.getElementById('title')
+            var f_name = document.getElementById('f_name')
+            var l_name = document.getElementById('l_name')
+            var address = document.getElementById('address')
+            var city = document.getElementById('city')
+            var state = document.getElementById('state')
+            var country = document.getElementById('country')
+            var postal = document.getElementById('zip')
+            var tel = document.getElementById('tel')
+            // call to update on load
+
+            // updateContactInfo();
+
+            // function to call XHR and update county dropdown
+            function updateContactInfo() {
+                console.log(contact_elt);
+                var contact_index = contact_elt.selectedIndex;
+                send = {
+                    contact_id: contact_elt.options[contact_index].value //send the contact id
+                };
+                console.log(send);
+                $.getJSON("{{ url_for('admin._get_contact_info') }}", send, function(data) {
+                    console.log(data);
+                });
+                return false;
+            }
+
+            // event listener to product dropdown change
+            $('#contacts').on('change', function() {
                 updateContactInfo();
             });
         });
