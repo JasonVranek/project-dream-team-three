@@ -282,10 +282,22 @@ def _get_contact_info():
     """
     check_admin()
 
-    contact_id = request.args.get('contact_id', '1', type=str)
-    contact = Contact.query.filter_by(contact_id=contact_id)
-
-    return jsonify(contact)
+    contact_id = request.args.get('contact_id', '1', type=int)
+    print(contact_id)
+    contact = Contact.query.filter_by(contact_id=contact_id).first()
+    # Can't serialize an sqlalchmy object using jsonify, so just make a dictionary with relevant data
+    data = {}
+    data['title'] = contact.cont_title
+    data['f_name'] = contact.f_name
+    data['l_name'] = contact.l_name
+    data['address'] = contact.b_address
+    data['city'] = contact.city
+    data['state'] = contact.state_province
+    data['country'] = contact.count_region
+    data['zip'] = contact.post_code
+    data['tel'] = contact.phone
+    
+    return jsonify(data)
 
 
 @admin.route('/contacts/background_process')

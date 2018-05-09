@@ -76,6 +76,15 @@
                 console.log(send);
                 $.getJSON("{{ url_for('admin._get_contact_info') }}", send, function(data) {
                     console.log(data);
+                    title.value = data.title;
+                    f_name.value = data.f_name;
+                    l_name.value = data.l_name;
+                    address.value = data.address;
+                    city.value = data.city;
+                    state.value = data.state;
+                    country.value = data.country;
+                    postal.value = data.postal;
+                    tel.value = data.tel;
                 });
                 return false;
             }
