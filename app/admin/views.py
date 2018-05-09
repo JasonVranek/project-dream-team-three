@@ -753,6 +753,56 @@ def delete_product(id):
 # Quotation Views
 
 
+@admin.route('/quotations/copy/<int:id>', methods=['GET'])
+@login_required
+def _copy_quotation(id):
+    # Get the relevant db objects to make a copy of the Quotation
+    quotation = Quotation.query.get_or_404(id)
+    customer = Customer.query.get_or_404(quotation.c_id)
+    contact = Contact.query.get_or_404(quotation.contact_id)    
+
+    # Recreate the new Quotation
+    new_quotation = Quotation(c_id = quotation.c_id,           
+                                acc_code = quotation.acc_code,
+                                contact_id = quotation.contact_id,
+                                q_num = quotation.q_num + 10000,
+                                e_id = quotation.e_id,           
+                                date = quotation.date,
+                                revision = quotation.revision,
+                                pay_terms = quotation.pay_terms,
+                                title = quotation.title,
+                                f_name = quotation.f_name,
+                                l_name = quotation.l_name,
+                                address = quotation.address,
+                                city = quotation.city,
+                                state = quotation.state,
+                                country = quotation.country,
+                                postal = quotation.postal,
+                                tel = quotation.tel,
+                                s_sched = quotation.s_sched,
+                                s_term = quotation.s_term,
+                                q_title = quotation.q_title,
+                                q_note = quotation.q_note,
+                                q_amount = quotation.q_amount)
+                                
+    try:
+        # add new quotation to the database
+        db.session.add(new_quotation)
+        db.session.commit()
+        flash('You have successfully added a new quotation.')
+    except:
+        # in case Quotation already exists
+        flash('Error: Quotation already exists.')
+
+    # Get all the quote details attached to this quotation
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+
+    # Recreate each quote detail to be used in the new quotation
+
+
+    # redirect to quotations page
+    return redirect(url_for('admin.list_quotations', page_num=1))
+
 @admin.route('/quotations/view/<int:id>', methods=['GET'])
 @login_required
 def view_quotation(id):
