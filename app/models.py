@@ -138,7 +138,9 @@ class Product(UserMixin, db.Model):
     date_created = db.Column('Date Created', db.Date)
     person_created = db.Column('Person Created', db.String(50))
     remarks = db.Column('Remarks', db.String(50))
-    
+    japanese_p_name = db.Column('Japanese ProductName', db.String(50))
+    japanese_unit_price = db.Column('Japanese UnitPrice', db.Float)
+    japanese_note = db.Column('Japanese Note to show', db.String(200))
     quote_details = db.relationship('Quotation_Detail', backref='product',
                                 lazy='dynamic')
 
