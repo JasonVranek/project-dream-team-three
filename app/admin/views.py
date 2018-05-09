@@ -762,7 +762,7 @@ def _copy_quotation(id):
     customer = Customer.query.get_or_404(quotation.c_id)
     contact = Contact.query.get_or_404(quotation.contact_id)    
 
-    new_q_num = quotation.q_num + random.randint(10000,20000)
+    new_q_num = quotation.q_num + 10000 + random.randint(0,100)
     # Recreate the new Quotation
     new_quotation = Quotation(c_id = quotation.c_id,           
                                 acc_code = quotation.acc_code,
@@ -800,7 +800,6 @@ def _copy_quotation(id):
     new_q_id = Quotation.query.filter_by(q_num=new_q_num).first().q_id
     # Get all the quote details attached to this quotation
     quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
-    # return new_q_id + " " + new_q_num
 
     # Recreate each quote detail to be used in the new quotation
     for quote_detail in quote_details:
@@ -826,6 +825,7 @@ def _copy_quotation(id):
 
     # redirect to quotations page
     return redirect(url_for('admin.list_quotations', page_num=1))
+    
 
 @admin.route('/quotations/view/<int:id>', methods=['GET'])
 @login_required

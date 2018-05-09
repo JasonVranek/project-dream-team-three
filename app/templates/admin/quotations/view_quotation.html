@@ -24,6 +24,10 @@
               <i class="fa fa-user-plus"></i>
               Edit Quotation
             </a>
+            <a href="{{ url_for('admin._copy_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-trash"></i>
+              Copy Quotation
+            </a>
             <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
               Delete Quotation
