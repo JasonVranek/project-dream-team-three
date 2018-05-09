@@ -138,7 +138,7 @@ class QuotationForm(FlaskForm):
     tel = StringField('TEL', id='tel')
     s_sched = StringField('Ship Schedule')
     s_term = SelectField('Shipment Term', choices=[('None', ''), ('ex', 'Ex-Works'), ('fob', 'FOB: Origin'), ('cif', 'CIF: Destination')])
-    q_title = StringField('Quotation title')
+    q_title = StringField('Quotation Title')
     q_note = TextField('Quotation Note')
     q_amount = IntegerField('Quote Amount')
 

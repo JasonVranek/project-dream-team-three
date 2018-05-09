@@ -78,10 +78,15 @@
               <i class="fa fa-user-plus"></i>
               Edit Quotation Detail
             </a>
+            <a href="{{ url_for('admin.gen_pdf', id=quotation_detail.q_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-quora"></i>
+              View in Quotation PDF
+            </a>
             <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
               Delete Quotation Detail
             </a>
+
         </div>
         {% endif %}
       </div>
