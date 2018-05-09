@@ -7,6 +7,7 @@ from forms import *
 from .. import db
 from ..models import *
 
+import random
 
 def check_admin():
     # prevent non-admins from accessing the page
@@ -761,11 +762,12 @@ def _copy_quotation(id):
     customer = Customer.query.get_or_404(quotation.c_id)
     contact = Contact.query.get_or_404(quotation.contact_id)    
 
+    new_q_num = quotation.q_num + random.randint(10000,20000)
     # Recreate the new Quotation
     new_quotation = Quotation(c_id = quotation.c_id,           
                                 acc_code = quotation.acc_code,
                                 contact_id = quotation.contact_id,
-                                q_num = quotation.q_num + 10000,
+                                q_num = new_q_num,
                                 e_id = quotation.e_id,           
                                 date = quotation.date,
                                 revision = quotation.revision,
@@ -794,11 +796,33 @@ def _copy_quotation(id):
         # in case Quotation already exists
         flash('Error: Quotation already exists.')
 
+    # Get the new quotation id
+    new_q_id = Quotation.query.filter_by(q_num=new_q_num).first().q_id
     # Get all the quote details attached to this quotation
     quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+    # return new_q_id + " " + new_q_num
 
     # Recreate each quote detail to be used in the new quotation
-
+    for quote_detail in quote_details:
+        product_associated = Product.query.get_or_404(quote_detail.p_id)
+        new_quote_detail = Quotation_Detail(q_id = new_q_id,     
+                                p_id = quote_detail.p_id,                
+                                p_name = product_associated.p_name,           
+                                q_num = new_q_num,
+                                p_num = product_associated.p_number,
+                                quantity = quote_detail.quantity,
+                                discount = quote_detail.discount,
+                                q_price = quote_detail.q_price,
+                                option = quote_detail.option)
+                                
+        try:
+            # add new quotation_detail to the database
+            db.session.add(new_quote_detail)
+            db.session.commit()
+            flash('You have successfully added a new quotation_detail.')
+        except:
+            # in case Quotation_Detail already exists
+            flash('Error: Quotation_Detail already exists.')
 
     # redirect to quotations page
     return redirect(url_for('admin.list_quotations', page_num=1))
