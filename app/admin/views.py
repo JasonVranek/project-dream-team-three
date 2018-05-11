@@ -9,6 +9,9 @@ from ..models import *
 
 import random
 
+from sqlalchemy import or_
+
+
 def check_admin():
     # prevent non-admins from accessing the page
     if not current_user.is_admin:
@@ -631,7 +634,8 @@ def list_products(page_num):
     products = Product.query.all()
     form = SearchForm()
     if form.validate_on_submit():
-        products = Product.query.filter(Product.p_name.like("%" + form.search_string.data + "%")).all()
+        products = Product.query.filter(or_(Product.p_number.like("%" + form.search_string.data + "%"), 
+                                        Product.p_name.like("%" + form.search_string.data + "%"))).all()
 
     return render_template('admin/products/products.html',
                            products=products, title="Products", form=form)
