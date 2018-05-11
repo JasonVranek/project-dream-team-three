@@ -626,11 +626,15 @@ def list_products(page_num):
     """
     check_admin()
 
-    # products = Product.query.all()
-    products = Product.query.paginate(per_page=5, page=page_num, error_out=True)
+    # products = Product.query.paginate(per_page=20, page=page_num, error_out=True)
+    # products = products.filter(Product.p_number.like('%EX002%'))
+    products = Product.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        products = Product.query.filter(Product.p_name.like("%" + form.search_string.data + "%")).all()
 
     return render_template('admin/products/products.html',
-                           products=products, title="Products")
+                           products=products, title="Products", form=form)
 
 
 @admin.route('/products/add', methods=['GET', 'POST'])

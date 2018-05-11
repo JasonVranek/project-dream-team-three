@@ -187,4 +187,10 @@ class Quotation_DetailForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
+class SearchForm(FlaskForm):
+    search_string = StringField('Search')
+
+    submit = SubmitField('Submit')
+
+
     
