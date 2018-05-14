@@ -141,9 +141,17 @@ def list_customers(page_num):
     check_admin()
 
     # customers = Customer.query.all()
-    customers = Customer.query.paginate(per_page=5, page=page_num, error_out=True)
+    # customers = Customer.query.paginate(per_page=5, page=page_num, error_out=True)
 
-    return render_template('admin/customers/customers.html',
+    customers = Customer.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        customers = Customer.query.filter(or_(Customer.acc_code.like("%" + form.search_string.data + "%"), 
+                                        Customer.email.like("%" + form.search_string.data + "%"),
+                                        Customer.f_name.like("%" + form.search_string.data + "%"),
+                                        Customer.l_name.like("%" + form.search_string.data + "%"))).all()
+
+    return render_template('admin/customers/customers.html', form=form,
                            customers=customers, title="Customers")
 
 
