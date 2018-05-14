@@ -31,7 +31,9 @@
                                 value: item[0], //contact_id
                                 text: item[1]   //contact's first and last name
                             })
+
                         );
+                        console.log(item);
                     });
                     
                     contact_elt.removeAttr('disabled');
@@ -51,7 +53,60 @@
 
         $(function() {
             // jQuery selection for the product product dropdown
-            // var contact_elt = $('#contacts');
+            var account_elt = document.getElementById('acc_code');
+            var contact_elt = document.getElementById('contacts');
+            var title = document.getElementById('title')
+            var f_name = document.getElementById('f_name')
+            var l_name = document.getElementById('l_name')
+            var address = document.getElementById('address')
+            var city = document.getElementById('city')
+            var state = document.getElementById('state')
+            var country = document.getElementById('country')
+            var postal = document.getElementById('zip')
+            var tel = document.getElementById('tel')
+            // call to update on load
+
+            // updateContactInfo();
+
+            // function to call XHR and update county dropdown
+            function updateCustomerInfo() {
+                console.log(contact_elt);
+                var contact_index = contact_elt.selectedIndex;
+                // send = {
+                //     contact_id: contact_elt.options[contact_index].value //send the contact id
+                // };
+                acc_index = account_elt.selectedIndex;
+                send = {
+                    acc_code: account_elt.options[account_elt.selectedIndex].text
+                };
+                console.log(send);
+                $.getJSON("{{ url_for('admin._get_customer_info') }}", send, function(data) {
+                    console.log(data);
+                    title.value = data.title;
+                    f_name.value = data.f_name;
+                    l_name.value = data.l_name;
+                    address.value = data.address;
+                    city.value = data.city;
+                    state.value = data.state;
+                    country.value = data.country;
+                    postal.value = data.postal;
+                    tel.value = data.tel;
+                });
+                return false;
+            }
+
+            // event listener to product dropdown change
+            $('#acc_code').on('change', function() {
+                updateCustomerInfo();
+            });
+        });
+
+    </script>
+
+    <script charset="utf-8" type="text/javascript">
+
+        $(function() {
+            // jQuery selection for the product product dropdown
             var contact_elt = document.getElementById('contacts');
             var title = document.getElementById('title')
             var f_name = document.getElementById('f_name')
@@ -90,7 +145,7 @@
             }
 
             // event listener to product dropdown change
-            $('#contacts').on('change', function() {
+            $('#contact_elt').on('change', function() {
                 updateContactInfo();
             });
         });

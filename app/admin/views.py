@@ -286,7 +286,32 @@ def delete_customer(id):
 # Contact Views
 
 
-@admin.route('/contacts/background_process/info')
+@admin.route('/contacts/background_process/customer')
+@login_required
+def _get_customer_info():
+    """
+    Retrieve a list of contacts from a specified account code
+    """
+    check_admin()
+
+    acc_code = request.args.get('acc_code', '1')
+    customer = Customer.query.filter_by(acc_code=acc_code).first()
+    # Can't serialize an sqlalchmy object using jsonify, so just make a dictionary with relevant data
+    data = {}
+    data['title'] = customer.cont_title
+    data['f_name'] = customer.f_name
+    data['l_name'] = customer.l_name
+    data['address'] = customer.b_address
+    data['city'] = customer.city
+    data['state'] = customer.state_province
+    data['country'] = customer.count_region
+    data['zip'] = customer.post_code
+    data['tel'] = customer.phone
+    
+    return jsonify(data)
+
+
+@admin.route('/contacts/background_process/contact_info')
 @login_required
 def _get_contact_info():
     """
@@ -322,7 +347,7 @@ def _get_contact():
 
     acc_code = request.args.get('acc_code', '1', type=str)
     contacts = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.filter_by(acc_code=acc_code).all()]
-
+    print(contacts)
     return jsonify(contacts)
 
 
@@ -1065,13 +1090,6 @@ def gen_pdf(id):
         qd_id = detail.quote_detail_id
         product = Product.query.filter_by(p_id=detail.p_id).first()
         products[qd_id] = product
-        # if detail.active:
-        # if detail.discount:
-        #     total += detail.quantity * product.unit_price * detail.discount
-        # else:
-        #     total += detail.quantity * product.unit_price
-
-        # subtotal += detail.quantity * product.unit_price
 
     return render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
