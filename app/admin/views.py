@@ -1310,9 +1310,15 @@ def list_quotation_details(page_num):
     check_admin()
 
     # quotation_details = Quotation_Detail.query.all()
-    quotation_details = Quotation_Detail.query.paginate(per_page=5, page=page_num, error_out=True)
+    # quotation_details = Quotation_Detail.query.paginate(per_page=5, page=page_num, error_out=True)
+    quotation_details = Quotation_Detail.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        quotation_details = Quotation_Detail.query.filter(or_(Quotation_Detail.q_num.like("%" + form.search_string.data + "%"), 
+                                        Quotation_Detail.p_num.like("%" + form.search_string.data + "%"),
+                                        Quotation_Detail.p_name.like("%" + form.search_string.data + "%"))).all()
 
-    return render_template('admin/quotation_details/quotation_details.html',
+    return render_template('admin/quotation_details/quotation_details.html', form=form,
                            quotation_details=quotation_details, title="Quotation_Details")
 
 
