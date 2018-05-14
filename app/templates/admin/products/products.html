@@ -11,10 +11,10 @@
         {{ utils.flashed_messages() }}
         <br/>
         <h1 style="text-align:center;">Products</h1>
-        {% if products %}
           <hr class="intro-divider">
           <div class="center">
             {{ wtf.quick_form(form) }}
+            {% if products %}
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>

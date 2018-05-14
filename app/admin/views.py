@@ -635,7 +635,8 @@ def list_products(page_num):
     form = SearchForm()
     if form.validate_on_submit():
         products = Product.query.filter(or_(Product.p_number.like("%" + form.search_string.data + "%"), 
-                                        Product.p_name.like("%" + form.search_string.data + "%"))).all()
+                                        Product.p_name.like("%" + form.search_string.data + "%"),
+                                        Product.supplier.like("%" + form.search_string.data + "%"))).all()
 
     return render_template('admin/products/products.html',
                            products=products, title="Products", form=form)
@@ -859,9 +860,15 @@ def list_quotations(page_num):
     check_admin()
 
     # quotations = Quotation.query.all()
-    quotations = Quotation.query.paginate(per_page=5, page=page_num, error_out=True)
+    # quotations = Quotation.query.paginate(per_page=5, page=page_num, error_out=True)
 
-    return render_template('admin/quotations/quotations.html',
+    quotations = Quotation.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        quotations = Quotation.query.filter(or_(Quotation.acc_code.like("%" + form.search_string.data + "%"), 
+                                        Quotation.q_num.like("%" + form.search_string.data + "%"))).all()
+
+    return render_template('admin/quotations/quotations.html', form=form,
                            quotations=quotations, title="Quotations")
 
 
