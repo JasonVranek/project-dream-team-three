@@ -80,6 +80,24 @@
                   <td> {{ product.remarks }} </td>
                 </thead>
               </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Japanese Unit Price </th>
+                  <td> {{ product.japanese_unit_price }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Japanese Product Name </th>
+                  <td> {{ product.japanese_p_name }} </td>
+                </thead>
+              </tr>
+              <tr>
+                <thead>
+                  <th width="20%"> Japanese Note to Show </th>
+                  <td> {{ product.japanese_note }} </td>
+                </thead>
+              </tr>
           </div>
           <div style="text-align: center">
             <a href="{{ url_for('admin.edit_product', id=product.p_id) }}" class="btn btn-default btn-lg">

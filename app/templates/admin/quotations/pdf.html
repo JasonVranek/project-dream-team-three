@@ -83,7 +83,7 @@
                             <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
                             {{ loop.index }} 
                         </td>
-                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
+                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_name }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
                         <td> <input type="text" size="10" id='price{{loop.index}}' value='{{ detail.q_price }}'> </td>
                         <td> <input type="text" size="5" id='quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
@@ -106,7 +106,7 @@
                             <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
                             {{ loop.index }} 
                         </td>
-                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
+                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_name }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
                         <td> <input type="text" size="10" id='op_price{{loop.index}}' value='{{ detail.q_price }}'> </td>
                         <td> <input type="text" size="5" id='op_quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
