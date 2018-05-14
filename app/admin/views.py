@@ -1133,9 +1133,15 @@ def list_opportunities(page_num):
     check_admin()
 
     # opportunities = Opportunity.query.all()
-    opportunities = Opportunity.query.paginate(per_page=5, page=page_num, error_out=True)
+    # opportunities = Opportunity.query.paginate(per_page=5, page=page_num, error_out=True)
+    opportunities = Opportunity.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        opportunities = Opportunity.query.filter(or_(Opportunity.q_num.like("%" + form.search_string.data + "%"), 
+                                        Opportunity.integrator.like("%" + form.search_string.data + "%"),
+                                        Opportunity.source_of_lead.like("%" + form.search_string.data + "%"))).all()
 
-    return render_template('admin/opportunities/opportunities.html',
+    return render_template('admin/opportunities/opportunities.html', form=form,
                            opportunities=opportunities, title="Opportunities")
 
 
