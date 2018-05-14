@@ -58,9 +58,11 @@
                 <thead>
                   <th width="20%"> Contact </th>
                   <td> 
+                    {% if quotation.contact_id %}
                     <a href="{{ url_for('admin.view_contact', id=quotation.contact_id) }}">
                       {{ quotation.l_name}} , {{ quotation.f_name }} 
                     </a>
+                    {% endif %}
                   </td>
                 </thead>
               </tr>

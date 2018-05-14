@@ -86,7 +86,7 @@ class Quotation(UserMixin, db.Model):
     e_id = db.Column('EmployeeID', db.String(20))
     date = db.Column('Quotaton Date', db.Date)          
     acc_code = db.Column('Account Code', db.String(20), nullable=False)
-    contact_id = db.Column('Contact', db.Integer, nullable=False)
+    contact_id = db.Column('Contact', db.Integer)
     q_num = db.Column('Quotation Number', db.Integer, unique=True, nullable=False)
     revision = db.Column('Revision', db.String(50))
     pay_terms = db.Column('Payment Terms', db.String(50))

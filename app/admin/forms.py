@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FloatField, TextField, IntegerField, BooleanField, SelectField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional
 from wtforms.fields.html5 import DateField
 # Import fixes issues parsing DateFields:
 import wtforms.ext.dateutil
@@ -114,7 +114,7 @@ class QuotationForm(FlaskForm):
     """
     acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
                             get_label="acc_code", id='acc_code')   
-    contact = SelectField('Contact', id='contacts', coerce=int)
+    contact = SelectField('Contact', id='contacts', coerce=int, validators=[Optional()])
     q_num = IntegerField('Quotation Number', validators=[DataRequired()])
     e_id = QuerySelectField('Employee', query_factory=lambda: Employee.query.all(),
                             get_label="username")
