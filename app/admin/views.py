@@ -348,9 +348,16 @@ def list_contacts(page_num):
     """
     check_admin()
 
-    contacts = Contact.query.paginate(per_page=5, page=page_num, error_out=True)
+    # contacts = Contact.query.paginate(per_page=5, page=page_num, error_out=True)
+    contacts = Contact.query.all()
+    form = SearchForm()
+    if form.validate_on_submit():
+        contacts = Contact.query.filter(or_(Contact.acc_code.like("%" + form.search_string.data + "%"), 
+                                        Contact.email.like("%" + form.search_string.data + "%"),
+                                        Contact.f_name.like("%" + form.search_string.data + "%"),
+                                        Contact.l_name.like("%" + form.search_string.data + "%"))).all()
 
-    return render_template('admin/contacts/contacts.html',
+    return render_template('admin/contacts/contacts.html', form=form,
                            contacts=contacts, title="Contacts")
 
 
