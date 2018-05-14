@@ -6,12 +6,12 @@
 <body>
     <div class="container-all">
         <div class="container-title">
-            <img src="{{ url_for('static', filename='img/new_im_logo.png') }}">
+            <a href="{{ url_for('home.homepage') }}"> <img style="flex: 1" src="{{ url_for('static', filename='img/new_im_logo.png') }}"> </a>   
             <!-- <img src="/media/sf_Ubuntu/quote/project-dream-team-three/app/static/img/IMlogo.jpg"> -->
-            <ul>
-                <li> <h2>Innovation Matrix, Inc.</h2> <li>
-                <li>3080 Olcott St., B105, Santa Clara, CA 95054</li>
-                <li>(408) 329-4422 FAX (408) 468-7537</li>
+            <ul style="width: 100%; flex: 1">
+                <li style="text-align: center;"> <h2>Innovation Matrix, Inc.</h2> <li>
+                <li style="text-align: center;">3080 Olcott St., B105, Santa Clara, CA 95054</li>
+                <li style="text-align: center;">(408) 329-4422 FAX (408) 468-7537</li>
             </ul>
         </div>
 
@@ -64,7 +64,9 @@
             <form method="post" action="#" name="main-form">
                 <table id='required-table'> 
                     <tr> 
-                        <div class="tabletitle"> Quotation Title: {{quotation.q_title}} </div>    
+                        <div class="tabletitle"> 
+                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">Quotation Title: {{quotation.q_title}} </a>
+                        </div>    
                     </tr>
                     <tr>
                         <th> Item </th>
@@ -77,8 +79,10 @@
                     </tr>
                     {% for detail in quote_details %}
                     <tr>
-                        
-                        <td> {{ loop.index }} </td>
+                        <td> 
+                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
+                            {{ loop.index }} 
+                        </td>
                         <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
                         <td> <input type="text" size="10" id='price{{loop.index}}' value='{{ detail.q_price }}'> </td>
@@ -98,7 +102,10 @@
                     </tr>
                     {% for detail in optional %}
                     <tr>
-                        <td> {{ loop.index }} </td>
+                        <td> 
+                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
+                            {{ loop.index }} 
+                        </td>
                         <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_note }}</textarea></td>
                         <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
                         <td> <input type="text" size="10" id='op_price{{loop.index}}' value='{{ detail.q_price }}'> </td>
