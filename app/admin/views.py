@@ -1044,6 +1044,13 @@ def delete_quotation(id):
     """
     check_admin()
 
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+    for quote_detail in quote_details:
+
+        db.session.delete(quote_detail)
+        db.session.commit()
+        flash('You have successfully deleted the associated quotation details.')
+
     quotation = Quotation.query.get_or_404(id)
     db.session.delete(quotation)
     db.session.commit()
