@@ -11,6 +11,9 @@
             // jQuery selection for the product product dropdown
             var product_elt = document.getElementById('product');
             var qp = document.getElementById('quote_price');
+            var name = document.getElementById('product_name');
+            $('#product_name').attr("disabled","disabled");
+            
             // call to update on load
             updatePrice();
 
@@ -22,7 +25,8 @@
                 };
                 console.log(send);
                 $.getJSON("{{ url_for('admin._get_unit_price') }}", send, function(data) {
-                    qp.value = data.result;
+                    qp.value = data.price;
+                    name.value = data.name;
                 });
                 return false;
             }

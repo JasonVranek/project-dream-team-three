@@ -1455,12 +1455,15 @@ def delete_quotation_detail(id):
 def _get_unit_price():
     p_num = request.args.get('product_num', '1', type=str)
     product = Product.query.filter_by(p_number=p_num).first()
-    print(p_num, product.unit_price)
+    print(p_num, product.unit_price, product.p_name)
     try:
         price = product.unit_price
+        name = product.p_name
     except Exception as e:
         price = 0
-    return jsonify(result=price)
+
+    result = {'price': price, 'name': name}
+    return jsonify(result)
 
 
 
