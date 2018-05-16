@@ -13,8 +13,9 @@ def import_pb():
 
 	# convert nans to Nones for mysql
 	pricebook = pricebook_nan.where((pd.notnull(pricebook_nan)), None)
-
-	for row in range(0,len(pricebook.index)):
+	length = len(pricebook.index)
+	# length = 1
+	for row in range(0, length):
 		p_id = pricebook['ProductID'][row]	
 		p_number = pricebook['Part Number'][row]	         
 		p_name = pricebook['ProductName'][row]	
@@ -29,7 +30,8 @@ def import_pb():
 		date_created = pricebook['Date Created'][row]	
 		# person_created = pricebook['Person Created'][row]	
 		remarks = pricebook['Remarks'][row]	
-		japanese_p_name = pricebook['Japanese ProductName'][row]	
+		# THE RAW JAPANESE NAME FROM THE EXCEL IS ENCODED IN UTF-8
+		japanese_p_name = pricebook['Japanese ProductName'][row]#.decode("utf-8")	
 		japanese_unit_price = pricebook['Japanese UnitPrice'][row]
 		japanese_note = pricebook['Product Note to show - Japanese'][row]	
 
