@@ -322,18 +322,56 @@ def _get_contact_info():
     contact_id = request.args.get('contact_id', '1', type=int)
     print(contact_id)
     contact = Contact.query.filter_by(contact_id=contact_id).first()
+    customer = Customer.query.filter_by(c_id=contact.c_id).first()
     # Can't serialize an sqlalchmy object using jsonify, so just make a dictionary with relevant data
     data = {}
-    data['title'] = contact.cont_title
-    data['f_name'] = contact.f_name
-    data['l_name'] = contact.l_name
-    data['address'] = contact.b_address
-    data['city'] = contact.city
-    data['state'] = contact.state_province
-    data['country'] = contact.count_region
-    data['zip'] = contact.post_code
-    data['tel'] = contact.phone
-    
+
+    # Only use contact data if it's available otherwise default to the customer's data
+    if contact.cont_title:
+        data['title'] = contact.cont_title
+    else:
+        data['title'] = customer.cont_title
+
+    if contact.f_name:
+        data['f_name'] = contact.f_name
+    else:
+        data['f_name'] = customer.f_name
+
+    if contact.l_name:
+        data['l_name'] = contact.l_name
+    else:
+        data['l_name'] = customer.l_name
+
+    if contact.city:
+        data['city'] = contact.city
+    else:
+        data['city'] = customer.city
+
+    if contact.state_province:
+        data['state'] = contact.state_province
+    else:
+        data['state'] = customer.state_province
+
+    if contact.count_region:
+        data['country'] = contact.count_region
+    else:
+        data['country'] = customer.count_region
+
+    if contact.phone:
+        data['tel'] = contact.phone
+    else:
+        data['tel'] = customer.phone
+
+    if contact.post_code:
+        data['zip'] = contact.post_code
+    else:
+        data['zip'] = customer.post_code
+
+    if contact.b_address:
+        data['address'] = contact.b_address
+    else:
+        data['address'] = customer.b_address
+
     return jsonify(data)
 
 

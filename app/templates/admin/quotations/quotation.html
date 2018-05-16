@@ -7,7 +7,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <script charset="utf-8" type="text/javascript">
-
+        // When the user selects an account code from the list the contact list is populated with 
+        // contacts that are linked to this account code (customer)
         $(function() {
             // jQuery selection for the product product dropdown
             var account_elt = document.getElementById('acc_code');
@@ -50,6 +51,8 @@
     </script>
 
     <script charset="utf-8" type="text/javascript">
+        // When the user selects an account code from the list the fields related to the contact are filled
+        // This initially populates the page, and should be overwritten when a contact is selected
 
         $(function() {
             // jQuery selection for the product product dropdown
@@ -104,6 +107,9 @@
     </script>
 
     <script charset="utf-8" type="text/javascript">
+        // When the user selects a contact from the list of contacts, the contact fields should
+        // be filled with the contacts info if it isn't null otherwise it will leave the fields
+        // filled with data from the customer
 
         $(function() {
             // jQuery selection for the product product dropdown
@@ -131,6 +137,7 @@
                 console.log(send);
                 $.getJSON("{{ url_for('admin._get_contact_info') }}", send, function(data) {
                     console.log(data);
+                    // only update the value if the data field isn't Null
                     title.value = data.title;
                     f_name.value = data.f_name;
                     l_name.value = data.l_name;
@@ -138,14 +145,14 @@
                     city.value = data.city;
                     state.value = data.state;
                     country.value = data.country;
-                    postal.value = data.postal;
+                    postal.value = data.zip;
                     tel.value = data.tel;
                 });
                 return false;
             }
 
             // event listener to product dropdown change
-            $('#contact_elt').on('change', function() {
+            $('#contacts').on('change', function() {
                 updateContactInfo();
             });
         });
