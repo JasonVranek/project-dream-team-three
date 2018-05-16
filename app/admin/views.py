@@ -1358,7 +1358,8 @@ def add_quotation_detail():
 
     form = Quotation_DetailForm()
     if form.validate_on_submit():
-        quotation_detail = Quotation_Detail(q_id = form.q_num.data.q_id,     
+        q_id = form.q_num.data.q_id
+        quotation_detail = Quotation_Detail(q_id = q_id,     
                                 p_id = form.p_num.data.p_id,                
                                 p_name = form.p_num.data.p_name,           
                                 q_num = form.q_num.data.q_num,
@@ -1376,6 +1377,16 @@ def add_quotation_detail():
         except:
             # in case Quotation_Detail already exists
             flash('Error: Quotation_Detail already exists.')
+
+        # Update the quote amount for the parent quote to reflect this new quotation detail
+        quotation = Quotation.query.get_or_404(q_id)
+        quotation.q_amount = 0
+        quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
+
+        for quote_detail in quote_details:
+            quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+
+        db.session.commit()
 
         # redirect to quotation_details page
         return redirect(url_for('admin.list_quotation_details', page_num=1))
@@ -1413,6 +1424,17 @@ def edit_quotation_detail(id):
         db.session.commit()
         flash('You have successfully edited the quotation_detail.')
 
+
+        # Update the quote amount for the parent quote to reflect this new quotation detail
+        quotation = Quotation.query.get_or_404(q_id)
+        quotation.q_amount = 0
+        quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
+
+        for quote_detail in quote_details:
+            quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+
+        db.session.commit()
+
         # redirect to the quotation_details page
         return redirect(url_for('admin.list_quotation_details', page_num=1))
 
@@ -1440,9 +1462,21 @@ def delete_quotation_detail(id):
     check_admin()
 
     quotation_detail = Quotation_Detail.query.get_or_404(id)
+    # Save the quotation ID to update the quotation amount post deletion
+    q_id = quotation_detail.q_id
     db.session.delete(quotation_detail)
     db.session.commit()
     flash('You have successfully deleted the quotation_detail.')
+
+    # Update the quote amount for the parent quote to reflect this new quotation detail
+    quotation = Quotation.query.get_or_404(q_id)
+    quotation.q_amount = 0
+    quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
+
+    for quote_detail in quote_details:
+        quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+
+    db.session.commit()
 
     # redirect to the quotation_details page
     return redirect(url_for('admin.list_quotation_details', page_num=1))
