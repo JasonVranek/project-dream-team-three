@@ -89,8 +89,9 @@
                     city.value = data.city;
                     state.value = data.state;
                     country.value = data.country;
-                    postal.value = data.postal;
+                    postal.value = data.zip;
                     tel.value = data.tel;
+                    console.log(data.zip);
                 });
                 return false;
             }
@@ -167,7 +168,7 @@
                 <p>
                     Select parameters to edit for: 
                     <span style="color: #aec251;">
-                        {{ quotation.q_id }} {{ quotation.q_num }} {{ quotation.title }}
+                        Title: {{ quotation.q_title }}, Quotation Number {{ quotation.q_num }}
                     </span>
                 </p>
                 <br/>

@@ -945,8 +945,8 @@ def add_quotation():
                                 s_sched = form.s_sched.data,
                                 s_term = form.s_term.data,
                                 q_title = form.q_title.data,
-                                q_note = form.q_note.data,
-                                q_amount = form.q_amount.data)
+                                q_note = form.q_note.data)
+                                #q_amount = form.q_amount.data)
                                 
         try:
             # add quotation to the database
@@ -1001,7 +1001,7 @@ def edit_quotation(id):
         quotation.s_term = form.s_term.data
         quotation.q_title = form.q_title.data
         quotation.q_note = form.q_note.data
-        quotation.q_amount = form.q_amount.data
+        # quotation.q_amount = form.q_amount.data
 
         db.session.commit()
         flash('You have successfully edited the quotation.')
@@ -1029,7 +1029,7 @@ def edit_quotation(id):
     form.s_term.data = quotation.s_term
     form.q_title.data = quotation.q_title
     form.q_note.data = quotation.q_note
-    form.q_amount.data = quotation.q_amount
+    # form.q_amount.data = quotation.q_amount
 
     return render_template('admin/quotations/quotation.html', action="Edit",
                            add_quotation=add_quotation, form=form,
