@@ -56,6 +56,12 @@
                     </a>
                   </td>
                   <td>
+                    <a href="{{ url_for('admin.add_quotation_detail', q_id=quotation.q_id) }}">
+                      <i class="fa fa-plus"></i>
+                      Add Detail
+                    </a>
+                  </td>
+                  <td>
                     <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}">
                       <i class="fa fa-quora"></i> PDF
                     </a>

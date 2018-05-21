@@ -461,8 +461,7 @@ def add_contact():
             flash('You have successfully added a new contact.')
         except Exception as e:
             # in case Contact Account Code already exists
-            flash(e)
-            # flash('Error: Customer Account Code already exists.')
+            flash('Error: Customer Account Code already exists.')
 
         # redirect to contacts page
         return redirect(url_for('admin.list_contacts', page_num=1))
@@ -1409,9 +1408,9 @@ def list_quotation_details(page_num):
                            quotation_details=quotation_details, title="Quotation_Details")
 
 
-@admin.route('/quotation_details/add', methods=['GET', 'POST'])
+@admin.route('/quotation_details/add/<int:q_id>', methods=['GET', 'POST'])
 @login_required
-def add_quotation_detail():
+def add_quotation_detail(q_id):
     """
     Add a quotation_detail to the database
     """
@@ -1422,6 +1421,8 @@ def add_quotation_detail():
     form = Quotation_DetailForm()
     form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
     form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
+    if q_id is not None:
+        form.q_num.data = q_id
     if form.validate_on_submit():
         q_id = form.q_num.data
         quotation = Quotation.query.filter_by(q_id=q_id).first()

@@ -12,7 +12,7 @@
         {% if quotation %}
         <h1 style="text-align:center;"> Quotation #{{ quotation.q_num }} </h1>
         <div style="text-align: center">
-            <a href="{{ url_for('admin.add_quotation_detail') }}" class="btn btn-default btn-lg">
+            <a href="{{ url_for('admin.add_quotation_detail', q_id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-plus"></i>
               Add Quote Detail
             </a>
