@@ -75,9 +75,6 @@
             function updateCustomerInfo() {
                 console.log(contact_elt);
                 var contact_index = contact_elt.selectedIndex;
-                // send = {
-                //     contact_id: contact_elt.options[contact_index].value //send the contact id
-                // };
                 acc_index = account_elt.selectedIndex;
                 send = {
                     acc_code: account_elt.options[account_elt.selectedIndex].text
@@ -94,6 +91,7 @@
                     country.value = data.country;
                     postal.value = data.zip;
                     tel.value = data.tel;
+                    updateContactInfo();
                 });
                 return false;
             }
@@ -102,30 +100,11 @@
             $('#acc_code').on('change', function() {
                 updateCustomerInfo();
             });
-        });
 
-    </script>
 
-    <script charset="utf-8" type="text/javascript">
         // When the user selects a contact from the list of contacts, the contact fields should
         // be filled with the contacts info if it isn't null otherwise it will leave the fields
         // filled with data from the customer
-
-        $(function() {
-            // jQuery selection for the product product dropdown
-            var contact_elt = document.getElementById('contacts');
-            var title = document.getElementById('title')
-            var f_name = document.getElementById('f_name')
-            var l_name = document.getElementById('l_name')
-            var address = document.getElementById('address')
-            var city = document.getElementById('city')
-            var state = document.getElementById('state')
-            var country = document.getElementById('country')
-            var postal = document.getElementById('zip')
-            var tel = document.getElementById('tel')
-            // call to update on load
-
-            // updateContactInfo();
 
             // function to call XHR and update county dropdown
             function updateContactInfo() {
@@ -157,7 +136,7 @@
             });
         });
 
-    </script>
+    </script> 
 </head>
 
 
