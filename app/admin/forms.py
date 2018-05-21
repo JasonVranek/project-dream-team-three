@@ -68,12 +68,13 @@ class ContactForm(FlaskForm):
     """
     Form for admin to add or edit a customer
     """
-    acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
-                            get_label="acc_code") 
+    # acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
+    #                         get_label="acc_code") 
+    acc_code = SelectField('Account Code', coerce=int)
     f_name = StringField('First Name', validators=[DataRequired()])
     l_name = StringField('Last Name', validators=[DataRequired()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    email = StringField('Email Address', validators=[DataRequired()])
+    phone = StringField('Phone Number')
+    email = StringField('Email Address')
     b_address = StringField('Billing Address')
     city = StringField('City')
     state_province = StringField('State or Province')

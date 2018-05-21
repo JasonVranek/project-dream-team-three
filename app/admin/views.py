@@ -435,9 +435,13 @@ def add_contact():
     add_contact = True
 
     form = ContactForm()
+    form.acc_code.choices = [(customer.c_id, str(customer.acc_code)) for customer in Customer.query.all()]
     if form.validate_on_submit():
-        contact = Contact(c_id = form.acc_code.data.c_id,
-                                acc_code=form.acc_code.data.acc_code,
+        c_id = form.acc_code.data
+        customer = Customer.query.filter_by(c_id=c_id).first()
+        acc_code = customer.acc_code
+        contact = Contact(c_id = c_id,
+                                acc_code=acc_code,
                                 f_name = form.f_name.data,
                                 l_name = form.l_name.data,
                                 phone = form.phone.data,
@@ -455,9 +459,10 @@ def add_contact():
             db.session.add(contact)
             db.session.commit()
             flash('You have successfully added a new contact.')
-        except:
+        except Exception as e:
             # in case Contact Account Code already exists
-            flash('Error: Customer Account Code already exists.')
+            flash(e)
+            # flash('Error: Customer Account Code already exists.')
 
         # redirect to contacts page
         return redirect(url_for('admin.list_contacts', page_num=1))
@@ -480,9 +485,12 @@ def edit_contact(id):
 
     contact = Contact.query.get_or_404(id)
     form = ContactForm(obj=contact)
+    form.acc_code.choices = [(customer.c_id, str(customer.acc_code)) for customer in Customer.query.all()]
     if form.validate_on_submit():
-        contact.c_id = form.acc_code.data.c_id
-        contact.acc_code = form.acc_code.data.acc_code
+        c_id = form.acc_code.data
+        contact.c_id = c_id
+        customer = Customer.query.filter_by(c_id=c_id).first()
+        contact.acc_code = customer.acc_code
         contact.f_name = form.f_name.data
         contact.l_name = form.l_name.data
         contact.phone = form.phone.data
@@ -503,7 +511,7 @@ def edit_contact(id):
         return redirect(url_for('admin.list_contacts', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.acc_code.data = contact.acc_code 
+    form.acc_code.data = contact.c_id 
     form.f_name.data = contact.f_name 
     form.l_name.data = contact.l_name
     form.phone.data = contact.phone

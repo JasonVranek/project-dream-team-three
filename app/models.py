@@ -26,7 +26,7 @@ class Customer(UserMixin, db.Model):
     cont_title = db.Column('ContactTitle', db.String(30))
     phone = db.Column('PhoneNumber', db.String(20))
     fax = db.Column('FaxNumber', db.String(20))
-    email = db.Column('EmailAddress', db.String(20), unique=True)
+    email = db.Column('EmailAddress', db.String(20))
     notes = db.Column('Notes', db.String(100))
     order = db.Column('Order', db.String(50))
     state = db.Column('State', db.String(50))
@@ -64,7 +64,7 @@ class Contact(UserMixin, db.Model):
     cont_title = db.Column('ContactTitle', db.String(30))
     phone = db.Column('PhoneNumber', db.String(20))
     fax = db.Column('FaxNumber', db.String(20))
-    email = db.Column('EmailAddress', db.String(20), unique=True)
+    email = db.Column('EmailAddress', db.String(20))
     notes = db.Column('Notes', db.String(100))
 
 
