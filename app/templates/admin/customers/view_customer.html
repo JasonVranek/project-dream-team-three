@@ -123,6 +123,10 @@
               <i class="fa fa-user-plus"></i>
               Edit Customer
             </a>
+            <a href="{{ url_for('admin.add_contact', c_id=customer.c_id) }}" class="btn btn-default btn-lg">
+              <i class="fa fa-plus"></i>
+              Add Contact
+            </a>
             <a href="{{ url_for('admin.delete_customer', id=customer.c_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
               Delete Customer

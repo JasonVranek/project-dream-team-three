@@ -424,9 +424,9 @@ def list_contacts(page_num):
                            contacts=contacts, title="Contacts")
 
 
-@admin.route('/contacts/add', methods=['GET', 'POST'])
+@admin.route('/contacts/add/<int:c_id>', methods=['GET', 'POST'])
 @login_required
-def add_contact():
+def add_contact(c_id):
     """
     Add a contact to the database
     """
@@ -436,6 +436,8 @@ def add_contact():
 
     form = ContactForm()
     form.acc_code.choices = [(customer.c_id, str(customer.acc_code)) for customer in Customer.query.all()]
+    if c_id is not None:
+        form.acc_code.data = c_id
     if form.validate_on_submit():
         c_id = form.acc_code.data
         customer = Customer.query.filter_by(c_id=c_id).first()
