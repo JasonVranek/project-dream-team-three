@@ -186,6 +186,7 @@ class Quotation_DetailForm(FlaskForm):
     p_name = StringField('Product Name', id='product_name')
     quantity = FloatField('Quantity', validators=[DataRequired()])
     discount = FloatField('Discount')#, validators=[DataRequired()])
+    unit_price = FloatField('Unit Price', id='unit_price')
     q_price = FloatField('Quote Price', id='quote_price')#, validators=[DataRequired()])       
     option = BooleanField('Optional')
 
