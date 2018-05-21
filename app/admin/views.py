@@ -962,9 +962,13 @@ def add_quotation():
 
     form = QuotationForm()
     form.contact.choices = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.all()]
+    form.acc_code.choices = [(customer.c_id, str(customer.acc_code)) for customer in Customer.query.all()]
     if form.validate_on_submit():
-        quotation = Quotation(c_id = form.acc_code.data.c_id,           
-                                acc_code = form.acc_code.data.acc_code,
+        c_id = form.acc_code.data
+        customer = Customer.query.filter_by(c_id=c_id).first()
+        acc_code = customer.acc_code
+        quotation = Quotation(c_id = c_id,           
+                                acc_code = acc_code,
                                 contact_id = form.contact.data,
                                 q_num = form.q_num.data,
                                 e_id = form.e_id.data.username,           
@@ -1017,9 +1021,13 @@ def edit_quotation(id):
     quotation = Quotation.query.get_or_404(id)
     form = QuotationForm(obj=quotation)
     form.contact.choices = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.all()]
+    form.acc_code.choices = [(customer.c_id, str(customer.acc_code)) for customer in Customer.query.all()]
     if form.validate_on_submit():
-        quotation.c_id = form.acc_code.data.c_id
-        quotation.acc_code = form.acc_code.data.acc_code
+        c_id = form.acc_code.data
+        customer = Customer.query.filter_by(c_id=c_id).first()
+        acc_code = customer.acc_code
+        quotation.c_id = c_id
+        quotation.acc_code = acc_code
         quotation.contact_id = form.contact.data
         quotation.q_num = form.q_num.data        
         quotation.e_id = form.e_id.data.username         
@@ -1048,7 +1056,9 @@ def edit_quotation(id):
         return redirect(url_for('admin.list_quotations', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.acc_code.data = quotation.acc_code
+    # Find the value corresponding to the selected account code so when they edit it doesnt default to a-tech
+    form.acc_code.default = quotation.c_id
+    form.process()
     form.q_num.data = quotation.q_num
     form.e_id.data = quotation.e_id
     form.date.data = quotation.date

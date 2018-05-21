@@ -112,8 +112,9 @@ class QuotationForm(FlaskForm):
     """
     Form for admin to add or edit a quotation
     """
-    acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
-                            get_label="acc_code", id='acc_code')   
+    # acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
+    #                         get_label="acc_code", id='acc_code')   
+    acc_code = SelectField('Account Code', id='acc_code', coerce=int)
     contact = SelectField('Contact', id='contacts', coerce=int, validators=[Optional()])
     q_num = IntegerField('Quotation Number', validators=[DataRequired()])
     e_id = QuerySelectField('Employee', query_factory=lambda: Employee.query.all(),
