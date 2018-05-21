@@ -112,13 +112,13 @@ ul {
 .note_box {
 	text-align: left;
 	/*border: 1px solid #010101;*/
-	flex: 2;
+	flex: 1;
 	padding-right: 15px;
 }
 
 .address_box {
 	flex: 1;
-	text-align: left;
+	text-align: center;
 	border: 1px solid #010101;
 }
 

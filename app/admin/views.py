@@ -1127,6 +1127,9 @@ def gen_pdf(id):
     # Get the customer from the Quotation's Customer ID
     customer = Customer.query.filter_by(c_id=quotation.c_id).first()    
 
+    # Get the contact frmo the Quotation's Contact ID
+    contact = Contact.query.filter_by(contact_id=quotation.contact_id).first()
+
     # Get all of the Quotation Details that are tied to this Quotation
     quote_details = Quotation_Detail.query.filter_by(q_id=id, option=False).all()
 
@@ -1155,6 +1158,7 @@ def gen_pdf(id):
 
     return render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
+                            contact=contact,
                             customer=customer,
                             quote_details=quote_details,
                             products=products,

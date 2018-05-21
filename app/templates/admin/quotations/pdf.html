@@ -21,13 +21,14 @@
             <!-- top left box -->
             <ul class="customer_box">
                 <li class="bold"> Revision: {{quotation.revision}}</li>
-                <li class="bold"> Account Code: {{quotation.acc_code}}</li>
+                <li><a class="bold" style="text-decoration:none" href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">Account Code: {{quotation.acc_code}} </a></li>
                 <li><br /></li>
                 <li>{{customer.comp_name}}</li>
                 <li>{{customer.city}}</li>
                 <li>{{customer.b_address}}</li>
                 <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
-                <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
+                <li><a style="text-decoration:none" href="{{ url_for('admin.view_contact', id=contact.contact_id) }}">Attn: {{contact.f_name}} {{contact.l_name}} </a></li>
+                <!-- <li>Attn: {{contact.f_name}} {{contact.l_name}}</li> -->
                 <li>Tel: {{customer.phone}}</li>
             </ul>  
 
@@ -36,7 +37,7 @@
                 <table>
                     <tr>
                         <th>Quotation NO.:</th>
-                        <th>{{quotation.q_num}}</th>
+                        <th><a style="text-decoration:none" href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a></th>
                     </tr> 
                     <tr>
                         <td>Quotation Date:</td>
@@ -46,7 +47,7 @@
                     </tr>
                     <tr>
                         <td>Shipping Schedule:</td>
-                        <td>{{quotation.s_sched}}<br />
+                        <td>{{quotation.s_sched}} Weeks<br />
                            <div class="small">after receipt of hard copy purchase order, subject to prior sale </div>
                        </td>
                     </tr>
@@ -90,8 +91,12 @@
                             <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
                             {{ loop.index }} 
                         </td>
-                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_name }}</textarea></td>
-                        <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
+                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+                            {{ products[detail.quote_detail_id].p_name }}
+                        </td>
+                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+                            {{ products[detail.quote_detail_id].p_number }}
+                        </td>
                         <td> <input type="text" size="10" id='price{{loop.index}}' value='{{ detail.q_price }}'> </td>
                         <td> <input type="text" size="5" id='quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
                         <td> <input type="text" size="5" id='discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
@@ -113,8 +118,12 @@
                             <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
                             {{ loop.index }} 
                         </td>
-                        <td> <textarea rows="2" cols="20"> {{ products[detail.quote_detail_id].p_name }}</textarea></td>
-                        <td> <input type="text" size="15" value='{{ products[detail.quote_detail_id].p_number }}'> </td>
+                       <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+                            {{ products[detail.quote_detail_id].p_name }}
+                        </td>
+                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+                            {{ products[detail.quote_detail_id].p_number }}
+                        </td>
                         <td> <input type="text" size="10" id='op_price{{loop.index}}' value='{{ detail.q_price }}'> </td>
                         <td> <input type="text" size="5" id='op_quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
                         <td> <input type="text" size="5" id='op_discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
@@ -144,11 +153,11 @@
         <div class="container-bottom">
             <!-- note box -->
             <ul class="note_box">
-              <li class="tabletitle"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
-              <li>* Required delivery date</li>
-              <li>* Carrier TBD</li>
-              <li>* Ship to address</li>
-              <li>* Bill to address</li>
+              <li class="tabletitle small"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
+              <li class="small">* Required delivery date</li>
+              <li class="small">* Carrier TBD</li>
+              <li class="small">* Ship to address</li>
+              <li class="small">* Bill to address</li>
             </ul>
 
             <!-- IM address box -->
@@ -158,7 +167,7 @@
               <li>Attn: Sales Operations</li>
               <li>3080 Olcott St., B105</li>
               <li>Santa Clara CA 95054 USA</li>
-              <li>FAX: ((408) 468-7537</li>
+              <li>FAX: (408) 468-7537</li>
             </ul>
         </div>
 
