@@ -15,17 +15,20 @@
             </ul>
         </div>
 
-        <h3 class="quote-title">Quotation</h3>
+        <!-- <h3 class="quote-title">Quotation</h3> -->
 
         <div class="container-top">     
             <!-- top left box -->
             <ul class="customer_box">
-              <li>{{customer.comp_name}}</li>
-              <li>{{customer.city}}</li>
-              <li>{{customer.b_address}}</li>
-              <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
-              <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
-              <li>Tel: {{customer.phone}}</li>
+                <li class="bold"> Revision: {{quotation.revision}}</li>
+                <li class="bold"> Account Code: {{quotation.acc_code}}</li>
+                <li><br /></li>
+                <li>{{customer.comp_name}}</li>
+                <li>{{customer.city}}</li>
+                <li>{{customer.b_address}}</li>
+                <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
+                <li>Attn: {{customer.f_name}} {{customer.l_name}}</li>
+                <li>Tel: {{customer.phone}}</li>
             </ul>  
 
             <!-- top right box -->
@@ -37,11 +40,15 @@
                     </tr> 
                     <tr>
                         <td>Quotation Date:</td>
-                        <td>{{quotation.date}}</td>
+                        <td>{{quotation.date}}<br />
+                           <div class="small" style="color: red">Valid for 30 days </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Shipping Schedule:</td>
-                        <td>{{quotation.s_sched}}</td>
+                        <td>{{quotation.s_sched}}<br />
+                           <div class="small">after receipt of hard copy purchase order, subject to prior sale </div>
+                       </td>
                     </tr>
                     <tr>
                         <td>Terms of Payment:</td>
@@ -75,7 +82,7 @@
                         <th> Unit Price </th>
                         <th> Qty </th>
                         <th> Discount </th> 
-                        <th> Total Price </th>
+                        <th> Ext Price </th>
                     </tr>
                     {% for detail in quote_details %}
                     <tr>
@@ -120,12 +127,19 @@
             </form>
         </div>
 
-        <!-- total box -->
-        <ul class="total_box">
-          <li id='subtotal'>subtotal: ${{subtotal}}</li>
-          <li id='discount_total'>discount: (${{subtotal - total}})</li>
-          <li><h3 id='total_total'>TOTAL: ${{total}} </h3></li>
-        </ul> 
+        <div class="container-bottom">
+            <ul class="note_box">
+                <li>Quotation Note: {{quotation.q_note}}</li>
+            </ul>
+
+            <!-- total box -->
+            <ul class="total_box">
+              <li id='subtotal'>subtotal: ${{subtotal}}</li>
+              <li id='discount_total'>discount: (${{subtotal - total}})</li>
+              <li><h3 id='total_total'>TOTAL (USD): ${{total}} </h3></li>
+              <li class="small">* plus appropriate tax</li>
+            </ul> 
+        </div>
 
         <div class="container-bottom">
             <!-- note box -->
