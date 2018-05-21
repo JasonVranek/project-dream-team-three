@@ -1412,13 +1412,20 @@ def add_quotation_detail():
     add_quotation_detail = True
 
     form = Quotation_DetailForm()
+    form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
+    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
     if form.validate_on_submit():
-        q_id = form.q_num.data.q_id
+        q_id = form.q_num.data
+        quotation = Quotation.query.filter_by(q_id=q_id).first()
+        q_num = quotation.q_num
+        p_id = form.p_num.data
+        product = Product.query.filter_by(p_id=p_id).first()
+        p_num = product.p_number
         quotation_detail = Quotation_Detail(q_id = q_id,     
-                                p_id = form.p_num.data.p_id,                
-                                p_name = form.p_num.data.p_name,           
-                                q_num = form.q_num.data.q_num,
-                                p_num = form.p_num.data.p_number,
+                                p_id = p_id,                
+                                p_name = product.p_name,           
+                                q_num = q_num,
+                                p_num = p_num,
                                 quantity = form.quantity.data,
                                 discount = form.discount.data,
                                 q_price = form.q_price.data,
@@ -1465,14 +1472,20 @@ def edit_quotation_detail(id):
 
     quotation_detail = Quotation_Detail.query.get_or_404(id)
     form = Quotation_DetailForm(obj=quotation_detail)
-
+    form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
+    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
     if form.validate_on_submit():
-        q_id = form.q_num.data.q_id
-        quotation_detail.q_num = form.q_num.data.q_num
-        quotation_detail.p_num = form.p_num.data.p_number
+        q_id = form.q_num.data
+        quotation = Quotation.query.filter_by(q_id=q_id).first()
+        q_num = quotation.q_num
+        p_id = form.p_num.data
+        product = Product.query.filter_by(p_id=p_id).first()
+        p_num = product.p_number
+        quotation_detail.q_num = q_num
+        quotation_detail.p_num = p_num
         quotation_detail.q_id = q_id
-        quotation_detail.p_id = form.p_num.data.p_id
-        quotation_detail.p_name = form.p_num.data.p_name
+        quotation_detail.p_id = p_id
+        quotation_detail.p_name = product.p_name
         quotation_detail.quantity = form.quantity.data
         quotation_detail.discount = form.discount.data
         quotation_detail.q_price = form.q_price.data
@@ -1497,8 +1510,8 @@ def edit_quotation_detail(id):
         return redirect(url_for('admin.list_quotation_details', page_num=1))
 
     # fill the form with current data to show what changes are to be made
-    form.q_num.data = quotation_detail.q_num
-    form.p_num.data = quotation_detail.p_num               
+    form.q_num.data = quotation_detail.q_id
+    form.p_num.data = quotation_detail.p_id               
     form.quantity.data = quotation_detail.quantity
     form.discount.data = quotation_detail.discount
 

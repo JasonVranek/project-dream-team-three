@@ -176,10 +176,12 @@ class Quotation_DetailForm(FlaskForm):
     """
     Form for admin to add or edit a quotation_detail
     """
-    q_num = QuerySelectField('Quotation Number', query_factory=lambda: Quotation.query.all(),
-                            get_label="q_num")             
-    p_num = QuerySelectField('Product Number', query_factory=lambda: Product.query.all(),
-                            get_label="p_number", id='product')
+    #q_num = QuerySelectField('Quotation Number', query_factory=lambda: Quotation.query.all(),
+    #                        get_label="q_num") 
+    q_num = SelectField('Quotation Number', coerce=int)    
+    p_num = SelectField('Product Number', coerce=int, id='product')           
+    # p_num = QuerySelectField('Product Number', query_factory=lambda: Product.query.all(),
+    #                         get_label="p_number", id='product')
     p_name = StringField('Product Name', id='product_name')
     quantity = FloatField('Quantity', validators=[DataRequired()])
     discount = FloatField('Discount')#, validators=[DataRequired()])
