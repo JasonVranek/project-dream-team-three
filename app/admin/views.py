@@ -1429,7 +1429,8 @@ def add_quotation_detail():
         quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
 
         for quote_detail in quote_details:
-            quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+            if quote_detail.option is False:
+                quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
 
         db.session.commit()
 
@@ -1456,9 +1457,10 @@ def edit_quotation_detail(id):
     form = Quotation_DetailForm(obj=quotation_detail)
 
     if form.validate_on_submit():
+        q_id = form.q_num.data.q_id
         quotation_detail.q_num = form.q_num.data.q_num
         quotation_detail.p_num = form.p_num.data.p_number
-        quotation_detail.q_id = form.q_num.data.q_id
+        quotation_detail.q_id = q_id
         quotation_detail.p_id = form.p_num.data.p_id
         quotation_detail.p_name = form.p_num.data.p_name
         quotation_detail.quantity = form.quantity.data
@@ -1476,7 +1478,8 @@ def edit_quotation_detail(id):
         quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
 
         for quote_detail in quote_details:
-            quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+            if quote_detail.option is False:
+                quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
 
         db.session.commit()
 
@@ -1519,7 +1522,8 @@ def delete_quotation_detail(id):
     quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
 
     for quote_detail in quote_details:
-        quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
+        if quote_detail.option is False:
+            quotation.q_amount += quote_detail.quantity * quote_detail.q_price * (1 - quote_detail.discount)
 
     db.session.commit()
 
