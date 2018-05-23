@@ -15,8 +15,6 @@
             </ul>
         </div>
 
-        <!-- <h3 class="quote-title">Quotation</h3> -->
-
         <div class="container-top">     
             <!-- top left box -->
             <ul class="customer_box">
@@ -28,7 +26,6 @@
                 <li>{{customer.b_address}}</li>
                 <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
                 <li><a style="text-decoration:none" href="{{ url_for('admin.view_contact', id=contact.contact_id) }}">Attn: {{contact.f_name}} {{contact.l_name}} </a></li>
-                <!-- <li>Attn: {{contact.f_name}} {{contact.l_name}}</li> -->
                 <li>Tel: {{customer.phone}}</li>
             </ul>  
 
@@ -137,8 +134,15 @@
         </div>
 
         <div class="container-bottom">
+            <!-- note box -->
             <ul class="note_box">
                 <li>Quotation Note: {{quotation.q_note}}</li>
+                <li><br /></li>
+                <li class="tabletitle small"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
+              <li class="small">* Required delivery date</li>
+              <li class="small">* Carrier TBD</li>
+              <li class="small">* Ship to address</li>
+              <li class="small">* Bill to address</li>
             </ul>
 
             <!-- total box -->
@@ -151,14 +155,11 @@
         </div>
 
         <div class="container-bottom">
-            <!-- note box -->
-            <ul class="note_box">
-              <li class="tabletitle small"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
-              <li class="small">* Required delivery date</li>
-              <li class="small">* Carrier TBD</li>
-              <li class="small">* Ship to address</li>
-              <li class="small">* Bill to address</li>
-            </ul>
+            
+             <!-- authorize box -->
+            <div class="container-authorize">
+                <h3>Authorized by: <input type="text" class="signature" /></h3>
+            </div>
 
             <!-- IM address box -->
             <ul class="address_box">
@@ -170,13 +171,7 @@
               <li>FAX: (408) 468-7537</li>
             </ul>
         </div>
-
-
-        <!-- authorize box -->
-        <div class="container-authorize">
-            <h3>Authorized by: </h3>
-            <input type="text" class="signature" />
-        </div>
+       
     </div>
 </body>
 

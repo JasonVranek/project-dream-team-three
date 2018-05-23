@@ -38,7 +38,7 @@
 }
 
 .container-authorize {
-	display: flex;
+	flex: 3;
 }
 
 /*GENERAL STYLES*/
@@ -86,7 +86,6 @@ ul {
 
 .customer_box {
 	border: 1px solid #010101;
-	/*height: 20%;*/
 	width: auto;
 	text-align: left;
 	background-color: #C89ACA;
@@ -96,7 +95,6 @@ ul {
 .shipping_table {
 	text-align: right;
 	flex: 2;
-	/*background-color: #E20FE9*/
 }
 
 .total_box {
@@ -105,27 +103,25 @@ ul {
 	margin-right: 20px;
 	width: 98%;
 	flex: 1;
-	/*border: 1px solid #010101;*/
-	/*float: right;*/
 }
 
 .note_box {
 	text-align: left;
-	/*border: 1px solid #010101;*/
 	flex: 1;
 	padding-right: 15px;
 }
 
 .address_box {
 	flex: 1;
-	text-align: center;
+	text-align: left;
 	border: 1px solid #010101;
 }
 
 .signature {
     border: 0;
     border-bottom: 1px solid #000;
-    width: 200px;
+    width: 300px;
     padding: 20px;
-    font-size: large;
+    font-size: x-large;
+    text-align: center;
 }
