@@ -377,15 +377,15 @@ def _get_contact_info():
 
 @admin.route('/contacts/background_process')
 @login_required
-def _get_contact():
+def _get_contacts_list():
     """
     Retrieve a list of contacts from a specified account code
     """
     check_admin()
 
     acc_code = request.args.get('acc_code', '1', type=str)
+    # Query for all the contacts that share this account code and index theyre names by their contact id
     contacts = [(contact.contact_id, str(contact.f_name + ' ' + contact.l_name)) for contact in Contact.query.filter_by(acc_code=acc_code).all()]
-    print(contacts)
     return jsonify(contacts)
 
 
@@ -722,6 +722,7 @@ def list_products(page_num):
     form = SearchForm()
     if form.validate_on_submit():
         products = Product.query.filter(or_(Product.p_number.like("%" + form.search_string.data + "%"), 
+                                        Product.japanese_p_name.like("%" + form.search_string.data + "%"),
                                         Product.p_name.like("%" + form.search_string.data + "%"),
                                         Product.supplier.like("%" + form.search_string.data + "%"))).all()
 
@@ -1066,6 +1067,7 @@ def edit_quotation(id):
     # fill the form with current data to show what changes are to be made
     # Find the value corresponding to the selected account code so when they edit it doesnt default to a-tech
     form.acc_code.default = quotation.c_id
+    # Call to process the form to default to the last used acc code from list
     form.process()
     form.q_num.data = quotation.q_num
     form.e_id.data = quotation.e_id

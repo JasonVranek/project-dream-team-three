@@ -14,10 +14,10 @@
             var account_elt = document.getElementById('acc_code');
             var contact_elt = $('#contacts');
             // call to update on load
-            getContact();
+            getContacts();
 
             // function to call XHR and update contact dropdown
-            function getContact() {
+            function getContacts() {
                 acc_index = account_elt.selectedIndex;
                 send = {
                     acc_code: account_elt.options[account_elt.selectedIndex].text
@@ -25,7 +25,7 @@
                 console.log(send);
                 contact_elt.attr('disabled', 'disabled');
                 contact_elt.empty();
-                $.getJSON("{{ url_for('admin._get_contact') }}", send, function(data) {
+                $.getJSON("{{ url_for('admin._get_contacts_list') }}", send, function(data) {
                     data.forEach(function(item) {
                         contact_elt.append(
                             $('<option>', {
@@ -44,7 +44,7 @@
 
             // event listener to product dropdown change
             $('#acc_code').on('change', function() {
-                getContact();
+                getContacts();
             });
         });
 
