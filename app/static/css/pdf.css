@@ -93,7 +93,7 @@ ul {
 }
 
 .shipping_table {
-	text-align: right;
+	/*text-align: right;*/
 	flex: 2;
 }
 

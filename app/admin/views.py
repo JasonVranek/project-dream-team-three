@@ -1133,8 +1133,8 @@ def gen_pdf(id):
     contact = Contact.query.filter_by(contact_id=quotation.contact_id).first()
 
     # Get all of the Quotation Details that are tied to this Quotation
-    quote_details = Quotation_Detail.query.filter_by(q_id=id, option=False).all()
-
+    # quote_details = Quotation_Detail.query.filter_by(q_id=id, option=False).all()
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
     # Get each product associated with each Quote Detail and save to dictionary
     products = {}
     subtotal = 0
@@ -1142,7 +1142,8 @@ def gen_pdf(id):
     for detail in quote_details:
         qd_id = detail.quote_detail_id
         product = Product.query.filter_by(p_id=detail.p_id).first()
-        products[qd_id] = product
+        # products[qd_id] = product
+        detail.product = product
 
         if detail.discount:
             total += detail.quantity * detail.q_price * (1 - detail.discount)
@@ -1152,11 +1153,11 @@ def gen_pdf(id):
         subtotal += detail.quantity * detail.q_price
 
     # Find the 'optional' items and pass them in
-    optional = Quotation_Detail.query.filter_by(q_id=id, option=True).all()
-    for detail in optional:
-        qd_id = detail.quote_detail_id
-        product = Product.query.filter_by(p_id=detail.p_id).first()
-        products[qd_id] = product
+    # optional = Quotation_Detail.query.filter_by(q_id=id, option=True).all()
+    # for detail in optional:
+    #     qd_id = detail.quote_detail_id
+    #     product = Product.query.filter_by(p_id=detail.p_id).first()
+    #     products[qd_id] = product
 
     return render_template('admin/quotations/pdf.html', 
                             quotation=quotation,
@@ -1164,7 +1165,7 @@ def gen_pdf(id):
                             customer=customer,
                             quote_details=quote_details,
                             products=products,
-                            optional=optional,
+                            # optional=optional,
                             title="PDF",
                             total=total,
                             subtotal=subtotal)

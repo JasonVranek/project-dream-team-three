@@ -33,8 +33,8 @@
             <div class="shipping_table">
                 <table>
                     <tr>
-                        <th>Quotation NO.:</th>
-                        <th><a style="text-decoration:none" href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a></th>
+                        <th style="text-align: left">Quotation NO.:</th>
+                        <th style="text-align: left;"><a style=" text-decoration:none; " href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a></th>
                     </tr> 
                     <tr>
                         <td>Quotation Date:</td>
@@ -67,7 +67,7 @@
         <div class="container-middle">
             <!-- main table -->
             <form method="post" action="#" name="main-form">
-                <table id='required-table'> 
+                <table id='details-table'> 
                     <tr> 
                         <div class="tabletitle"> 
                             <a style="text-decoration:none" href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">Quotation Title: {{quotation.q_title}} </a>
@@ -82,54 +82,26 @@
                         <th> Discount </th> 
                         <th> Ext Price </th>
                     </tr>
-                    {% for detail in quote_details %}
-                    <tr>
-                        <td> 
-                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
-                            {{ loop.index }} 
-                        </td>
-                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
-                            {{ products[detail.quote_detail_id].p_name }}
-                        </td>
-                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
-                            {{ products[detail.quote_detail_id].p_number }}
-                        </td>
-                        <td> <input type="text" size="10" id='price{{loop.index}}' value='{{ detail.q_price }}'> </td>
-                        <td> <input type="text" size="5" id='quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
-                        <td> <input type="text" size="5" id='discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
-                        <td> <input type="text" size="10" id='total{{loop.index}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                    <!-- loop.index loses scope when pass into the detail_table.html so 
+                    use loop_index_list instead -->
+                    {% set loop_index_list = ['1'] %}
+                    {% set flag = False %}
+                    {% for option in [False,True] %}
+                        {% for detail in quote_details %}
+                            {% if flag != option %}
+                                <tr><td colspan="7">Optional</td></tr>
+                                {% set flag = True %}
+                            {% endif %}
+                            {% if detail.option == option %}
+                                {% set loop_index = loop_index_list|length %}
+                                {% include 'admin/quotations/detail_table.html' %}
+                                {% if loop_index_list.append('1') %}{% endif %}
+                            {% endif %}
 
-
-            <!-- optional table -->
-            {% if optional %}
-                <table id='optional-table'> 
-                    <tr> 
-                        <div class="tabletitle"> Optional </div>    
-                    </tr>
-                    {% for detail in optional %}
-                    <tr>
-                        <td> 
-                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
-                            {{ loop.index }} 
-                        </td>
-                       <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
-                            {{ products[detail.quote_detail_id].p_name }}
-                        </td>
-                        <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
-                            {{ products[detail.quote_detail_id].p_number }}
-                        </td>
-                        <td> <input type="text" size="10" id='op_price{{loop.index}}' value='{{ detail.q_price }}'> </td>
-                        <td> <input type="text" size="5" id='op_quantity{{loop.index}}' value='{{ detail.quantity }}'> </td>
-                        <td> <input type="text" size="5" id='op_discount{{loop.index}}' value='%{{ 100 * detail.discount }}'> </td>
-                        <td> <input type="text" size="10" id='op_total{{loop.index}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
-                    </tr>
+                        {% endfor %}
                     {% endfor %}
+                    
                 </table>
-                <!-- <p><input type="submit" value="Submit" name="main-btn" hidden="hidden"></p> -->
-            {% endif %}
             </form>
         </div>
 
