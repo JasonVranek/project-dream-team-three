@@ -36,11 +36,21 @@
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">{{ _('Dashboard') }}</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('admin.change_language') }}">{{ _('Language') }}</a></li>
+                    
                     <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
                     <li><a><i class="fa fa-user"></i>  {{ _('Hi') }}, {{ current_user.username }}!</a></li>
                      {% if current_user.language == 'en' %}
-                     aasdfasdfasfdasf
+                      <li><a class="navbar-brand" href="{{ url_for('admin.change_language') }}" align="left">
+                          <img style="max-height: 100%;" 
+                          src="{{ url_for('static', filename='img/us_flag.png') }}">
+                        </a>
+                      </li>
+                     {% else %}
+                     <li><a class="navbar-brand" href="{{ url_for('admin.change_language') }}" align="left">
+                          <img style="max-height: 100%;" 
+                          src="{{ url_for('static', filename='img/japanese_flag.png') }}">
+                        </a>
+                      </li>
                      {% endif %}
                   {% else %}
                     <li><a href="{{ url_for('home.homepage') }}">{{ _('Home') }}</a></li>

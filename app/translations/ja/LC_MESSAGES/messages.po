@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-05-30 15:04-0700\n"
+"POT-Creation-Date: 2018-05-30 15:42-0700\n"
 "PO-Revision-Date: 2018-05-30 10:53-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -368,7 +368,7 @@ msgstr "オプション"
 msgid "Search"
 msgstr "サーチ"
 
-#: app/templates/base.html:20 app/templates/base.html:46
+#: app/templates/base.html:20 app/templates/base.html:55
 msgid "Home"
 msgstr "ホーム"
 
@@ -403,10 +403,6 @@ msgstr "見積詳細"
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: app/templates/base.html:39
-msgid "Language"
-msgstr "言語"
-
 #: app/templates/base.html:40
 msgid "Logout"
 msgstr "ログアウト"
@@ -415,11 +411,16 @@ msgstr "ログアウト"
 msgid "Hi"
 msgstr "こんにちは"
 
-#: app/templates/base.html:47
+#: app/templates/base.html:43 app/templates/base.html:46
+#: app/templates/base.html:51
+msgid "Language"
+msgstr "言語"
+
+#: app/templates/base.html:56
 msgid "Register"
 msgstr "登録"
 
-#: app/templates/base.html:48
+#: app/templates/base.html:57
 msgid "Login"
 msgstr "ログイン"
 
