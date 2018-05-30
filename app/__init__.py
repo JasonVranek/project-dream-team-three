@@ -34,13 +34,14 @@ def create_app(config_name):
     migrate = Migrate(app, db)
 
     # Added by Jason
-    app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+    app.config['BABEL_DEFAULT_LOCALE'] = 'ja'
     babel = Babel(app)
 
     @babel.localeselector
     def get_locale():
         #returns best language from a given list
-        return request.accept_languages.best_match(['en', 'ja'])
+        # return request.accept_languages.best_match(['en', 'ja'])
+        return 'ja'
 
     # End Jason
 
