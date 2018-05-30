@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_babel import Babel, gettext
 # local imports
 from config import app_config
 
@@ -32,12 +33,18 @@ def create_app(config_name):
     login_manager.login_view = "auth.login"
     migrate = Migrate(app, db)
 
-    from app import models
+    # Added by Jason
+    app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+    babel = Babel(app)
 
-    # ADDED BY JASON 4/11/18
-    # import flask_whooshalchemy as wa
-    # wa.whoosh_index(app, models.Opportunity)
-    # END JASON
+    @babel.localeselector
+    def get_locale():
+        #returns best language from a given list
+        return request.accept_languages.best_match(['en', 'ja'])
+
+    # End Jason
+
+    from app import models
 
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
