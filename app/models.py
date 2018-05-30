@@ -228,6 +228,7 @@ class Employee(UserMixin, db.Model):
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     is_admin = db.Column(db.Boolean, default=False)
+    language = db.Column(db.String(10), default='en')
 
     @property
     def password(self):

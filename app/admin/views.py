@@ -1,4 +1,4 @@
-from flask import abort, flash, redirect, render_template, url_for, make_response, request, jsonify
+from flask import abort, flash, redirect, render_template, url_for, make_response, request, jsonify, session
 from flask_login import current_user, login_required
 import pdfkit
 
@@ -10,6 +10,19 @@ from ..models import *
 import random
 
 from sqlalchemy import or_
+
+
+@admin.route('/background_process/change_language/')
+def change_language():
+    if session.get('language') == 'en':
+        session['language'] = 'ja'
+        current_user.language = 'ja'
+    else:
+        session['language'] = 'en'
+        current_user.language = 'en'
+
+    db.session.commit()
+    return redirect(url_for('home.homepage'))
 
 
 def check_admin():

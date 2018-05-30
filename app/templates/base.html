@@ -36,8 +36,12 @@
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">{{ _('Dashboard') }}</a></li>
                     {% endif %}
+                    <li><a href="{{ url_for('admin.change_language') }}">{{ _('Language') }}</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
                     <li><a><i class="fa fa-user"></i>  {{ _('Hi') }}, {{ current_user.username }}!</a></li>
+                     {% if current_user.language == 'en' %}
+                     aasdfasdfasfdasf
+                     {% endif %}
                   {% else %}
                     <li><a href="{{ url_for('home.homepage') }}">{{ _('Home') }}</a></li>
                     <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>

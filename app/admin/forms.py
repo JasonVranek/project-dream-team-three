@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Optional
 from wtforms.fields.html5 import DateField
 # Import fixes issues parsing DateFields:
 import wtforms.ext.dateutil
+from app import gettext
 
 from ..models import *
 
@@ -13,18 +14,18 @@ class DepartmentForm(FlaskForm):
     """
     Form for admin to add or edit a department
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    name = StringField( gettext('Name'), validators=[DataRequired()])
+    description = StringField(gettext('Description'), validators=[DataRequired()])
+    submit = SubmitField(gettext('Submit'))
 
 
 class RoleForm(FlaskForm):
     """
     Form for admin to add or edit a role
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    name = StringField( gettext('Name'), validators=[DataRequired()])
+    description = StringField( gettext('Description'), validators=[DataRequired()])
+    submit = SubmitField( gettext('Submit'))
 
 
 class EmployeeAssignForm(FlaskForm):
@@ -35,33 +36,33 @@ class EmployeeAssignForm(FlaskForm):
                                   get_label="name")
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
-    submit = SubmitField('Submit')
+    submit = SubmitField( gettext('Submit'))
 
 
 class CustomerForm(FlaskForm):
     """
     Form for admin to add or edit a customer
     """
-    acc_code = StringField('Account Code', validators=[DataRequired()])
-    comp_name = StringField('Company Name', validators=[DataRequired()])
-    f_name = StringField('First Name', validators=[DataRequired()])
-    l_name = StringField('Last Name', validators=[DataRequired()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    email = StringField('Email Address', validators=[DataRequired()])
-    b_address = StringField('Billing Address')
-    city = StringField('City')
-    state_province = StringField('State or Province')
-    post_code = StringField('Postal Code')          #implicitly fill from city?
-    count_region = StringField('Country/Region')   #query from list of regions?
-    cont_title = StringField('Contact Title')
-    fax = StringField('Fax Number')
-    notes = StringField('Notes')
-    order = StringField('Order')
-    state = StringField('State')
-    status = StringField('Status')
-    rating = StringField('Rating')
+    acc_code = StringField(gettext('Account Code'), validators=[DataRequired()])
+    comp_name = StringField(gettext('Company Name'), validators=[DataRequired()])
+    f_name = StringField(gettext('First Name'), validators=[DataRequired()])
+    l_name = StringField(gettext('Last Name'), validators=[DataRequired()])
+    phone = StringField(gettext('Phone Number'), validators=[DataRequired()])
+    email = StringField(gettext('Email Address'), validators=[DataRequired()])
+    b_address = StringField(gettext('Billing Address'))
+    city = StringField(gettext('City'))
+    state_province = StringField(gettext('State or Province'))
+    post_code = StringField(gettext('Postal Code'))        #implicitly fill from city?
+    count_region = StringField(gettext('Country/Region'))   #query from list of regions?
+    cont_title = StringField(gettext('Contact Title'))
+    fax = StringField(gettext('Fax Number'))
+    notes = StringField(gettext('Notes'))
+    order = StringField(gettext('Order'))
+    state = StringField(gettext('State'))
+    status = StringField(gettext('Status'))
+    rating = StringField(gettext('Rating'))
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class ContactForm(FlaskForm):
@@ -70,43 +71,43 @@ class ContactForm(FlaskForm):
     """
     # acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
     #                         get_label="acc_code") 
-    acc_code = SelectField('Account Code', coerce=int)
-    f_name = StringField('First Name', validators=[DataRequired()])
-    l_name = StringField('Last Name', validators=[DataRequired()])
-    phone = StringField('Phone Number')
-    email = StringField('Email Address')
-    b_address = StringField('Billing Address')
-    city = StringField('City')
-    state_province = StringField('State or Province')
-    post_code = StringField('Postal Code')          
-    count_region = StringField('Country/Region')   
-    cont_title = StringField('Contact Title')
-    fax = StringField('Fax Number')
-    notes = StringField('Notes')
+    acc_code = SelectField(gettext('Account Code'), coerce=int)
+    f_name = StringField(gettext('First Name'), validators=[DataRequired()])
+    l_name = StringField(gettext('Last Name'), validators=[DataRequired()])
+    phone = StringField(gettext('Phone Number'))
+    email = StringField(gettext('Email Address'))
+    b_address = StringField(gettext('Billing Address'))
+    city = StringField(gettext('City'))
+    state_province = StringField(gettext('State or Province'))
+    post_code = StringField(gettext('Postal Code'))          
+    count_region = StringField(gettext('Country/Region'))
+    cont_title = StringField(gettext('Contact Title'))
+    fax = StringField(gettext('Fax Number'))
+    notes = StringField(gettext('Notes'))
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class ProductForm(FlaskForm):
     """
     Form for admin to add or edit a product
     """
-    p_number = StringField('Part Number', validators=[DataRequired()])                    
-    p_name = StringField('Product Name', validators=[DataRequired()])
-    unit_price = FloatField('Unit Price', validators=[DataRequired()])
-    p_note = StringField('Product Note to show')
-    cost_native = FloatField('Cost Native')
-    exchange_rate = FloatField('Exchange Rate used')
-    unit_cost = FloatField('Unit Cost', validators=[DataRequired()])
-    supplier = StringField('Supplier')
-    p_category = StringField('Product Category')
-    p_status = StringField('Product Status')
-    date_created = DateField('Date Created')  #date field?
-    person_created = QuerySelectField('Person Created', query_factory=lambda: Employee.query.all(),
+    p_number = StringField(gettext('Part Number'), validators=[DataRequired()])                    
+    p_name = StringField(gettext('Product Name'), validators=[DataRequired()])
+    unit_price = FloatField(gettext('Unit Price'), validators=[DataRequired()])
+    p_note = StringField(gettext('Product Note to show'))
+    cost_native = FloatField(gettext('Cost Native'))
+    exchange_rate = FloatField(gettext('Exchange Rate used'))
+    unit_cost = FloatField(gettext('Unit Cost'), validators=[DataRequired()])
+    supplier = StringField(gettext('Supplier'))
+    p_category = StringField(gettext('Product Category'))
+    p_status = StringField(gettext('Product Status'))
+    date_created = DateField(gettext('Date Created'))  #date field?
+    person_created = QuerySelectField(gettext('Person Created'), query_factory=lambda: Employee.query.all(),
                             get_label="username")
-    remarks = TextField('Remarks')
+    remarks = TextField(gettext('Remarks'))
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class QuotationForm(FlaskForm):
@@ -115,62 +116,62 @@ class QuotationForm(FlaskForm):
     """
     # acc_code = QuerySelectField('Account Code', query_factory=lambda: Customer.query.all(),
     #                         get_label="acc_code", id='acc_code')   
-    acc_code = SelectField('Account Code', id='acc_code', coerce=int)
-    contact = SelectField('Contact', id='contacts', coerce=int, validators=[Optional()])
-    q_num = IntegerField('Quotation Number', validators=[DataRequired()])
-    e_id = QuerySelectField('Employee', query_factory=lambda: Employee.query.all(),
+    acc_code = SelectField(gettext('Account Code'), id='acc_code', coerce=int)
+    contact = SelectField(gettext('Contact'), id='contacts', coerce=int, validators=[Optional()])
+    q_num = IntegerField(gettext('Quotation Number'), validators=[DataRequired()])
+    e_id = QuerySelectField(gettext('Employee'), query_factory=lambda: Employee.query.all(),
                             get_label="username")
-    date = DateField('Quotaton Date')
-    revision = StringField('Revision')
-    pay_terms = SelectField('Payment Terms', choices=[('None', ''),
+    date = DateField(gettext('Quotaton Date'))
+    revision = StringField(gettext('Revision'))
+    pay_terms = SelectField(gettext('Payment Terms'), choices=[('None', ''),
                                                     ('net15', 'Net 15'), 
                                                     ('net30', 'Net 30'), 
                                                     ('net45', 'Net 45'),
                                                     ('net60', 'Net60'),
                                                     ('prepaid', 'Prepaid T/T'),
                                                     ('lc', 'L/C')])
-    title = StringField('Title', id='title')
-    f_name = StringField('First Name', id='f_name')
-    l_name = StringField('Last Name', id='l_name')
-    address = StringField('Address', id='address')
-    city = StringField('City', id='city')
-    state = StringField('State', id='state')
-    country = StringField('Country', id='country')
-    postal = StringField('Zip', id='zip')
-    tel = StringField('TEL', id='tel')
-    s_sched = StringField('Ship Schedule (Weeks)')
-    s_term = SelectField('Shipment Term', choices=[('None', ''), ('Ex-Works', 'Ex-Works'), ('FOB: Origin', 'FOB: Origin'), ('CIF: Destination', 'CIF: Destination')])
-    q_title = StringField('Quotation Title')
-    q_note = TextField('Quotation Note')
+    title = StringField(gettext('Title'), id='title')
+    f_name = StringField(gettext('First Name'), id='f_name')
+    l_name = StringField(gettext('Last Name'), id='l_name')
+    address = StringField(gettext('Address'), id='address')
+    city = StringField(gettext('City'), id='city')
+    state = StringField(gettext('State'), id='state')
+    country = StringField(gettext('Country'), id='country')
+    postal = StringField(gettext('Zip'), id='zip')
+    tel = StringField(gettext('TEL'), id='tel')
+    s_sched = StringField(gettext('Ship Schedule (Weeks)'))
+    s_term = SelectField(gettext('Shipment Term'), choices=[('None', ''), ('Ex-Works', 'Ex-Works'), ('FOB: Origin', 'FOB: Origin'), ('CIF: Destination', 'CIF: Destination')])
+    q_title = StringField(gettext('Quotation Title'))
+    q_note = TextField(gettext('Quotation Note'))
     #q_amount = IntegerField('Quote Amount')
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class OpportunityForm(FlaskForm):
     """
     Form for admin to add or edit an opportunity
     """
-    q_num = QuerySelectField('Quotation Number', query_factory=lambda: Quotation.query.all(),
+    q_num = QuerySelectField(gettext('Quotation Number'), query_factory=lambda: Quotation.query.all(),
                             get_label="q_num")       
-    source_of_lead = StringField('Source of Lead')
-    sale_ref_fee = StringField('Sales referal Fee')
-    competitors = IntegerField('Competitors')
-    sales_stage = IntegerField('Sales Stage')
-    close_date = DateField('Close Date', validators=[DataRequired()])
-    probability = FloatField('Probability')
-    rev_category = StringField('Revenue Category')
-    proj_note = StringField('Project Note')
-    application = StringField('Application')
-    family = StringField('Family')
-    potential_money = FloatField('Potential $')
-    probable_money = FloatField('Probable $')
-    actual_money = FloatField('Actual $')
-    revenue = FloatField('Revenue $')
-    integrator = StringField('Integrator')
-    region = StringField('Region')
+    source_of_lead = StringField(gettext('Source of Lead'))
+    sale_ref_fee = StringField(gettext('Sales referal Fee'))
+    competitors = IntegerField(gettext('Competitors'))
+    sales_stage = IntegerField(gettext('Sales Stage'))
+    close_date = DateField(gettext('Close Date'), validators=[DataRequired()])
+    probability = FloatField(gettext('Probability'))
+    rev_category = StringField(gettext('Revenue Category'))
+    proj_note = StringField(gettext('Project Note'))
+    application = StringField(gettext('Application'))
+    family = StringField(gettext('Family'))
+    potential_money = FloatField(gettext('Potential $'))
+    probable_money = FloatField(gettext('Probable $'))
+    actual_money = FloatField(gettext('Actual $'))
+    revenue = FloatField(gettext('Revenue $'))
+    integrator = StringField(gettext('Integrator'))
+    region = StringField(gettext('Region'))
     
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class Quotation_DetailForm(FlaskForm):
@@ -179,24 +180,24 @@ class Quotation_DetailForm(FlaskForm):
     """
     #q_num = QuerySelectField('Quotation Number', query_factory=lambda: Quotation.query.all(),
     #                        get_label="q_num") 
-    q_num = SelectField('Quotation Number', coerce=int)    
-    p_num = SelectField('Product Number', coerce=int, id='product')           
+    q_num = SelectField(gettext('Quotation Number'), coerce=int)    
+    p_num = SelectField(gettext('Product Number'), coerce=int, id='product')           
     # p_num = QuerySelectField('Product Number', query_factory=lambda: Product.query.all(),
     #                         get_label="p_number", id='product')
-    p_name = StringField('Product Name', id='product_name')
-    quantity = FloatField('Quantity', validators=[DataRequired()])
-    discount = FloatField('Discount')#, validators=[DataRequired()])
-    unit_price = FloatField('Unit Price', id='unit_price')
-    q_price = FloatField('Quote Price', id='quote_price')#, validators=[DataRequired()])       
-    option = BooleanField('Optional')
+    p_name = StringField(gettext('Product Name'), id='product_name')
+    quantity = FloatField(gettext('Quantity'), validators=[DataRequired()])
+    discount = FloatField(gettext('Discount'))#, validators=[DataRequired()])
+    unit_price = FloatField(gettext('Unit Price'), id='unit_price')
+    q_price = FloatField(gettext('Quote Price'), id='quote_price')#, validators=[DataRequired()])       
+    option = BooleanField(gettext('Optional'))
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
 class SearchForm(FlaskForm):
-    search_string = StringField('Search')
+    search_string = StringField(gettext('Search'))
 
-    submit = SubmitField('Submit')
+    submit = SubmitField(gettext('Submit'))
 
 
     

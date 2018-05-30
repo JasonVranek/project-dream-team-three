@@ -1,7 +1,7 @@
 import os
 
 # third-party imports
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -39,8 +39,9 @@ def create_app(config_name):
 
     @babel.localeselector
     def get_locale():
-        #returns best language from a given list
-        return request.accept_languages.best_match(['en', 'ja'])
+        #returns best language from a given list if they don't have a set preference
+        #return request.accept_languages.best_match(['en', 'ja'])
+        return session.get('language', request.accept_languages.best_match(['en', 'ja']))
         # return 'ja'
 
     # End Jason
