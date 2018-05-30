@@ -1,6 +1,6 @@
 {% import "bootstrap/utils.html" as utils %}
 {% extends "base.html" %}
-{% block title %}Product{% endblock %}
+{% block title %}{{ _('Product') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -16,85 +16,85 @@
             <table class="table table-striped table-bordered">
               <tr>
                 <thead>
-                  <th width="20%"> Part Number </th>
+                  <th width="20%"> {{ _('Part Number') }} </th>
                   <td> {{ product.p_number }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Name </th>
+                  <th width="20%"> {{ _('Product Name') }} </th>
                   <td> {{ product.p_name }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Note </th>
+                  <th width="20%"> {{ _('Product Note') }} </th>
                   <td> {{ product.p_note }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Exchange Rate Used </th>
+                  <th width="20%"> {{ _('Exchange Rate Used') }} </th>
                   <td> {{ product.exchange_rate }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Unit Cost </th>
+                  <th width="20%"> {{ _('Unit Cost') }} </th>
                   <td> {{ product.unit_cost }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Supplier </th>
+                  <th width="20%"> {{ _('Supplier') }} </th>
                   <td> {{ product.supplier }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Category </th>
+                  <th width="20%"> {{ _('Product Category') }} </th>
                   <td> {{ product.p_category }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Status </th>
+                  <th width="20%"> {{ _('Product Status') }} </th>
                   <td> {{ product.p_status }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Date Created </th>
+                  <th width="20%"> {{ _('Date Created') }} </th>
                   <td> {{ product.date_created }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Person Created </th>
+                  <th width="20%"> {{ _('Person Created') }} </th>
                   <td> {{ product.person_created }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Remarks </th>
+                  <th width="20%"> {{ _('Remarks') }} </th>
                   <td> {{ product.remarks }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Japanese Unit Price </th>
+                  <th width="20%"> {{ _('Japanese Unit Price') }} </th>
                   <td> {{ product.japanese_unit_price }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Japanese Product Name </th>
+                  <th width="20%"> {{ _('Japanese Product Name') }} </th>
                   <td> {{ product.japanese_p_name }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Japanese Note to Show </th>
+                  <th width="20%"> {{ _('Japanese Note to Show') }} </th>
                   <td> {{ product.japanese_note }} </td>
                 </thead>
               </tr>
@@ -102,11 +102,11 @@
           <div style="text-align: center">
             <a href="{{ url_for('admin.edit_product', id=product.p_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-user-plus"></i>
-              Edit Product
+              {{ _('Edit Product') }}
             </a>
             <a href="{{ url_for('admin.delete_product', id=product.p_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
-              Delete Product
+              {{ _('Delete Product') }}
             </a>
         </div>
         {% endif %}

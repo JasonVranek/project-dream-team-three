@@ -1,7 +1,7 @@
 {% import "bootstrap/utils.html" as utils %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Customers{% endblock %}
+{% block title %}{{ _('Customers') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -10,25 +10,25 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Customers</h1>
+        <h1 style="text-align:center;">{{ _('Customers') }}</h1>
           <hr class="intro-divider">
           <div class="center">
             {{ wtf.quick_form(form) }}
             <div style="text-align: center;  padding: 10px">
               <a href="{{ url_for('admin.add_customer') }}" class="btn btn-default btn-lg">
                 <i class="fa fa-plus"></i>
-                Add Customer
+                {{ _('Add Customer') }}
               </a>
             </div>
             {% if customers %}
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Account Code </th>
-                  <th width="30%"> Name </th>
-                  <th width="30%"> Company Name </th>
-                  <th width="15%"> Email </th>
-                  <th width="15%"> Phone </th>
+                  <th width="15%"> {{ _('Account Code') }} </th>
+                  <th width="30%"> {{ _('Name') }} </th>
+                  <th width="30%"> {{ _('Company Name') }} </th>
+                  <th width="15%"> {{ _('Email') }} </th>
+                  <th width="15%"> {{ _('Phone') }} </th>
 
                 </tr>
               </thead>
@@ -42,23 +42,23 @@
                   <td> {{ customer.phone }} </td>
                   <td>
                     <a href="{{ url_for('admin.view_customer', id=customer.c_id) }}">
-                      <i class="fa fa-eye"></i> View
+                      <i class="fa fa-eye"></i> {{ _('View') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.edit_customer', id=customer.c_id) }}">
-                      <i class="fa fa-user-plus"></i> Edit
+                      <i class="fa fa-user-plus"></i> {{ _('Edit') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.add_contact', c_id=customer.c_id) }}">
                       <i class="fa fa-plus"></i>
-                      Add Contact
+                      {{ _('Add Contact') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.delete_customer', id=customer.c_id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                      <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
                   </td>
                 </tr>
@@ -70,7 +70,7 @@
         <div style="text-align: center;  padding: 10px">
           <a href="{{ url_for('admin.add_customer') }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Customer
+            {{ _('Add Customer') }}
           </a>
         </div>
       </div>

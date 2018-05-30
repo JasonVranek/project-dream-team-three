@@ -1,6 +1,6 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Edit Product{% endblock %}
+{% block title %}{{ _('Edit Product') }}{% endblock %}
 {% block body %}
 <div class="content-section">
  <div class="outer">
@@ -8,12 +8,12 @@
       <div class="inner">
         <div class="center">
             {% if add_product %}
-                <h1> Add a Product </h1>
+                <h1> {{ _('Add a Product') }} </h1>
             {% else %}
-                <h1> Edit a Product </h1>
+                <h1> {{ _('Edit a Product') }} </h1>
                 <br/>
                 <p>
-                    Select parameters to edit for: 
+                    {{ _('Select parameters to edit for') }}: 
                     <span style="color: #aec251;">
                         {{ product.p_id }} {{ product.p_number }} {{ product.p_name }}
                     </span>

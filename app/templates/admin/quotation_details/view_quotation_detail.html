@@ -1,6 +1,6 @@
 {% import "bootstrap/utils.html" as utils %}
 {% extends "base.html" %}
-{% block title %}Quotation Detail{% endblock %}
+{% block title %}{{ _('Quotation Detail') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -10,19 +10,19 @@
         {{ utils.flashed_messages() }}
         <br/>
         {% if quotation_detail %}
-        <h1 style="text-align:center;"> Detail #{{ quotation_detail.quote_detail_id }} for Quote #{{ quotation_detail.q_num }}</h1>
+        <h1 style="text-align:center;"> {{ _('Detail #') }}{{ quotation_detail.quote_detail_id }} {{ _('for Quote #') }}{{ quotation_detail.q_num }}</h1>
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">
               <tr>
                 <thead>
-                  <th width="20%"> Quotation Detail ID </th>
+                  <th width="20%"> {{ _('Quotation Detail ID') }} </th>
                   <td> {{ quotation_detail.quote_detail_id }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quote Number </th>
+                  <th width="20%"> {{ _('Quote Number') }} </th>
                   <td> 
                     <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
                       {{ quotation_detail.q_num }} 
@@ -33,7 +33,7 @@
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Number </th>
+                  <th width="20%"> {{ _('Product Number') }} </th>
                   <td> 
                     <a href="{{ url_for('admin.view_product', id=quotation_detail.p_id) }}">
                       {{ quotation_detail.p_num }}
@@ -43,31 +43,31 @@
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Product Name </th>
+                  <th width="20%"> {{ _('Product Name') }} </th>
                   <td> {{ quotation_detail.p_name }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quantity </th>
+                  <th width="20%"> {{ _('Quantity') }} </th>
                   <td> {{ quotation_detail.quantity }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Discount </th>
+                  <th width="20%"> {{ _('Discount') }} </th>
                   <td> {{ quotation_detail.discount }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quote Price </th>
+                  <th width="20%"> {{ _('Quote Price') }} </th>
                   <td> {{ quotation_detail.q_price }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Optional </th>
+                  <th width="20%"> {{ _('Optional') }} </th>
                   <td> {{ quotation_detail.option }} </td>
                 </thead>
               </tr>
@@ -76,15 +76,15 @@
           <div style="text-align: center">
             <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-user-plus"></i>
-              Edit Quotation Detail
+              {{ _('Edit Quotation Detail') }}
             </a>
             <a href="{{ url_for('admin.gen_pdf', id=quotation_detail.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-quora"></i>
-              View in Quotation PDF
+              {{ _('View in Quotation PDF') }}
             </a>
             <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
-              Delete Quotation Detail
+              {{ _('Delete Quotation Detail') }}
             </a>
 
         </div>

@@ -1,6 +1,6 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Edit Quotation Detail{% endblock %}
+{% block title %}{{ _('Edit Quotation Detail') }}{% endblock %}
 {% block body %}
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -49,14 +49,14 @@
       <div class="inner">
         <div class="center">
             {% if add_quotation_detail %}
-                <h1> Add a Quotation Detail</h1>
+                <h1> {{ _('Add a Quotation Detail') }}</h1>
             {% else %}
-                <h1> Edit a Quotation Detail</h1>
+                <h1> {{ _('Edit a Quotation Detail') }}</h1>
                 <br/>
                 <p>
-                    Select parameters to edit for: 
+                    {{ _('Select parameters to edit for') }}: 
                     <span style="color: #aec251;">
-                        Quote Num: {{ quotation_detail.q_num }}, Product Num: {{ quotation_detail.p_num }}
+                        {{ _('Quote Num') }}: {{ quotation_detail.q_num }}, {{ _('Product Num') }}: {{ quotation_detail.p_num }}
                     </span>
                 </p>
                 <br/>

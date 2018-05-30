@@ -27,21 +27,21 @@
                       <!-- <li><a href="{{ url_for('admin.list_departments', page_num=1) }}">Departments</a></li> -->
                       <!-- <li><a href="{{ url_for('admin.list_roles', page_num=1) }}">Roles</a></li> -->
                       <!-- <li><a href="{{ url_for('admin.list_employees', page_num=1) }}">Employees</a></li> -->
-                      <li><a href="{{ url_for('admin.list_customers', page_num=1) }}">Customers</a></li>
-                      <li><a href="{{ url_for('admin.list_contacts', page_num=1) }}">Contacts</a></li>
-                      <li><a href="{{ url_for('admin.list_products', page_num=1) }}">Products</a></li>
-                      <li><a href="{{ url_for('admin.list_quotations', page_num=1) }}">Quotes</a></li>
-                      <li><a href="{{ url_for('admin.list_opportunities', page_num=1) }}">Opportunities</a></li>
-                      <li><a href="{{ url_for('admin.list_quotation_details', page_num=1) }}">Quote Details</a></li>
+                      <li><a href="{{ url_for('admin.list_customers', page_num=1) }}">{{ _('Customers') }}</a></li>
+                      <li><a href="{{ url_for('admin.list_contacts', page_num=1) }}">{{ _('Contacts') }}</a></li>
+                      <li><a href="{{ url_for('admin.list_products', page_num=1) }}">{{ _('Products') }}</a></li>
+                      <li><a href="{{ url_for('admin.list_quotations', page_num=1) }}">{{ _('Quotes') }}</a></li>
+                      <li><a href="{{ url_for('admin.list_opportunities', page_num=1) }}">{{ _('Opportunities') }}</a></li>
+                      <li><a href="{{ url_for('admin.list_quotation_details', page_num=1) }}">{{ _('Quote Details') }}</a></li>
                     {% else %}
-                      <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+                      <li><a href="{{ url_for('home.dashboard') }}">{{ _('Dashboard') }}</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                    <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
+                    <li><a><i class="fa fa-user"></i>  {{ _('Hi') }}, {{ current_user.username }}!</a></li>
                   {% else %}
-                    <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
-                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    <li><a href="{{ url_for('home.homepage') }}">{{ _('Home') }}</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
                   {% endif %}
               </ul>
           </div>

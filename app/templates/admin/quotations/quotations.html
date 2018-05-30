@@ -1,7 +1,7 @@
 {% import "bootstrap/utils.html" as utils %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Quotations{% endblock %}
+{% block title %}{{ _('Quotations') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -10,26 +10,26 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Quotations</h1>
+        <h1 style="text-align:center;">{{ _('Quotations') }}</h1>
           <hr class="intro-divider">
           <div class="center">
             {{ wtf.quick_form(form) }}
             <div style="text-align: center;  padding: 10px">
               <a href="{{ url_for('admin.add_quotation') }}" class="btn btn-default btn-lg">
                 <i class="fa fa-plus"></i>
-                Add Quotation
+                {{ _('Add Quotation') }}
               </a>
             </div>
             {% if quotations %}
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Quote Number </th>
-                  <th width="15%"> Customer Code </th>
-                  <th width="15%"> Contact </th>
-                  <th width="15%"> Employee ID </th>
-                  <th width="15%"> Quote Date </th>
-                  <th width="15%"> Quote Amount </th>
+                  <th width="15%"> {{ _('Quote Number') }} </th>
+                  <th width="15%"> {{ _('Customer Code') }} </th>
+                  <th width="15%"> {{ _('Contact') }} </th>
+                  <th width="15%"> {{ _('Employee ID') }} </th>
+                  <th width="15%"> {{ _('Quote Date') }} </th>
+                  <th width="15%"> {{ _('Quote Amount') }} </th>
                 </tr>
               </thead>
               <tbody>
@@ -53,33 +53,33 @@
                   <td> {{ quotation.q_amount }} </td>
                   <td>
                     <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-eye"></i> View
+                      <i class="fa fa-eye"></i> {{ _('View') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-user-plus"></i> Edit
+                      <i class="fa fa-user-plus"></i> {{ _('Edit') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.add_quotation_detail', q_id=quotation.q_id) }}">
                       <i class="fa fa-plus"></i>
-                      Add Detail
+                      {{ _('Add Quote Detail') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}">
-                      <i class="fa fa-quora"></i> PDF
+                      <i class="fa fa-quora"></i> {{ _('PDF') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin._copy_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-copy"></i> Copy
+                      <i class="fa fa-copy"></i> {{ _('Copy') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                      <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
                   </td>
                 </tr>
@@ -91,7 +91,7 @@
         <div style="text-align: center;  padding: 10px">
           <a href="{{ url_for('admin.add_quotation') }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Quotation
+            {{ _('Add Quotation') }}
           </a>
         </div>
       </div>

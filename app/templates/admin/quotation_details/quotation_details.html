@@ -1,7 +1,7 @@
 {% import "bootstrap/utils.html" as utils %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
-{% block title %}Quotation Details{% endblock %}
+{% block title %}{{ _('Quotation Details') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -10,27 +10,27 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        <h1 style="text-align:center;">Quotation Details</h1>
+        <h1 style="text-align:center;">{{ _('Quotation Details') }}</h1>
           <hr class="intro-divider">
           <div class="center">
             {{ wtf.quick_form(form) }}
             <div style="text-align: center; padding: 10px">
               <a href="{{ url_for('admin.add_quotation_detail', q_id=0) }}" class="btn btn-default btn-lg">
                 <i class="fa fa-plus"></i>
-                Add Quotation Detail
+                {{ _('Add Quotation Detail') }}
               </a>
             </div>
             {% if quotation_details %}
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="15%"> Quote Detail ID </th>
-                  <th width="15%"> Quotation Number </th>
-                  <th width="15%"> Product Number </th>
-                  <th width="15%"> Product Name </th>
-                  <th width="15%"> Quantity </th>
-                  <th width="15%"> Discount </th>
-                  <th width="15%"> Quote Price </th>
+                  <th width="15%"> {{ _('Quote Detail ID') }} </th>
+                  <th width="15%"> {{ _('Quotation Number') }} </th>
+                  <th width="15%"> {{ _('Product Number') }} </th>
+                  <th width="15%"> {{ _('Product Name') }} </th>
+                  <th width="15%"> {{ _('Quantity') }} </th>
+                  <th width="15%"> {{ _('Discount') }} </th>
+                  <th width="15%"> {{ _('Quote Price') }} </th>
                 </tr>
               </thead>
               <tbody>
@@ -58,29 +58,29 @@
                   {% if quotation_detail.option %}
                   <td>
                     <a href="{{ url_for('admin.optional_quotation_detail', id=quotation_detail.quote_detail_id, option=0) }}">
-                      <i class="fa fa-plus"></i> Make Required
+                      <i class="fa fa-plus"></i> {{ _('Make Required') }}
                     </a>
                   </td>
                   {% else %}
                   <td>
                     <a href="{{ url_for('admin.optional_quotation_detail', id=quotation_detail.quote_detail_id, option=1) }}">
-                      <i class="fa fa-minus"></i> Make Optional
+                      <i class="fa fa-minus"></i> {{ _('Make Optional') }}
                     </a>
                   </td>
                   {% endif %}
                   <td>
                     <a href="{{ url_for('admin.view_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-eye"></i> View
+                      <i class="fa fa-eye"></i> {{ _('View') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-user-plus"></i> Edit
+                      <i class="fa fa-user-plus"></i> {{ _('Edit') }}
                     </a>
                   </td>
                   <td>
                     <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                      <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
                   </td>
                 </tr>
@@ -92,7 +92,7 @@
         <div style="text-align: center; padding: 10px">
           <a href="{{ url_for('admin.add_quotation_detail', q_id=0) }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Quotation Detail
+            {{ _('Add Quotation Detail') }}
           </a>
         </div>
       </div>

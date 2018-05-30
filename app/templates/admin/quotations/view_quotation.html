@@ -1,6 +1,6 @@
 {% import "bootstrap/utils.html" as utils %}
 {% extends "base.html" %}
-{% block title %}Quotation{% endblock %}
+{% block title %}{{ _('Quotation') }}{% endblock %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -10,27 +10,27 @@
         {{ utils.flashed_messages() }}
         <br/>
         {% if quotation %}
-        <h1 style="text-align:center;"> Quotation #{{ quotation.q_num }} </h1>
+        <h1 style="text-align:center;"> {{ _('Quotation #') }}{{ quotation.q_num }} </h1>
         <div style="text-align: center">
             <a href="{{ url_for('admin.add_quotation_detail', q_id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-plus"></i>
-              Add Quote Detail
+              {{ _('Add Quote Detail') }}
             </a>
             <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-quora"></i>
-              View PDF
+              {{ _('View PDF') }}
             </a>
             <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-user-plus"></i>
-              Edit Quotation
+              {{ _('Edit Quotation') }}
             </a>
             <a href="{{ url_for('admin._copy_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-copy"></i>
-              Copy Quotation
+              {{ _('Copy Quotation') }}
             </a>
             <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}" class="btn btn-default btn-lg">
               <i class="fa fa-trash"></i>
-              Delete Quotation
+              {{ _('Delete Quotation') }}
             </a>
         </div>
         <hr class="intro-divider">
@@ -40,13 +40,13 @@
             <table class="table table-striped table-bordered">
               <tr>
                 <thead>
-                  <th width="20%"> Quote Number </th>
+                  <th width="20%"> {{ _('Quote Number') }} </th>
                   <td> {{ quotation.q_num }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Customer Code </th>
+                  <th width="20%"> {{ _('Customer Code') }} </th>
                   <td> 
                     <a href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">
                       {{ quotation.acc_code }}
@@ -56,7 +56,7 @@
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Contact </th>
+                  <th width="20%"> {{ _('Contact') }} </th>
                   <td> 
                     {% if quotation.contact_id %}
                     <a href="{{ url_for('admin.view_contact', id=quotation.contact_id) }}">
@@ -68,109 +68,109 @@
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Employee ID </th>
+                  <th width="20%"> {{ _('Employee ID') }} </th>
                   <td> {{ quotation.e_id }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Date </th>
+                  <th width="20%"> {{ _('Date') }} </th>
                   <td> {{ quotation.date }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Revision </th>
+                  <th width="20%"> {{ _('Revision') }} </th>
                   <td> {{ quotation.revision }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Payment Terms </th>
+                  <th width="20%"> {{ _('Payment Terms') }} </th>
                   <td> {{ quotation.pay_terms }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Title </th>
+                  <th width="20%"> {{ _('Title') }} </th>
                   <td> {{ quotation.title }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> First Name </th>
+                  <th width="20%"> {{ _('First Name') }} </th>
                   <td> {{ quotation.f_name }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Last Name </th>
+                  <th width="20%"> {{ _('Last Name') }} </th>
                   <td> {{ quotation.l_name }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Address </th>
+                  <th width="20%"> {{ _('Address') }} </th>
                   <td> {{ quotation.address }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> City </th>
+                  <th width="20%"> {{ _('City') }} </th>
                   <td> {{ quotation.city }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> State </th>
+                  <th width="20%"> {{ _('State') }} </th>
                   <td> {{ quotation.state }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Country </th>
+                  <th width="20%"> {{ _('Country') }} </th>
                   <td> {{ quotation.country }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Postal Code </th>
+                  <th width="20%"> {{ _('Postal Code') }} </th>
                   <td> {{ quotation.postal }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Tel </th>
+                  <th width="20%"> {{ _('Tel') }} </th>
                   <td> {{ quotation.tel }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Ship Schedule </th>
+                  <th width="20%"> {{ _('Ship Schedule') }}</th>
                   <td> {{ quotation.s_sched }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Shipment Term </th>
+                  <th width="20%"> {{ _('Shipment Term') }} </th>
                   <td> {{ quotation.s_term }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quotation Title </th>
+                  <th width="20%"> {{ _('Quotation Title') }} </th>
                   <td> {{ quotation.q_title }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quotation Note </th>
+                  <th width="20%"> {{ _('Quotation Note') }} </th>
                   <td> {{ quotation.q_note }} </td>
                 </thead>
               </tr>
               <tr>
                 <thead>
-                  <th width="20%"> Quotation Amount </th>
+                  <th width="20%"> {{ _('Quotation Amount') }} </th>
                   <td> {{ quotation.q_amount }} </td>
                 </thead>
               </tr>
@@ -184,13 +184,13 @@
               <table class="table table-striped table-bordered">
                 <tr>
                   <thead>
-                    <th width="20%"> Quotation Detail ID </th>
+                    <th width="20%"> {{ _('Quotation Detail ID') }} </th>
                     <td> {{ quotation_detail.quote_detail_id }} </td>
                   </thead>
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Quote Number </th>
+                    <th width="20%"> {{ _('Quote Number') }} </th>
                     <td> 
                       <a href="{{ url_for('admin.view_quotation', id=quotation_detail.q_id) }}">
                         {{ quotation_detail.q_num }} 
@@ -201,7 +201,7 @@
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Product Number </th>
+                    <th width="20%"> {{ _('Product Number') }} </th>
                     <td> 
                       <a href="{{ url_for('admin.view_product', id=quotation_detail.p_id) }}">
                         {{ quotation_detail.p_num }}
@@ -211,48 +211,48 @@
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Product Name </th>
+                    <th width="20%"> {{ _('Product Name') }} </th>
                     <td> {{ quotation_detail.p_name }} </td>
                   </thead>
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Quantity </th>
+                    <th width="20%"> {{ _('Quantity') }} </th>
                     <td> {{ quotation_detail.quantity }} </td>
                   </thead>
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Discount </th>
+                    <th width="20%"> {{ _('Discount') }} </th>
                     <td> {{ quotation_detail.discount }} </td>
                   </thead>
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Quote Price </th>
+                    <th width="20%"> {{ _('Quote Price') }} </th>
                     <td> {{ quotation_detail.q_price }} </td>
                   </thead>
                 </tr>
                 <tr>
                   <thead>
-                    <th width="20%"> Option </th>
+                    <th width="20%"> {{ _('Option') }} </th>
                     <td> {{ quotation_detail.option }} </td>
                   </thead>
                 </tr>
                  <tr>
                   <thead>
-                    <th width="20%"> Actions </th>
+                    <th width="20%"> {{ _('Actions') }} </th>
                     <td>
                     <a href="{{ url_for('admin.view_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-eye"></i> View,
+                      <i class="fa fa-eye"></i> {{ _('View') }},
                     </a>
                     &emsp;
                     <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-user-plus"></i> Edit,
+                      <i class="fa fa-user-plus"></i> {{ _('Edit') }},
                     </a>
                     &emsp;
                     <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-trash"></i> Delete
+                      <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
                   </td>
                   </thead>
