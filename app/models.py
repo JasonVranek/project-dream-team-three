@@ -104,6 +104,7 @@ class Quotation(UserMixin, db.Model):
     q_title = db.Column('Quotation title', db.String(50))
     q_note = db.Column('Quotation Note', db.String(50))
     q_amount = db.Column('Quote Amount', db.Integer)
+    locked = db.Column('Locked', db.Boolean, default=False)
 
     opportunities = db.relationship('Opportunity', backref='quotation',
                                 lazy='dynamic')

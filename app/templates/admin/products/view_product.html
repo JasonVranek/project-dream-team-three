@@ -10,7 +10,13 @@
         {{ utils.flashed_messages() }}
         <br/>
         {% if product %}
-        <h1 style="text-align:center;"> {{ product.p_name }} : {{ product.p_number }} </h1>
+        <h1 style="text-align:center;"> 
+          {% if current_user.language == 'ja' %}
+            {{ product.japanese_p_name }} : {{ product.p_number }} 
+          {% else %}
+            {{ product.p_name }} : {{ product.p_number }} 
+          {% endif %}
+        </h1>
           <hr class="intro-divider">
           <div class="center">
             <table class="table table-striped table-bordered">

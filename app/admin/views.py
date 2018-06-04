@@ -867,6 +867,18 @@ def delete_product(id):
 # Quotation Views
 
 
+@admin.route('/quotations/toggle/<int:id>/<int:locked>', methods=['GET', 'POST'])
+@login_required
+def lock_quotation(id, locked):
+    # Modify the locked parameter of the quotation to boolean value: locked
+    quotation = Quotation.query.get_or_404(id)
+    quotation.locked = bool(locked)
+    db.session.commit()
+
+    # redirect to quotation_details page
+    return redirect(url_for('admin.list_quotations', page_num=1))
+
+
 @admin.route('/quotations/copy/<int:id>', methods=['GET'])
 @login_required
 def _copy_quotation(id):
