@@ -1595,12 +1595,18 @@ def _get_unit_price():
     product = Product.query.filter_by(p_number=p_num).first()
     print(p_num, product.unit_price, product.p_name)
     try:
-        price = product.unit_price
-        name = product.p_name
+        if current_user.language == 'ja':
+            price = product.japanese_unit_price
+            name = product.japanese_p_name
+            currency = 'YEN'
+        else:
+            price = product.unit_price
+            name = product.p_name
+            currency = 'USD'
     except Exception as e:
         price = 0
 
-    result = {'price': price, 'name': name}
+    result = {'price': price, 'name': name, 'currency': currency}
     return jsonify(result)
 
 
