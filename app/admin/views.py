@@ -140,6 +140,8 @@ def view_customer(id):
     check_admin()
 
     customer = Customer.query.filter_by(c_id=id).first()
+    # acc_code = customer.acc_code
+    # contacts = Contact.query.filter_by(acc_code=acc_code).all()
     contacts = Contact.query.filter_by(c_id=id).all()
 
     return render_template('admin/customers/view_customer.html', action="View",
