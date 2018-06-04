@@ -1,18 +1,18 @@
 <tr>
     <td> 
-        <a style="text-decoration:none" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
+        <a style="text-decoration:none; font-size: small" href="{{ url_for('admin.view_quotation_detail', id=detail.quote_detail_id) }}">
         {{ loop_index }} 
     </td>
-    <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+    <td> <a style="text-decoration:none; font-size: small" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
 
         {{ detail.product.p_name }}
     </td>
-    <td> <a style="text-decoration:none" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
+    <td> <a style="text-decoration:none; font-size: small" href="{{ url_for('admin.view_product', id=detail.p_id) }}">
 
         {{ detail.product.p_number }}
     </td>
-    <td> <input type="text" style="width: 80px" id='price{{loop_index}}{{detail.option}}' value='{{ detail.q_price }}'> </td>
-    <td> <input type="text" style="width: 80px" id='quantity{{loop_index}}{{detail.option}}' value='{{ detail.quantity }}'> </td>
-    <td> <input type="text" style="width: 80px" id='discount{{loop_index}}{{detail.option}}' value='{{ 100 * detail.discount }}%'> </td>
+    <td> <input type="text" style="width: 60px" id='price{{loop_index}}{{detail.option}}' value='{{ detail.q_price }}'> </td>
+    <td> <input type="text" style="width: 50px" id='quantity{{loop_index}}{{detail.option}}' value='{{ detail.quantity }}'> </td>
+    <td> <input type="text" style="width: 50px" id='discount{{loop_index}}{{detail.option}}' value='{{ 100 * detail.discount }}%'> </td>
     <td> <input type="text" style="width: 80px"  id='total{{loop_index}}{{detail.option}}' value='{{ detail.q_price * detail.quantity * (1-detail.discount)}}''> </td>
 </tr>

@@ -140,9 +140,10 @@ def view_customer(id):
     check_admin()
 
     customer = Customer.query.filter_by(c_id=id).first()
+    contacts = Contact.query.filter_by(c_id=id).all()
 
     return render_template('admin/customers/view_customer.html', action="View",
-                           customer=customer, title="View Customer")
+                           customer=customer, contacts=contacts, title="View Customer")
 
 
 @admin.route('/customers/<int:page_num>/', methods=['GET', 'POST'])

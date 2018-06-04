@@ -70,7 +70,7 @@
                 <table id='details-table'> 
                     <tr> 
                         <div class="tabletitle"> 
-                            <a style="text-decoration:none" href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">Quotation Title: {{quotation.q_title}} </a>
+                            <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}" style="text-decoration:none">Quotation Title: {{quotation.q_title}} </a>
                         </div>    
                     </tr>
                     <tr>
@@ -122,6 +122,7 @@
               <li id='subtotal'>subtotal: ${{subtotal}}</li>
               <li id='discount_total'>discount: (${{subtotal - total}})</li>
               <li><h3 id='total_total'>TOTAL (USD): ${{total}} </h3></li>
+              <li class="small" id="optional_total">Optional items with discount (USD): </li>
               <li class="small">* plus appropriate tax</li>
             </ul> 
         </div>
