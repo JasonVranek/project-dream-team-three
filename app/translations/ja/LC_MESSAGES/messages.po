@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-05-30 15:42-0700\n"
+"POT-Creation-Date: 2018-06-04 10:26-0700\n"
 "PO-Revision-Date: 2018-05-30 10:53-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -368,7 +368,7 @@ msgstr "オプション"
 msgid "Search"
 msgstr "サーチ"
 
-#: app/templates/base.html:20 app/templates/base.html:55
+#: app/templates/base.html:20 app/templates/base.html:56
 msgid "Home"
 msgstr "ホーム"
 
@@ -411,16 +411,11 @@ msgstr "ログアウト"
 msgid "Hi"
 msgstr "こんにちは"
 
-#: app/templates/base.html:43 app/templates/base.html:46
-#: app/templates/base.html:51
-msgid "Language"
-msgstr "言語"
-
-#: app/templates/base.html:56
+#: app/templates/base.html:57
 msgid "Register"
 msgstr "登録"
 
-#: app/templates/base.html:57
+#: app/templates/base.html:58
 msgid "Login"
 msgstr "ログイン"
 
@@ -446,8 +441,8 @@ msgid "Select parameters to edit for"
 msgstr "編集する箇所を選んで入力"
 
 #: app/templates/admin/contacts/contacts.html:20
-#: app/templates/admin/contacts/contacts.html:69
-#: app/templates/admin/customers/customers.html:56
+#: app/templates/admin/contacts/contacts.html:70
+#: app/templates/admin/customers/customers.html:57
 #: app/templates/admin/customers/view_customer.html:128
 msgid "Add Contact"
 msgstr "取引担当者を追加"
@@ -466,29 +461,29 @@ msgstr "Email"
 msgid "Phone"
 msgstr "電話"
 
-#: app/templates/admin/contacts/contacts.html:47
-#: app/templates/admin/customers/customers.html:45
-#: app/templates/admin/products/products.html:51
-#: app/templates/admin/quotation_details/quotation_details.html:73
-#: app/templates/admin/quotations/quotations.html:56
+#: app/templates/admin/contacts/contacts.html:48
+#: app/templates/admin/customers/customers.html:46
+#: app/templates/admin/products/products.html:52
+#: app/templates/admin/quotation_details/quotation_details.html:74
+#: app/templates/admin/quotations/quotations.html:57
 #: app/templates/admin/quotations/view_quotation.html:247
 msgid "View"
 msgstr "プレビュー"
 
-#: app/templates/admin/contacts/contacts.html:52
-#: app/templates/admin/customers/customers.html:50
-#: app/templates/admin/products/products.html:56
-#: app/templates/admin/quotation_details/quotation_details.html:78
-#: app/templates/admin/quotations/quotations.html:61
+#: app/templates/admin/contacts/contacts.html:53
+#: app/templates/admin/customers/customers.html:51
+#: app/templates/admin/products/products.html:57
+#: app/templates/admin/quotation_details/quotation_details.html:79
+#: app/templates/admin/quotations/quotations.html:62
 #: app/templates/admin/quotations/view_quotation.html:251
 msgid "Edit"
 msgstr "編集"
 
-#: app/templates/admin/contacts/contacts.html:57
-#: app/templates/admin/customers/customers.html:61
-#: app/templates/admin/products/products.html:61
-#: app/templates/admin/quotation_details/quotation_details.html:83
-#: app/templates/admin/quotations/quotations.html:82
+#: app/templates/admin/contacts/contacts.html:58
+#: app/templates/admin/customers/customers.html:62
+#: app/templates/admin/products/products.html:62
+#: app/templates/admin/quotation_details/quotation_details.html:84
+#: app/templates/admin/quotations/quotations.html:83
 #: app/templates/admin/quotations/view_quotation.html:255
 msgid "Delete"
 msgstr "削除"
@@ -516,7 +511,7 @@ msgid "Edit a Customer"
 msgstr "顧客を編集"
 
 #: app/templates/admin/customers/customers.html:20
-#: app/templates/admin/customers/customers.html:73
+#: app/templates/admin/customers/customers.html:74
 msgid "Add Customer"
 msgstr "顧客を追加"
 
@@ -542,7 +537,7 @@ msgid "Edit a Product"
 msgstr "商品を編集"
 
 #: app/templates/admin/products/products.html:20
-#: app/templates/admin/products/products.html:73
+#: app/templates/admin/products/products.html:74
 msgid "Add Product"
 msgstr "商品を追加"
 
@@ -605,7 +600,7 @@ msgid "Quotation Details"
 msgstr "見積詳細"
 
 #: app/templates/admin/quotation_details/quotation_details.html:20
-#: app/templates/admin/quotation_details/quotation_details.html:95
+#: app/templates/admin/quotation_details/quotation_details.html:96
 msgid "Add Quotation Detail"
 msgstr "見積詳細を追加"
 
@@ -613,11 +608,11 @@ msgstr "見積詳細を追加"
 msgid "Quote Detail ID"
 msgstr "見積詳細ID"
 
-#: app/templates/admin/quotation_details/quotation_details.html:61
+#: app/templates/admin/quotation_details/quotation_details.html:62
 msgid "Make Required"
 msgstr "標準装備を追加"
 
-#: app/templates/admin/quotation_details/quotation_details.html:67
+#: app/templates/admin/quotation_details/quotation_details.html:68
 msgid "Make Optional"
 msgstr "オプションを追加"
 
@@ -672,7 +667,7 @@ msgid "Quotations"
 msgstr "見積り"
 
 #: app/templates/admin/quotations/quotations.html:20
-#: app/templates/admin/quotations/quotations.html:94
+#: app/templates/admin/quotations/quotations.html:95
 msgid "Add Quotation"
 msgstr "見積を追加"
 
@@ -694,16 +689,16 @@ msgstr "見積作成日"
 msgid "Quote Amount"
 msgstr "見積合計額"
 
-#: app/templates/admin/quotations/quotations.html:67
+#: app/templates/admin/quotations/quotations.html:68
 #: app/templates/admin/quotations/view_quotation.html:17
 msgid "Add Quote Detail"
 msgstr "見積詳細を追加"
 
-#: app/templates/admin/quotations/quotations.html:72
+#: app/templates/admin/quotations/quotations.html:73
 msgid "PDF"
 msgstr "PDF"
 
-#: app/templates/admin/quotations/quotations.html:77
+#: app/templates/admin/quotations/quotations.html:78
 msgid "Copy"
 msgstr "コピー"
 
@@ -754,4 +749,7 @@ msgstr "アクション"
 #: app/templates/home/index.html:10
 msgid "Quotation Web Application"
 msgstr "Quotation Web Application"
+
+#~ msgid "Language"
+#~ msgstr "言語"
 
