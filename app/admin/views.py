@@ -159,7 +159,7 @@ def list_customers(page_num):
     # customers = Customer.query.all()
     # customers = Customer.query.paginate(per_page=5, page=page_num, error_out=True)
 
-    customers = Customer.query.all()
+    customers = Customer.query.order_by(Customer.acc_code).all()
     form = SearchForm()
     if form.validate_on_submit():
         customers = Customer.query.filter(or_(Customer.acc_code.like("%" + form.search_string.data + "%"), 
@@ -428,7 +428,7 @@ def list_contacts(page_num):
     check_admin()
 
     # contacts = Contact.query.paginate(per_page=5, page=page_num, error_out=True)
-    contacts = Contact.query.all()
+    contacts = Contact.query.order_by(Contact.acc_code).all()
     form = SearchForm()
     if form.validate_on_submit():
         contacts = Contact.query.filter(or_(Contact.acc_code.like("%" + form.search_string.data + "%"), 
@@ -732,9 +732,7 @@ def list_products(page_num):
     """
     check_admin()
 
-    # products = Product.query.paginate(per_page=20, page=page_num, error_out=True)
-    # products = products.filter(Product.p_number.like('%EX002%'))
-    products = Product.query.all()
+    products = Product.query.order_by(Product.p_id).all()
     form = SearchForm()
     if form.validate_on_submit():
         products = Product.query.filter(or_(Product.p_number.like("%" + form.search_string.data + "%"), 
@@ -1060,7 +1058,7 @@ def list_quotations(page_num):
     # quotations = Quotation.query.all()
     # quotations = Quotation.query.paginate(per_page=5, page=page_num, error_out=True)
 
-    quotations = Quotation.query.all()
+    quotations = Quotation.query.order_by(Quotation.q_num).all()
     form = SearchForm()
     if form.validate_on_submit():
         quotations = Quotation.query.filter(or_(Quotation.acc_code.like("%" + form.search_string.data + "%"), 
@@ -1306,7 +1304,7 @@ def list_opportunities(page_num):
 
     # opportunities = Opportunity.query.all()
     # opportunities = Opportunity.query.paginate(per_page=5, page=page_num, error_out=True)
-    opportunities = Opportunity.query.all()
+    opportunities = Opportunity.query.order_by(Opportunity.q_num).all()
     form = SearchForm()
     if form.validate_on_submit():
         opportunities = Opportunity.query.filter(or_(Opportunity.q_num.like("%" + form.search_string.data + "%"), 
@@ -1489,7 +1487,7 @@ def list_quotation_details(page_num):
 
     # quotation_details = Quotation_Detail.query.all()
     # quotation_details = Quotation_Detail.query.paginate(per_page=5, page=page_num, error_out=True)
-    quotation_details = Quotation_Detail.query.all()
+    quotation_details = Quotation_Detail.query.order_by(Quotation_Detail.q_num).all()
     form = SearchForm()
     if form.validate_on_submit():
         quotation_details = Quotation_Detail.query.filter(or_(Quotation_Detail.q_num.like("%" + form.search_string.data + "%"), 
