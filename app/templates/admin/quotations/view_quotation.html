@@ -264,16 +264,18 @@
                     <th width="20%"> {{ _('Actions') }} </th>
                     <td>
                     <a href="{{ url_for('admin.view_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-eye"></i> {{ _('View') }},
+                      <i class="fa fa-eye"></i> {{ _('View') }}
                     </a>
+                    {% if not quotation.locked %}
                     &emsp;
                     <a href="{{ url_for('admin.edit_quotation_detail', id=quotation_detail.quote_detail_id) }}">
-                      <i class="fa fa-user-plus"></i> {{ _('Edit') }},
+                      <i class="fa fa-user-plus"></i> {{ _('Edit') }}
                     </a>
                     &emsp;
                     <a href="{{ url_for('admin.delete_quotation_detail', id=quotation_detail.quote_detail_id) }}">
                       <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
+                    {% endif %}
                   </td>
                   </thead>
                 </tr>

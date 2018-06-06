@@ -27,7 +27,7 @@
                   <th width="15%"> {{ _('Quote Number') }} </th>
                   <th width="15%"> {{ _('Customer Code') }} </th>
                   <th width="15%"> {{ _('Contact') }} </th>
-                  <th width="15%"> {{ _('Employee ID') }} </th>
+                  <th width="15%"> {{ _('Employee Created') }} </th>
                   <th width="15%"> {{ _('Quote Date') }} </th>
                   <th width="15%"> {{ _('Quote Amount') }} </th>
                   <th width="15%"> {{ _('Revision') }} </th>
@@ -66,13 +66,13 @@
                   {% if quotation.locked %}
                   <td>
                     <a href="{{ url_for('admin._revise_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-user-plus"></i> {{ _('Revise') }}             <!-- left off here 6/4 -> add revise view func -->
+                      <i class="fa fa-edit"></i> {{ _('Revise') }}             <!-- left off here 6/4 -> add revise view func -->
                     </a>
                   </td>
                   {% else %}
                     <td>
                     <a href="{{ url_for('admin.edit_quotation', id=quotation.q_id) }}">
-                      <i class="fa fa-user-plus"></i> {{ _('Edit') }}
+                      <i class="fa fa-edit"></i> {{ _('Edit') }}
                     </a>
                   </td>
                   {% endif %}

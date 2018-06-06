@@ -924,7 +924,9 @@ def _revise_quotation(id):
         flash('You have successfully added a new quotation.')
     except:
         # in case Quotation already exists
-        flash('Error: Quotation already exists.')
+        flash('Error: Quotation Revision number: ' + new_q_num +' already exists.')
+        return redirect(url_for('admin.list_quotations', page_num=1))
+
 
     # Get the new quotation id
     new_q_id = Quotation.query.filter_by(q_num=new_q_num).first().q_id
@@ -952,6 +954,7 @@ def _revise_quotation(id):
         except:
             # in case Quotation_Detail already exists
             flash('Error: Quotation_Detail already exists.')
+            return redirect(url_for('admin.list_quotations', page_num=1))
 
     # redirect to quotations page
     return redirect(url_for('admin.view_quotation', id=new_q_id))
@@ -996,7 +999,7 @@ def _copy_quotation(id):
         # add new quotation to the database
         db.session.add(new_quotation)
         db.session.commit()
-        flash('You have successfully added a new quotation.')
+        flash('You have successfully copied a quotation.')
     except:
         # in case Quotation already exists
         flash('Error: Quotation already exists.')
@@ -1023,13 +1026,12 @@ def _copy_quotation(id):
             # add new quotation_detail to the database
             db.session.add(new_quote_detail)
             db.session.commit()
-            flash('You have successfully added a new quotation_detail.')
         except:
             # in case Quotation_Detail already exists
             flash('Error: Quotation_Detail already exists.')
 
     # redirect to quotations page
-    return redirect(url_for('admin.list_quotations', page_num=1))
+    return redirect(url_for('admin.view_quotation', id=new_q_id))
     
 
 @admin.route('/quotations/view/<int:id>', methods=['GET'])
@@ -1510,8 +1512,8 @@ def add_quotation_detail(q_id):
 
     form = Quotation_DetailForm()
     form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
-    # index each q_num choice by its q_id
-    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
+    # index each q_num choice by its q_id (exlcude locked quotations)
+    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.filter_by(locked=False).all()]
     if q_id is not None:
         form.q_num.data = q_id
     if form.validate_on_submit():
@@ -1571,10 +1573,17 @@ def edit_quotation_detail(id):
     add_quotation_detail = False
 
     quotation_detail = Quotation_Detail.query.get_or_404(id)
+
+    # First check if this is a locked quotation before proceeding
+    quotation = Quotation.query.get_or_404(quotation_detail.q_id)
+    if quotation.locked:
+        flash('Error, can not edit a detail of a locked quotation')
+        return redirect(url_for('admin.list_quotation_details', page_num=1))
+
     form = Quotation_DetailForm(obj=quotation_detail)
     form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
     # index each q_num by its q_id
-    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
+    form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.filter_by(locked=False).all()]
     if form.validate_on_submit():
         q_id = form.q_num.data
         quotation = Quotation.query.filter_by(q_id=q_id).first()
@@ -1634,13 +1643,21 @@ def delete_quotation_detail(id):
     check_admin()
 
     quotation_detail = Quotation_Detail.query.get_or_404(id)
-    # Save the quotation ID to update the quotation amount post deletion
+    # get the details quotation
     q_id = quotation_detail.q_id
+    quotation = Quotation.query.get_or_404(q_id)
+
+    # Make sure you don't modify a locked quotation
+    if quotation.locked:
+        flash('Error, can not delete detail of locked quotation!')
+        return redirect(url_for('admin.list_quotation_details', page_num=1))
+
+    # Only delete if its unlocked
     db.session.delete(quotation_detail)
     db.session.commit()
     flash('You have successfully deleted the quotation_detail.')
 
-    # Update the quote amount for the parent quote to reflect this new quotation detail
+    # Update the quote amount for the parent quote to reflect this new quotation detail deletion
     quotation = Quotation.query.get_or_404(q_id)
     quotation.q_amount = 0
     quote_details = Quotation_Detail.query.filter_by(q_id=q_id).all()
