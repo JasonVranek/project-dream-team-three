@@ -879,6 +879,83 @@ def lock_quotation(id, locked):
     return redirect(url_for('admin.list_quotations', page_num=1))
 
 
+@admin.route('/quotations/revise/<int:id>', methods=['GET'])
+@login_required
+def _revise_quotation(id):
+    # Get the relevant db objects to make a copy of the Quotation
+    quotation = Quotation.query.get_or_404(id)
+    customer = Customer.query.get_or_404(quotation.c_id)
+    contact = Contact.query.get_or_404(quotation.contact_id)  
+    # get the current revision number to update
+
+    # practicing lambda function, essentially (r_num = quote.r_num + 1)
+    revision_num = (lambda r_num: 1 + int(r_num) if r_num else 1)(quotation.revision)
+
+    new_q_num = quotation.q_num + 10000 + random.randint(0,100)
+    # Recreate the new Quotation
+    new_quotation = Quotation(c_id = quotation.c_id,           
+                                acc_code = quotation.acc_code,
+                                contact_id = quotation.contact_id,
+                                q_num = new_q_num,
+                                e_id = quotation.e_id,           
+                                date = quotation.date,
+                                revision = revision_num + 1,
+                                pay_terms = quotation.pay_terms,
+                                title = quotation.title,
+                                f_name = quotation.f_name,
+                                l_name = quotation.l_name,
+                                address = quotation.address,
+                                city = quotation.city,
+                                state = quotation.state,
+                                country = quotation.country,
+                                postal = quotation.postal,
+                                tel = quotation.tel,
+                                s_sched = quotation.s_sched,
+                                s_term = quotation.s_term,
+                                q_title = quotation.q_title,
+                                q_note = quotation.q_note,
+                                q_amount = quotation.q_amount)
+                                
+    try:
+        # add new quotation to the database
+        db.session.add(new_quotation)
+        db.session.commit()
+        flash('You have successfully added a new quotation.')
+    except:
+        # in case Quotation already exists
+        flash('Error: Quotation already exists.')
+
+    # Get the new quotation id
+    new_q_id = Quotation.query.filter_by(q_num=new_q_num).first().q_id
+    # Get all the quote details attached to this quotation
+    quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
+
+    # Recreate each quote detail to be used in the new quotation
+    for quote_detail in quote_details:
+        product_associated = Product.query.get_or_404(quote_detail.p_id)
+        new_quote_detail = Quotation_Detail(q_id = new_q_id,     
+                                p_id = quote_detail.p_id,                
+                                p_name = product_associated.p_name,           
+                                q_num = new_q_num,
+                                p_num = product_associated.p_number,
+                                quantity = quote_detail.quantity,
+                                discount = quote_detail.discount,
+                                q_price = quote_detail.q_price,
+                                option = quote_detail.option)
+                                
+        try:
+            # add new quotation_detail to the database
+            db.session.add(new_quote_detail)
+            db.session.commit()
+            flash('You have successfully added a new quotation_detail.')
+        except:
+            # in case Quotation_Detail already exists
+            flash('Error: Quotation_Detail already exists.')
+
+    # redirect to quotations page
+    return redirect(url_for('admin.view_quotation', id=new_q_id))
+
+
 @admin.route('/quotations/copy/<int:id>', methods=['GET'])
 @login_required
 def _copy_quotation(id):
@@ -1129,6 +1206,12 @@ def delete_quotation(id):
     """
     check_admin()
 
+    quotation = Quotation.query.get_or_404(id)
+    if quotation.locked:
+        flash('Can not delete locked quotation.')
+        return redirect(url_for('admin.list_quotations', page_num=1))
+
+
     quote_details = Quotation_Detail.query.filter_by(q_id=id).all()
     for quote_detail in quote_details:
 
@@ -1136,7 +1219,6 @@ def delete_quotation(id):
         db.session.commit()
         flash('You have successfully deleted the associated quotation details.')
 
-    quotation = Quotation.query.get_or_404(id)
     db.session.delete(quotation)
     db.session.commit()
     flash('You have successfully deleted the quotation.')
