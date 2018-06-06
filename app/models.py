@@ -81,14 +81,14 @@ class Quotation(UserMixin, db.Model):
     """
     __tablename__ = 'quotations'
 
-    q_id = db.Column('QuotationID', db.Integer, primary_key=True)  # FOREIGN KEY PARENT OF QUOTATION DETAILS AND OPPORTUNITIES
-    c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)                           # FOREIGN KEY CHILD OF CUSTOMERS: CustomerID
+    q_id = db.Column('QuotationID', db.Integer, primary_key=True)  
+    c_id = db.Column('CustomerID', db.Integer, db.ForeignKey('customers.CustomerID'), nullable=False)  
     e_id = db.Column('EmployeeID', db.String(20))
     date = db.Column('Quotaton Date', db.Date)          
     acc_code = db.Column('Account Code', db.String(20), nullable=False)
     contact_id = db.Column('Contact', db.Integer)
-    q_num = db.Column('Quotation Number', db.Integer, unique=True, nullable=False)
-    revision = db.Column('Revision', db.String(50))
+    q_num = db.Column('Quotation Number', db.String(20), unique=True, nullable=False)
+    revision = db.Column('Revision', db.String(50), default='0')
     pay_terms = db.Column('Payment Terms', db.String(50))
     title = db.Column('Title', db.String(50))
     f_name = db.Column('FirstName', db.String(50))
@@ -160,7 +160,7 @@ class Opportunity(UserMixin, db.Model):
 
     o_id = db.Column('OpportunityID', db.Integer, primary_key=True)  
     q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False) 
-    q_num = db.Column('Quotation Number', db.Integer, nullable=False)                          
+    q_num = db.Column('Quotation Number', db.String(20), nullable=False)                          
     source_of_lead = db.Column('Source of Lead', db.String(50))
     sale_ref_fee = db.Column('Sales referal Fee', db.Float)
     competitors = db.Column('Competitors', db.Integer)
@@ -195,7 +195,7 @@ class Quotation_Detail(UserMixin, db.Model):
     quote_detail_id = db.Column('QuotationDetailID', db.Integer, primary_key=True)  
     q_id = db.Column('QuotationID', db.Integer, db.ForeignKey('quotations.QuotationID'), nullable=False)                 
     p_id = db.Column('ProductID', db.Integer, db.ForeignKey('products.ProductID'), nullable=False)   
-    q_num = db.Column('Quotation Number', db.Integer, nullable=False)               
+    q_num = db.Column('Quotation Number', db.String(20), nullable=False)               
     p_num = db.Column('Product Number', db.String(50), nullable=False)        # ADD 4/25/18
     p_name = db.Column('Product Name', db.String(50))
     quantity = db.Column('Quantity', db.Float)

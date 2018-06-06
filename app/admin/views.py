@@ -891,7 +891,8 @@ def _revise_quotation(id):
     # practicing lambda function, essentially (r_num = quote.r_num + 1)
     revision_num = (lambda r_num: 1 + int(r_num) if r_num else 1)(quotation.revision)
 
-    new_q_num = quotation.q_num + 10000 + random.randint(0,100)
+    #practicing lambda func, replace last char in string with new r_num: new_q_num = q_num[:-1] + str(revision_num)
+    new_q_num = (lambda q_num, r_num: q_num[:-1] + str(r_num)) (quotation.q_num, revision_num)
     # Recreate the new Quotation
     new_quotation = Quotation(c_id = quotation.c_id,           
                                 acc_code = quotation.acc_code,
@@ -964,7 +965,9 @@ def _copy_quotation(id):
     customer = Customer.query.get_or_404(quotation.c_id)
     contact = Contact.query.get_or_404(quotation.contact_id)    
 
-    new_q_num = quotation.q_num + 10000 + random.randint(0,100)
+    # Prepend a C to indicate that it is a copy. 
+    new_q_num = 'C' + quotation.q_num
+
     # Recreate the new Quotation
     new_quotation = Quotation(c_id = quotation.c_id,           
                                 acc_code = quotation.acc_code,
@@ -1082,13 +1085,16 @@ def add_quotation():
         c_id = form.acc_code.data
         customer = Customer.query.filter_by(c_id=c_id).first()
         acc_code = customer.acc_code
+        # if form.qnum.data = 18100 -> 18100R0
+        revision = (lambda rev: rev if rev else '0')(form.revision.data)
+        q_num = str(form.q_num.data) + (lambda x: 'R' + x if x else 'R0')(revision)
         quotation = Quotation(c_id = c_id,           
                                 acc_code = acc_code,
                                 contact_id = form.contact.data,
-                                q_num = form.q_num.data,
+                                q_num = q_num,
                                 e_id = form.e_id.data.username,           
                                 date = form.date.data,
-                                revision = form.revision.data,
+                                revision = revision,
                                 pay_terms = form.pay_terms.data,
                                 title = form.title.data,
                                 f_name = form.f_name.data,
@@ -1504,6 +1510,7 @@ def add_quotation_detail(q_id):
 
     form = Quotation_DetailForm()
     form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
+    # index each q_num choice by its q_id
     form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
     if q_id is not None:
         form.q_num.data = q_id
@@ -1566,6 +1573,7 @@ def edit_quotation_detail(id):
     quotation_detail = Quotation_Detail.query.get_or_404(id)
     form = Quotation_DetailForm(obj=quotation_detail)
     form.p_num.choices = [(product.p_id, str(product.p_number)) for product in Product.query.all()]
+    # index each q_num by its q_id
     form.q_num.choices = [(quotation.q_id, str(quotation.q_num)) for quotation in Quotation.query.all()]
     if form.validate_on_submit():
         q_id = form.q_num.data
