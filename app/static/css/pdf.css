@@ -122,9 +122,11 @@ ul {
 
 .address_box {
 	flex: 1;
-	/*text-align: left;*/
-	text-align: right;
-	/*border: 1px solid #010101;*/
+	text-align: left;
+	/*text-align: right;*/
+	border: 1px solid #010101;
+	padding-top: 10px;
+	margin-left: 10px;
 	/*font-size: small;*/
 }
 
@@ -136,3 +138,17 @@ ul {
     font-size: x-large;
     text-align: center;
 }
+
+.border-center { 
+            width: 100%;
+            border: black 1px solid;
+            position: relative;
+        }
+
+.border-center:before { content: '';
+        position: absolute;
+        bottom: 30%;
+        border-bottom: 2px black solid;
+        width: 100%;
+        z-index:0;
+    }

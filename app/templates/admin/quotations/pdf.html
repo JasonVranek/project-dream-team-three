@@ -35,7 +35,8 @@
                 <table>
                     <tr>
                         <th style="text-align: left">{{ _('Quotation NO.') }}:</th>
-                        <th style="text-align: left;"><a style=" text-decoration:none; " href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a></th>
+                        <th style="text-align: left;"><a style=" text-decoration:none; " href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a> ({{ _('Revision') }} {{quotation.revision}} )
+                        </th>
                     </tr> 
                     <tr>
                         <td>{{ _('Quotation Date') }}:</td>
@@ -45,7 +46,7 @@
                     </tr>
                     <tr>
                         <td>{{ _('Shipping Schedule') }}:</td>
-                        <td>{{quotation.s_sched}} Weeks<br />
+                        <td>{{quotation.s_sched}} {{ _('Weeks') }}<br />
                            <div class="small">{{ _('after receipt of hard copy purchase order, subject to prior sale') }} </div>
                        </td>
                     </tr>
@@ -74,7 +75,7 @@
                             <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}" style="text-decoration:none">{{ _('Quotation Title') }}: {{quotation.q_title}} </a>
                         </div>    
                     </tr>
-                    <tr>
+                    <tr style="font-size: small">
                         <th> {{ _('Item') }} </th>
                         <th> {{ _('Description') }} </th>
                         <th> {{ _('Part Number') }} </th>
@@ -90,7 +91,7 @@
                     {% for option in [False,True] %}
                         {% for detail in quote_details %}
                             {% if flag != option %}
-                                <tr><td colspan="7">Optional</td></tr>
+                                <tr><td colspan="7">{{ _('Optional') }}</td></tr>
                                 {% set flag = True %}
                             {% endif %}
                             {% if detail.option == option %}
@@ -113,7 +114,9 @@
                 <li><br /></li>
                 <li class="tabletitle small"> {{ _('Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery') }}:</li>
               <li class="small">* {{ _('Required delivery date') }}</li>
+              {% if current_user.language == 'en' %}
               <li class="small">* {{ _('Carrier TBD') }}</li>
+              {% endif %}
               <li class="small">* {{ _('Ship to address') }}</li>
               <li class="small">* {{ _('Bill to address') }}</li>
             </ul>
@@ -133,9 +136,9 @@
              <!-- authorize box -->
             <div class="container-authorize">
                 <!-- <h3>{{ _('Authorized by') }}: <input type="text" class="signature" /></h3> -->
-                <div id="signature-pad" class="signature-pad" style="border-bottom: 1px solid #000;">
+                <div id="signature-pad" class="signature-pad border-center" >
                     <div class="signature-pad--body">
-                    <h3>{{ _('Authorized by') }}:</h3>
+                    <h3 style="padding-left: 5px">{{ _('Authorized by') }}:</h3>
                       <canvas></canvas>
                     </div>
                 </div>

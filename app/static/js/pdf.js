@@ -58,10 +58,18 @@ $(function() {
 
 
         // Update the cummulative totals and inject the new values into the html
-        subtotal_elt.innerHTML = 'subtotal: $' + subtotal.toFixed(2);
-        total_elt.innerHTML = 'TOTAL (USD): $' + total.toFixed(2);
-        discount_elt.innerHTML = 'discount: $' + (subtotal - total).toFixed(2);
-        op_total_elt.innerHTML = 'Optional items after discount (USD): $' + optional_total.toFixed(2);
+        if(navigator.language == 'en'){
+            subtotal_elt.innerHTML = 'subtotal: $' + subtotal.toFixed(2);
+            total_elt.innerHTML = 'TOTAL (USD): $' + total.toFixed(2);
+            discount_elt.innerHTML = 'discount: $' + (subtotal - total).toFixed(2);
+            op_total_elt.innerHTML = 'Optional items after discount (USD): $' + optional_total.toFixed(2);
+        }
+        else{
+            subtotal_elt.innerHTML = '合計　(円）:' + subtotal.toFixed(2);
+            total_elt.innerHTML = '総計（円）:' + total.toFixed(2);
+            discount_elt.innerHTML = '割引 (円）:' + (subtotal - total).toFixed(2);
+            op_total_elt.innerHTML = 'オプション製品の割引 (円）:' + optional_total.toFixed(2);
+        }
 
     }
 
