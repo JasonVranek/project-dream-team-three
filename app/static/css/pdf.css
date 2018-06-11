@@ -46,7 +46,7 @@ a:hover, a:active { text-decoration: none; }
 }
 
 .container-authorize {
-	flex: 3;
+	flex: 1;
 }
 
 /*GENERAL STYLES*/
@@ -122,8 +122,10 @@ ul {
 
 .address_box {
 	flex: 1;
-	text-align: left;
-	border: 1px solid #010101;
+	/*text-align: left;*/
+	text-align: right;
+	/*border: 1px solid #010101;*/
+	/*font-size: small;*/
 }
 
 .signature {

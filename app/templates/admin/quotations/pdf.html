@@ -2,6 +2,7 @@
     <link href="{{ url_for('static', filename='css/pdf.css') }}" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </head>
 <body>
     <div class="container-all">
@@ -9,56 +10,56 @@
             <a href="{{ url_for('home.homepage') }}"> <img style="flex: 1" src="{{ url_for('static', filename='img/new_im_logo.png') }}"> </a>   
             <!-- <img src="/media/sf_Ubuntu/quote/project-dream-team-three/app/static/img/IMlogo.jpg"> -->
             <ul style="width: 100%; flex: 1">
-                <li style="text-align: center;"> <h2>Innovation Matrix, Inc.</h2> <li>
-                <li style="text-align: center;">3080 Olcott St., B105, Santa Clara, CA 95054</li>
-                <li style="text-align: center;">(408) 329-4422 FAX (408) 468-7537</li>
+                <li style="text-align: center;"> <h2>{{ _('Innovation Matrix, Inc.') }}</h2> <li>
+                <li style="text-align: center;">{{ _('3080 Olcott St., B105, Santa Clara, CA 95054') }}</li>
+                <li style="text-align: center;">{{ _('(408) 329-4422 FAX (408) 468-7537') }}</li>
             </ul>
         </div>
 
         <div class="container-top">     
             <!-- top left box -->
             <ul class="customer_box">
-                <li class="bold"> Revision: {{quotation.revision}}</li>
-                <li><a class="bold" style="text-decoration:none" href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">Account Code: {{quotation.acc_code}} </a></li>
+                <li class="bold"> {{ _('Revision') }}: {{quotation.revision}}</li>
+                <li><a class="bold" style="text-decoration:none" href="{{ url_for('admin.view_customer', id=quotation.c_id) }}">{{ _('Account Code') }}: {{quotation.acc_code}} </a></li>
                 <li><br /></li>
                 <li>{{customer.comp_name}}</li>
                 <li>{{customer.city}}</li>
                 <li>{{customer.b_address}}</li>
                 <li>{{customer.city}}, {{customer.state_province}} {{customer.post_code}}</li>
-                <li><a style="text-decoration:none" href="{{ url_for('admin.view_contact', id=contact.contact_id) }}">Attn: {{contact.f_name}} {{contact.l_name}} </a></li>
-                <li>Tel: {{customer.phone}}</li>
+                <li><a style="text-decoration:none" href="{{ url_for('admin.view_contact', id=contact.contact_id) }}">{{ _('Attn') }}: {{contact.f_name}} {{contact.l_name}} </a></li>
+                <li>{{ _('Tel') }}: {{customer.phone}}</li>
             </ul>  
 
             <!-- top right box -->
             <div class="shipping_table">
                 <table>
                     <tr>
-                        <th style="text-align: left">Quotation NO.:</th>
+                        <th style="text-align: left">{{ _('Quotation NO.') }}:</th>
                         <th style="text-align: left;"><a style=" text-decoration:none; " href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}">{{quotation.q_num}} </a></th>
                     </tr> 
                     <tr>
-                        <td>Quotation Date:</td>
+                        <td>{{ _('Quotation Date') }}:</td>
                         <td>{{quotation.date}}<br />
-                           <div class="small" style="color: red">Valid for 30 days </div>
+                           <div class="small" style="color: red">{{ _('Valid for 30 days') }} </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>Shipping Schedule:</td>
+                        <td>{{ _('Shipping Schedule') }}:</td>
                         <td>{{quotation.s_sched}} Weeks<br />
-                           <div class="small">after receipt of hard copy purchase order, subject to prior sale </div>
+                           <div class="small">{{ _('after receipt of hard copy purchase order, subject to prior sale') }} </div>
                        </td>
                     </tr>
                     <tr>
-                        <td>Terms of Payment:</td>
+                        <td>{{ _('Terms of Payment') }}:</td>
                         <td>{{quotation.pay_terms}}</td>
                     </tr>
                     <tr>
-                        <td>Shipment Terms:</td>
+                        <td>{{ _('Shipment Terms') }}:</td>
                         <td>{{quotation.s_term}}</td>
                     </tr>
                     <tr>
-                        <td>Primary Contact:</td>
-                        <td>Onaga, Eimei</td>
+                        <td>{{ _('Primary Contact') }}:</td>
+                        <td>{{ _('Onaga, Eimei') }}</td>
                     </tr>
                 </table>
             </div>  
@@ -70,17 +71,17 @@
                 <table id='details-table'> 
                     <tr> 
                         <div class="tabletitle"> 
-                            <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}" style="text-decoration:none">Quotation Title: {{quotation.q_title}} </a>
+                            <a href="{{ url_for('admin.view_quotation', id=quotation.q_id) }}" style="text-decoration:none">{{ _('Quotation Title') }}: {{quotation.q_title}} </a>
                         </div>    
                     </tr>
                     <tr>
-                        <th> Item </th>
-                        <th> Description </th>
-                        <th> Part Number </th>
-                        <th> Unit Price </th>
-                        <th> Qty </th>
-                        <th> Discount </th> 
-                        <th> Ext Price </th>
+                        <th> {{ _('Item') }} </th>
+                        <th> {{ _('Description') }} </th>
+                        <th> {{ _('Part Number') }} </th>
+                        <th> {{ _('Unit Price') }} </th>
+                        <th> {{ _('Qty') }} </th>
+                        <th> {{ _('Discount') }} </th> 
+                        <th> {{ _('Ext Price') }} </th>
                     </tr>
                     <!-- loop.index loses scope when pass into the detail_table.html so 
                     use loop_index_list instead -->
@@ -108,22 +109,22 @@
         <div class="container-bottom">
             <!-- note box -->
             <ul class="note_box">
-                <li>Quotation Note: {{quotation.q_note}}</li>
+                <li>{{ _('Quotation Note') }}: {{quotation.q_note}}</li>
                 <li><br /></li>
-                <li class="tabletitle small"> Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery:</li>
-              <li class="small">* Required delivery date</li>
-              <li class="small">* Carrier TBD</li>
-              <li class="small">* Ship to address</li>
-              <li class="small">* Bill to address</li>
+                <li class="tabletitle small"> {{ _('Please refer to the above quotation number on any correspondence related to this quotation. All purchase orders must indicate the following in order to be scheduled for delivery') }}:</li>
+              <li class="small">* {{ _('Required delivery date') }}</li>
+              <li class="small">* {{ _('Carrier TBD') }}</li>
+              <li class="small">* {{ _('Ship to address') }}</li>
+              <li class="small">* {{ _('Bill to address') }}</li>
             </ul>
 
             <!-- total box -->
             <ul class="total_box">
-              <li id='subtotal'>subtotal: ${{subtotal}}</li>
-              <li id='discount_total'>discount: (${{subtotal - total}})</li>
-              <li><h3 id='total_total'>TOTAL (USD): ${{total}} </h3></li>
-              <li class="small" id="optional_total">Optional items with discount (USD): </li>
-              <li class="small">* plus appropriate tax</li>
+              <li id='subtotal'>{{ _('subtotal') }}: ${{subtotal}}</li>
+              <li id='discount_total'>{{ _('discount') }}: (${{subtotal - total}})</li>
+              <li><h3 id='total_total'>{{ _('TOTAL (USD)') }}: ${{total}} </h3></li>
+              <li class="small" id="optional_total">{{ _('Optional items with discount (USD)') }}: </li>
+              <li class="small">* {{ _('plus appropriate tax') }}</li>
             </ul> 
         </div>
 
@@ -131,17 +132,23 @@
             
              <!-- authorize box -->
             <div class="container-authorize">
-                <h3>Authorized by: <input type="text" class="signature" /></h3>
+                <!-- <h3>{{ _('Authorized by') }}: <input type="text" class="signature" /></h3> -->
+                <div id="signature-pad" class="signature-pad" style="border-bottom: 1px solid #000;">
+                    <div class="signature-pad--body">
+                    <h3>{{ _('Authorized by') }}:</h3>
+                      <canvas></canvas>
+                    </div>
+                </div>
             </div>
 
             <!-- IM address box -->
             <ul class="address_box">
-              <li> Address order to: </li>
-              <li>Innovation Matrix, Inc</li>
-              <li>Attn: Sales Operations</li>
-              <li>3080 Olcott St., B105</li>
-              <li>Santa Clara CA 95054 USA</li>
-              <li>FAX: (408) 468-7537</li>
+              <li>{{ _('Address order to') }}: </li>
+              <li>{{ _('Innovation Matrix, Inc') }}</li>
+              <li>{{ _('Attn: Sales Operations') }}</li>
+              <li>{{ _('3080 Olcott St., B105') }}</li>
+              <li>{{ _('Santa Clara CA 95054 USA') }}</li>
+              <li>{{ _('FAX: (408) 468-7537') }}</li>
             </ul>
         </div>
        

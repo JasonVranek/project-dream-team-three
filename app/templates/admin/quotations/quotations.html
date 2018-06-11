@@ -77,10 +77,12 @@
                   </td>
                   {% endif %}
                   <td>
+                    {% if not quotation.locked %}
                     <a href="{{ url_for('admin.add_quotation_detail', q_id=quotation.q_id) }}">
                       <i class="fa fa-plus"></i>
                       {{ _('Add Quote Detail') }}
                     </a>
+                    {% endif %}
                   </td>
                   <td>
                     <a href="{{ url_for('admin.gen_pdf', id=quotation.q_id) }}">
@@ -93,9 +95,11 @@
                     </a>
                   </td>
                   <td>
+                    {% if not quotation.locked %}
                     <a href="{{ url_for('admin.delete_quotation', id=quotation.q_id) }}">
                       <i class="fa fa-trash"></i> {{ _('Delete') }}
                     </a>
+                    {% endif %}
                   </td>
                   {% if quotation.locked %}
                     <td>

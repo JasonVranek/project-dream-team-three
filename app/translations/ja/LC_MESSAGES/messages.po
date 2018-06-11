@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-04 10:26-0700\n"
+"POT-Creation-Date: 2018-06-11 13:16-0700\n"
 "PO-Revision-Date: 2018-05-30 10:53-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -22,11 +22,13 @@ msgstr ""
 #: app/templates/admin/contacts/contacts.html:28
 #: app/templates/admin/contacts/view_contact.html:29
 #: app/templates/admin/customers/customers.html:28
-#: app/templates/admin/customers/view_customer.html:25
+#: app/templates/admin/customers/view_customer.html:40
+#: app/templates/admin/customers/view_customer.html:155
 msgid "Name"
 msgstr "名前"
 
 #: app/admin/forms.py:18 app/admin/forms.py:27
+#: app/templates/admin/quotations/pdf.html:78
 msgid "Description"
 msgstr "所属部署"
 
@@ -41,23 +43,25 @@ msgstr "保存"
 #: app/templates/admin/contacts/contacts.html:27
 #: app/templates/admin/contacts/view_contact.html:19
 #: app/templates/admin/customers/customers.html:27
-#: app/templates/admin/customers/view_customer.html:19
+#: app/templates/admin/customers/view_customer.html:34
+#: app/templates/admin/customers/view_customer.html:145
+#: app/templates/admin/quotations/pdf.html:22
 #: app/templates/admin/quotations/quotation.html:156
 msgid "Account Code"
 msgstr "アカウントコード"
 
 #: app/admin/forms.py:47 app/templates/admin/customers/customers.html:29
-#: app/templates/admin/customers/view_customer.html:31
+#: app/templates/admin/customers/view_customer.html:46
 msgid "Company Name"
 msgstr "会社名"
 
 #: app/admin/forms.py:48 app/admin/forms.py:75 app/admin/forms.py:134
-#: app/templates/admin/quotations/view_quotation.html:101
+#: app/templates/admin/quotations/view_quotation.html:121
 msgid "First Name"
 msgstr "姓"
 
 #: app/admin/forms.py:49 app/admin/forms.py:76 app/admin/forms.py:135
-#: app/templates/admin/quotations/view_quotation.html:107
+#: app/templates/admin/quotations/view_quotation.html:127
 msgid "Last Name"
 msgstr "名"
 
@@ -71,27 +75,31 @@ msgstr "Emailアドレス"
 
 #: app/admin/forms.py:52 app/admin/forms.py:79
 #: app/templates/admin/contacts/view_contact.html:47
-#: app/templates/admin/customers/view_customer.html:49
+#: app/templates/admin/customers/view_customer.html:64
+#: app/templates/admin/customers/view_customer.html:173
 msgid "Billing Address"
 msgstr "住所（町村番地建物名）"
 
 #: app/admin/forms.py:53 app/admin/forms.py:80 app/admin/forms.py:137
 #: app/templates/admin/contacts/view_contact.html:53
-#: app/templates/admin/customers/view_customer.html:55
-#: app/templates/admin/quotations/view_quotation.html:119
+#: app/templates/admin/customers/view_customer.html:70
+#: app/templates/admin/customers/view_customer.html:179
+#: app/templates/admin/quotations/view_quotation.html:139
 msgid "City"
 msgstr "市"
 
 #: app/admin/forms.py:54 app/admin/forms.py:81
 #: app/templates/admin/contacts/view_contact.html:59
-#: app/templates/admin/customers/view_customer.html:61
+#: app/templates/admin/customers/view_customer.html:76
+#: app/templates/admin/customers/view_customer.html:185
 msgid "State or Province"
 msgstr "都道府県"
 
 #: app/admin/forms.py:55 app/admin/forms.py:82
 #: app/templates/admin/contacts/view_contact.html:65
-#: app/templates/admin/customers/view_customer.html:67
-#: app/templates/admin/quotations/view_quotation.html:137
+#: app/templates/admin/customers/view_customer.html:82
+#: app/templates/admin/customers/view_customer.html:191
+#: app/templates/admin/quotations/view_quotation.html:157
 msgid "Postal Code"
 msgstr "郵便番号"
 
@@ -101,56 +109,61 @@ msgstr ""
 
 #: app/admin/forms.py:57 app/admin/forms.py:84
 #: app/templates/admin/contacts/view_contact.html:77
-#: app/templates/admin/customers/view_customer.html:79
+#: app/templates/admin/customers/view_customer.html:94
+#: app/templates/admin/customers/view_customer.html:203
 msgid "Contact Title"
 msgstr "敬称"
 
 #: app/admin/forms.py:58 app/admin/forms.py:85
 #: app/templates/admin/contacts/view_contact.html:83
-#: app/templates/admin/customers/view_customer.html:85
+#: app/templates/admin/customers/view_customer.html:100
+#: app/templates/admin/customers/view_customer.html:209
 msgid "Fax Number"
 msgstr "FAX番号"
 
 #: app/admin/forms.py:59 app/admin/forms.py:86
 #: app/templates/admin/contacts/view_contact.html:89
-#: app/templates/admin/customers/view_customer.html:91
+#: app/templates/admin/customers/view_customer.html:106
+#: app/templates/admin/customers/view_customer.html:215
 msgid "Notes"
 msgstr "メモ"
 
-#: app/admin/forms.py:60 app/templates/admin/customers/view_customer.html:97
+#: app/admin/forms.py:60 app/templates/admin/customers/view_customer.html:112
 msgid "Order"
 msgstr "注文の有無"
 
 #: app/admin/forms.py:61 app/admin/forms.py:138
-#: app/templates/admin/customers/view_customer.html:103
-#: app/templates/admin/quotations/view_quotation.html:125
+#: app/templates/admin/customers/view_customer.html:118
+#: app/templates/admin/quotations/view_quotation.html:145
 msgid "State"
 msgstr "都道府県、州"
 
-#: app/admin/forms.py:62 app/templates/admin/customers/view_customer.html:109
+#: app/admin/forms.py:62 app/templates/admin/customers/view_customer.html:124
 msgid "Status"
 msgstr "ステータス"
 
-#: app/admin/forms.py:63 app/templates/admin/customers/view_customer.html:115
+#: app/admin/forms.py:63 app/templates/admin/customers/view_customer.html:130
 msgid "Rating"
 msgstr "評価（確率）"
 
 #: app/admin/forms.py:95 app/templates/admin/products/products.html:27
-#: app/templates/admin/products/view_product.html:19
+#: app/templates/admin/products/view_product.html:25
+#: app/templates/admin/quotations/pdf.html:79
 msgid "Part Number"
 msgstr "Part Number"
 
 #: app/admin/forms.py:96 app/admin/forms.py:187
 #: app/templates/admin/products/products.html:28
-#: app/templates/admin/products/view_product.html:25
-#: app/templates/admin/quotation_details/quotation_details.html:30
-#: app/templates/admin/quotation_details/view_quotation_detail.html:46
-#: app/templates/admin/quotations/view_quotation.html:214
+#: app/templates/admin/products/view_product.html:31
+#: app/templates/admin/quotation_details/quotation_details.html:29
+#: app/templates/admin/quotation_details/view_quotation_detail.html:40
+#: app/templates/admin/quotations/view_quotation.html:236
 msgid "Product Name"
 msgstr "商品名"
 
 #: app/admin/forms.py:97 app/admin/forms.py:190
 #: app/templates/admin/products/products.html:29
+#: app/templates/admin/quotations/pdf.html:80
 msgid "Unit Price"
 msgstr "Unit Price"
 
@@ -167,47 +180,45 @@ msgid "Exchange Rate used"
 msgstr "為替レート"
 
 #: app/admin/forms.py:101 app/templates/admin/products/products.html:30
-#: app/templates/admin/products/view_product.html:43
+#: app/templates/admin/products/view_product.html:49
 msgid "Unit Cost"
 msgstr "Unit原価"
 
 #: app/admin/forms.py:102 app/templates/admin/products/products.html:34
-#: app/templates/admin/products/view_product.html:49
+#: app/templates/admin/products/view_product.html:55
 msgid "Supplier"
 msgstr "供給元"
 
 #: app/admin/forms.py:103 app/templates/admin/products/products.html:33
-#: app/templates/admin/products/view_product.html:55
+#: app/templates/admin/products/view_product.html:61
 msgid "Product Category"
 msgstr "商品カテゴリー"
 
-#: app/admin/forms.py:104 app/templates/admin/products/view_product.html:61
+#: app/admin/forms.py:104 app/templates/admin/products/view_product.html:67
 msgid "Product Status"
 msgstr "商品在庫状況"
 
-#: app/admin/forms.py:105 app/templates/admin/products/view_product.html:67
+#: app/admin/forms.py:105 app/templates/admin/products/view_product.html:73
 msgid "Date Created"
 msgstr "商品データ入力日"
 
-#: app/admin/forms.py:106 app/templates/admin/products/view_product.html:73
+#: app/admin/forms.py:106 app/templates/admin/products/view_product.html:79
 msgid "Person Created"
 msgstr "作成者"
 
-#: app/admin/forms.py:108 app/templates/admin/products/view_product.html:79
+#: app/admin/forms.py:108 app/templates/admin/products/view_product.html:85
 msgid "Remarks"
 msgstr "備忘録"
 
 #: app/admin/forms.py:120 app/templates/admin/contacts/view_contact.html:3
 #: app/templates/admin/quotations/quotations.html:29
-#: app/templates/admin/quotations/view_quotation.html:59
+#: app/templates/admin/quotations/view_quotation.html:79
 msgid "Contact"
 msgstr "取引担当者"
 
-#: app/admin/forms.py:121 app/admin/forms.py:155 app/admin/forms.py:183
-#: app/templates/admin/quotation_details/quotation_details.html:28
-#: app/templates/admin/quotations/quotation.html:156
-msgid "Quotation Number"
-msgstr "見積り番号"
+#: app/admin/forms.py:121
+msgid "Quotation Number (YY###)"
+msgstr ""
 
 #: app/admin/forms.py:122
 msgid "Employee"
@@ -217,26 +228,29 @@ msgstr "担当者"
 msgid "Quotaton Date"
 msgstr "見積作成日"
 
-#: app/admin/forms.py:125 app/templates/admin/quotations/view_quotation.html:83
+#: app/admin/forms.py:125 app/templates/admin/quotations/pdf.html:21
+#: app/templates/admin/quotations/quotations.html:33
+#: app/templates/admin/quotations/view_quotation.html:103
 msgid "Revision"
 msgstr "リビジョン"
 
-#: app/admin/forms.py:126 app/templates/admin/quotations/view_quotation.html:89
+#: app/admin/forms.py:126
+#: app/templates/admin/quotations/view_quotation.html:109
 msgid "Payment Terms"
 msgstr "Payment Terms"
 
 #: app/admin/forms.py:133 app/templates/admin/quotations/quotation.html:156
-#: app/templates/admin/quotations/view_quotation.html:95
+#: app/templates/admin/quotations/view_quotation.html:115
 msgid "Title"
 msgstr "敬称"
 
 #: app/admin/forms.py:136
-#: app/templates/admin/quotations/view_quotation.html:113
+#: app/templates/admin/quotations/view_quotation.html:133
 msgid "Address"
 msgstr "住所"
 
 #: app/admin/forms.py:139
-#: app/templates/admin/quotations/view_quotation.html:131
+#: app/templates/admin/quotations/view_quotation.html:151
 msgid "Country"
 msgstr "国"
 
@@ -253,19 +267,25 @@ msgid "Ship Schedule (Weeks)"
 msgstr "配達スケジュール（週間）"
 
 #: app/admin/forms.py:143
-#: app/templates/admin/quotations/view_quotation.html:155
+#: app/templates/admin/quotations/view_quotation.html:175
 msgid "Shipment Term"
 msgstr "配達方法"
 
-#: app/admin/forms.py:144
-#: app/templates/admin/quotations/view_quotation.html:161
+#: app/admin/forms.py:144 app/templates/admin/quotations/pdf.html:73
+#: app/templates/admin/quotations/view_quotation.html:181
 msgid "Quotation Title"
 msgstr "見積名"
 
-#: app/admin/forms.py:145
-#: app/templates/admin/quotations/view_quotation.html:167
+#: app/admin/forms.py:145 app/templates/admin/quotations/pdf.html:111
+#: app/templates/admin/quotations/view_quotation.html:187
 msgid "Quotation Note"
 msgstr "見積メモ"
+
+#: app/admin/forms.py:155 app/admin/forms.py:183
+#: app/templates/admin/quotation_details/quotation_details.html:27
+#: app/templates/admin/quotations/quotation.html:156
+msgid "Quotation Number"
+msgstr "見積り番号"
 
 #: app/admin/forms.py:157
 msgid "Source of Lead"
@@ -332,35 +352,36 @@ msgid "Region"
 msgstr "地域"
 
 #: app/admin/forms.py:184
-#: app/templates/admin/quotation_details/quotation_details.html:29
-#: app/templates/admin/quotation_details/view_quotation_detail.html:36
-#: app/templates/admin/quotations/view_quotation.html:204
+#: app/templates/admin/quotation_details/quotation_details.html:28
+#: app/templates/admin/quotation_details/view_quotation_detail.html:30
+#: app/templates/admin/quotations/view_quotation.html:226
 msgid "Product Number"
 msgstr "商品番号"
 
 #: app/admin/forms.py:188
-#: app/templates/admin/quotation_details/quotation_details.html:31
-#: app/templates/admin/quotation_details/view_quotation_detail.html:52
-#: app/templates/admin/quotations/view_quotation.html:220
+#: app/templates/admin/quotation_details/quotation_details.html:30
+#: app/templates/admin/quotation_details/view_quotation_detail.html:46
+#: app/templates/admin/quotations/view_quotation.html:242
 msgid "Quantity"
 msgstr "数量"
 
 #: app/admin/forms.py:189
-#: app/templates/admin/quotation_details/quotation_details.html:32
-#: app/templates/admin/quotation_details/view_quotation_detail.html:58
-#: app/templates/admin/quotations/view_quotation.html:226
+#: app/templates/admin/quotation_details/quotation_details.html:31
+#: app/templates/admin/quotation_details/view_quotation_detail.html:52
+#: app/templates/admin/quotations/pdf.html:82
+#: app/templates/admin/quotations/view_quotation.html:248
 msgid "Discount"
 msgstr "割引"
 
 #: app/admin/forms.py:191
-#: app/templates/admin/quotation_details/quotation_details.html:33
-#: app/templates/admin/quotation_details/view_quotation_detail.html:64
-#: app/templates/admin/quotations/view_quotation.html:232
+#: app/templates/admin/quotation_details/quotation_details.html:32
+#: app/templates/admin/quotation_details/view_quotation_detail.html:58
+#: app/templates/admin/quotations/view_quotation.html:254
 msgid "Quote Price"
 msgstr "見積価格"
 
 #: app/admin/forms.py:192
-#: app/templates/admin/quotation_details/view_quotation_detail.html:70
+#: app/templates/admin/quotation_details/view_quotation_detail.html:64
 msgid "Optional"
 msgstr "オプション"
 
@@ -421,6 +442,7 @@ msgstr "ログイン"
 
 #: app/templates/admin/contacts/contact.html:3
 #: app/templates/admin/contacts/view_contact.html:98
+#: app/templates/admin/customers/view_customer.html:223
 msgid "Edit Contact"
 msgstr "取引担当者を編集"
 
@@ -435,7 +457,7 @@ msgstr "取引担当者を編集"
 #: app/templates/admin/contacts/contact.html:16
 #: app/templates/admin/customers/customer.html:16
 #: app/templates/admin/products/product.html:16
-#: app/templates/admin/quotation_details/quotation_detail.html:57
+#: app/templates/admin/quotation_details/quotation_detail.html:56
 #: app/templates/admin/quotations/quotation.html:154
 msgid "Select parameters to edit for"
 msgstr "編集する箇所を選んで入力"
@@ -443,62 +465,66 @@ msgstr "編集する箇所を選んで入力"
 #: app/templates/admin/contacts/contacts.html:20
 #: app/templates/admin/contacts/contacts.html:70
 #: app/templates/admin/customers/customers.html:57
-#: app/templates/admin/customers/view_customer.html:128
+#: app/templates/admin/customers/view_customer.html:21
 msgid "Add Contact"
 msgstr "取引担当者を追加"
 
 #: app/templates/admin/contacts/contacts.html:29
 #: app/templates/admin/contacts/view_contact.html:35
 #: app/templates/admin/customers/customers.html:30
-#: app/templates/admin/customers/view_customer.html:37
+#: app/templates/admin/customers/view_customer.html:52
+#: app/templates/admin/customers/view_customer.html:161
 msgid "Email"
 msgstr "Email"
 
 #: app/templates/admin/contacts/contacts.html:30
 #: app/templates/admin/contacts/view_contact.html:41
 #: app/templates/admin/customers/customers.html:31
-#: app/templates/admin/customers/view_customer.html:43
+#: app/templates/admin/customers/view_customer.html:58
+#: app/templates/admin/customers/view_customer.html:167
 msgid "Phone"
 msgstr "電話"
 
 #: app/templates/admin/contacts/contacts.html:48
 #: app/templates/admin/customers/customers.html:46
 #: app/templates/admin/products/products.html:52
-#: app/templates/admin/quotation_details/quotation_details.html:74
-#: app/templates/admin/quotations/quotations.html:57
-#: app/templates/admin/quotations/view_quotation.html:247
+#: app/templates/admin/quotation_details/quotation_details.html:72
+#: app/templates/admin/quotations/quotations.html:63
+#: app/templates/admin/quotations/view_quotation.html:269
 msgid "View"
 msgstr "プレビュー"
 
 #: app/templates/admin/contacts/contacts.html:53
 #: app/templates/admin/customers/customers.html:51
 #: app/templates/admin/products/products.html:57
-#: app/templates/admin/quotation_details/quotation_details.html:79
-#: app/templates/admin/quotations/quotations.html:62
-#: app/templates/admin/quotations/view_quotation.html:251
+#: app/templates/admin/quotation_details/quotation_details.html:77
+#: app/templates/admin/quotations/quotations.html:75
+#: app/templates/admin/quotations/view_quotation.html:274
 msgid "Edit"
 msgstr "編集"
 
 #: app/templates/admin/contacts/contacts.html:58
 #: app/templates/admin/customers/customers.html:62
 #: app/templates/admin/products/products.html:62
-#: app/templates/admin/quotation_details/quotation_details.html:84
-#: app/templates/admin/quotations/quotations.html:83
-#: app/templates/admin/quotations/view_quotation.html:255
+#: app/templates/admin/quotation_details/quotation_details.html:82
+#: app/templates/admin/quotations/quotations.html:100
+#: app/templates/admin/quotations/view_quotation.html:278
 msgid "Delete"
 msgstr "削除"
 
 #: app/templates/admin/contacts/view_contact.html:71
-#: app/templates/admin/customers/view_customer.html:73
+#: app/templates/admin/customers/view_customer.html:88
+#: app/templates/admin/customers/view_customer.html:197
 msgid "Country or Region"
 msgstr "国または地域"
 
 #: app/templates/admin/contacts/view_contact.html:102
+#: app/templates/admin/customers/view_customer.html:227
 msgid "Delete Contact"
 msgstr "取引担当者を削除"
 
 #: app/templates/admin/customers/customer.html:3
-#: app/templates/admin/customers/view_customer.html:124
+#: app/templates/admin/customers/view_customer.html:17
 msgid "Edit Customer"
 msgstr "顧客を編集"
 
@@ -519,12 +545,12 @@ msgstr "顧客を追加"
 msgid "Customer"
 msgstr "顧客"
 
-#: app/templates/admin/customers/view_customer.html:132
+#: app/templates/admin/customers/view_customer.html:25
 msgid "Delete Customer"
 msgstr "顧客を削除"
 
 #: app/templates/admin/products/product.html:3
-#: app/templates/admin/products/view_product.html:105
+#: app/templates/admin/products/view_product.html:111
 msgid "Edit Product"
 msgstr "商品を編集"
 
@@ -549,48 +575,48 @@ msgstr "為替レート"
 msgid "Product"
 msgstr "商品"
 
-#: app/templates/admin/products/view_product.html:31
+#: app/templates/admin/products/view_product.html:37
 msgid "Product Note"
 msgstr "商品メモ"
 
-#: app/templates/admin/products/view_product.html:37
+#: app/templates/admin/products/view_product.html:43
 msgid "Exchange Rate Used"
 msgstr "為替レート"
 
-#: app/templates/admin/products/view_product.html:85
+#: app/templates/admin/products/view_product.html:91
 msgid "Japanese Unit Price"
 msgstr "Unit Price（円）"
 
-#: app/templates/admin/products/view_product.html:91
+#: app/templates/admin/products/view_product.html:97
 msgid "Japanese Product Name"
 msgstr "商品名（日本語）"
 
-#: app/templates/admin/products/view_product.html:97
+#: app/templates/admin/products/view_product.html:103
 msgid "Japanese Note to Show"
 msgstr "商品メモ（日本語）"
 
-#: app/templates/admin/products/view_product.html:109
+#: app/templates/admin/products/view_product.html:115
 msgid "Delete Product"
 msgstr "商品を削除"
 
 #: app/templates/admin/quotation_details/quotation_detail.html:3
-#: app/templates/admin/quotation_details/view_quotation_detail.html:79
+#: app/templates/admin/quotation_details/view_quotation_detail.html:73
 msgid "Edit Quotation Detail"
 msgstr "見積詳細を編集"
 
-#: app/templates/admin/quotation_details/quotation_detail.html:52
+#: app/templates/admin/quotation_details/quotation_detail.html:51
 msgid "Add a Quotation Detail"
 msgstr "見積詳細を追加"
 
-#: app/templates/admin/quotation_details/quotation_detail.html:54
+#: app/templates/admin/quotation_details/quotation_detail.html:53
 msgid "Edit a Quotation Detail"
 msgstr "見積詳細を編集"
 
-#: app/templates/admin/quotation_details/quotation_detail.html:59
+#: app/templates/admin/quotation_details/quotation_detail.html:58
 msgid "Quote Num"
 msgstr "見積番号"
 
-#: app/templates/admin/quotation_details/quotation_detail.html:59
+#: app/templates/admin/quotation_details/quotation_detail.html:58
 msgid "Product Num"
 msgstr "商品番号"
 
@@ -600,19 +626,15 @@ msgid "Quotation Details"
 msgstr "見積詳細"
 
 #: app/templates/admin/quotation_details/quotation_details.html:20
-#: app/templates/admin/quotation_details/quotation_details.html:96
+#: app/templates/admin/quotation_details/quotation_details.html:94
 msgid "Add Quotation Detail"
 msgstr "見積詳細を追加"
 
-#: app/templates/admin/quotation_details/quotation_details.html:27
-msgid "Quote Detail ID"
-msgstr "見積詳細ID"
-
-#: app/templates/admin/quotation_details/quotation_details.html:62
+#: app/templates/admin/quotation_details/quotation_details.html:60
 msgid "Make Required"
 msgstr "標準装備を追加"
 
-#: app/templates/admin/quotation_details/quotation_details.html:68
+#: app/templates/admin/quotation_details/quotation_details.html:66
 msgid "Make Optional"
 msgstr "オプションを追加"
 
@@ -629,27 +651,162 @@ msgid "for Quote #"
 msgstr "見積番号 #"
 
 #: app/templates/admin/quotation_details/view_quotation_detail.html:19
-#: app/templates/admin/quotations/view_quotation.html:187
-msgid "Quotation Detail ID"
-msgstr "見積詳細ID"
-
-#: app/templates/admin/quotation_details/view_quotation_detail.html:25
 #: app/templates/admin/quotations/quotations.html:27
-#: app/templates/admin/quotations/view_quotation.html:43
-#: app/templates/admin/quotations/view_quotation.html:193
+#: app/templates/admin/quotations/view_quotation.html:63
+#: app/templates/admin/quotations/view_quotation.html:215
 msgid "Quote Number"
 msgstr "見積番号"
 
-#: app/templates/admin/quotation_details/view_quotation_detail.html:83
+#: app/templates/admin/quotation_details/view_quotation_detail.html:77
 msgid "View in Quotation PDF"
 msgstr "見積PDFを表示"
 
-#: app/templates/admin/quotation_details/view_quotation_detail.html:87
+#: app/templates/admin/quotation_details/view_quotation_detail.html:81
 msgid "Delete Quotation Detail"
 msgstr "見積詳細を削除"
 
+#: app/templates/admin/quotations/pdf.html:12
+msgid "Innovation Matrix, Inc."
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:13
+msgid "3080 Olcott St., B105, Santa Clara, CA 95054"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:14
+msgid "(408) 329-4422 FAX (408) 468-7537"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:28
+msgid "Attn"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:29
+#: app/templates/admin/quotations/view_quotation.html:163
+msgid "Tel"
+msgstr "電話"
+
+#: app/templates/admin/quotations/pdf.html:36
+msgid "Quotation NO."
+msgstr "見積 #"
+
+#: app/templates/admin/quotations/pdf.html:40
+msgid "Quotation Date"
+msgstr "見積作成日"
+
+#: app/templates/admin/quotations/pdf.html:42
+msgid "Valid for 30 days"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:46
+msgid "Shipping Schedule"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:48
+msgid "after receipt of hard copy purchase order, subject to prior sale"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:52
+msgid "Terms of Payment"
+msgstr "Payment Terms"
+
+#: app/templates/admin/quotations/pdf.html:56
+msgid "Shipment Terms"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:60
+msgid "Primary Contact"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:61
+msgid "Onaga, Eimei"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:77
+msgid "Item"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:81
+msgid "Qty"
+msgstr "数量"
+
+#: app/templates/admin/quotations/pdf.html:83
+msgid "Ext Price"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:113
+msgid ""
+"Please refer to the above quotation number on any correspondence related "
+"to this quotation. All purchase orders must indicate the following in "
+"order to be scheduled for delivery"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:114
+msgid "Required delivery date"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:115
+msgid "Carrier TBD"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:116
+msgid "Ship to address"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:117
+msgid "Bill to address"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:122
+msgid "subtotal"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:123
+msgid "discount"
+msgstr "割引"
+
+#: app/templates/admin/quotations/pdf.html:124
+msgid "TOTAL (USD)"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:125
+msgid "Optional items with discount (USD)"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:126
+msgid "plus appropriate tax"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:134
+msgid "Authorized by"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:139
+msgid "Address order to"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:140
+msgid "Innovation Matrix, Inc"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:141
+msgid "Attn: Sales Operations"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:142
+msgid "3080 Olcott St., B105"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:143
+msgid "Santa Clara CA 95054 USA"
+msgstr ""
+
+#: app/templates/admin/quotations/pdf.html:144
+msgid "FAX: (408) 468-7537"
+msgstr ""
+
 #: app/templates/admin/quotations/quotation.html:3
-#: app/templates/admin/quotations/view_quotation.html:25
+#: app/templates/admin/quotations/view_quotation.html:44
 msgid "Edit Quotation"
 msgstr "見積を編集"
 
@@ -667,19 +824,18 @@ msgid "Quotations"
 msgstr "見積り"
 
 #: app/templates/admin/quotations/quotations.html:20
-#: app/templates/admin/quotations/quotations.html:95
+#: app/templates/admin/quotations/quotations.html:126
 msgid "Add Quotation"
 msgstr "見積を追加"
 
 #: app/templates/admin/quotations/quotations.html:28
-#: app/templates/admin/quotations/view_quotation.html:49
+#: app/templates/admin/quotations/view_quotation.html:69
 msgid "Customer Code"
 msgstr "顧客コード"
 
 #: app/templates/admin/quotations/quotations.html:30
-#: app/templates/admin/quotations/view_quotation.html:71
-msgid "Employee ID"
-msgstr "取引担当者ID"
+msgid "Employee Created"
+msgstr ""
 
 #: app/templates/admin/quotations/quotations.html:31
 msgid "Quote Date"
@@ -689,18 +845,30 @@ msgstr "見積作成日"
 msgid "Quote Amount"
 msgstr "見積合計額"
 
-#: app/templates/admin/quotations/quotations.html:68
-#: app/templates/admin/quotations/view_quotation.html:17
+#: app/templates/admin/quotations/quotations.html:69
+msgid "Revise"
+msgstr ""
+
+#: app/templates/admin/quotations/quotations.html:83
+#: app/templates/admin/quotations/view_quotation.html:29
 msgid "Add Quote Detail"
 msgstr "見積詳細を追加"
 
-#: app/templates/admin/quotations/quotations.html:73
+#: app/templates/admin/quotations/quotations.html:89
 msgid "PDF"
 msgstr "PDF"
 
-#: app/templates/admin/quotations/quotations.html:78
+#: app/templates/admin/quotations/quotations.html:94
 msgid "Copy"
 msgstr "コピー"
+
+#: app/templates/admin/quotations/quotations.html:107
+msgid "Unlock"
+msgstr ""
+
+#: app/templates/admin/quotations/quotations.html:113
+msgid "Lock"
+msgstr ""
 
 #: app/templates/admin/quotations/view_quotation.html:3
 msgid "Quotation"
@@ -710,39 +878,47 @@ msgstr "見積"
 msgid "Quotation #"
 msgstr "見積 #"
 
-#: app/templates/admin/quotations/view_quotation.html:21
+#: app/templates/admin/quotations/view_quotation.html:34
 msgid "View PDF"
 msgstr "PDFプレビュー"
 
-#: app/templates/admin/quotations/view_quotation.html:29
+#: app/templates/admin/quotations/view_quotation.html:39
+msgid "Revise Quotation"
+msgstr ""
+
+#: app/templates/admin/quotations/view_quotation.html:49
 msgid "Copy Quotation"
 msgstr "見積をコピー"
 
-#: app/templates/admin/quotations/view_quotation.html:33
+#: app/templates/admin/quotations/view_quotation.html:53
 msgid "Delete Quotation"
 msgstr "見積を削除"
 
-#: app/templates/admin/quotations/view_quotation.html:77
+#: app/templates/admin/quotations/view_quotation.html:91
+msgid "Employee ID"
+msgstr "取引担当者ID"
+
+#: app/templates/admin/quotations/view_quotation.html:97
 msgid "Date"
 msgstr "日時"
 
-#: app/templates/admin/quotations/view_quotation.html:143
-msgid "Tel"
-msgstr "電話"
-
-#: app/templates/admin/quotations/view_quotation.html:149
+#: app/templates/admin/quotations/view_quotation.html:169
 msgid "Ship Schedule"
 msgstr "配達スケジュール"
 
-#: app/templates/admin/quotations/view_quotation.html:173
+#: app/templates/admin/quotations/view_quotation.html:193
 msgid "Quotation Amount"
 msgstr "見積合計額"
 
-#: app/templates/admin/quotations/view_quotation.html:238
+#: app/templates/admin/quotations/view_quotation.html:207
+msgid "Quotation Detail ID"
+msgstr "見積詳細ID"
+
+#: app/templates/admin/quotations/view_quotation.html:260
 msgid "Option"
 msgstr "オプション"
 
-#: app/templates/admin/quotations/view_quotation.html:244
+#: app/templates/admin/quotations/view_quotation.html:266
 msgid "Actions"
 msgstr "アクション"
 
@@ -752,4 +928,7 @@ msgstr "Quotation Web Application"
 
 #~ msgid "Language"
 #~ msgstr "言語"
+
+#~ msgid "Quote Detail ID"
+#~ msgstr "見積詳細ID"
 

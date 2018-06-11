@@ -118,7 +118,7 @@ class QuotationForm(FlaskForm):
     #                         get_label="acc_code", id='acc_code')   
     acc_code = SelectField(gettext('Account Code'), id='acc_code', coerce=int)
     contact = SelectField(gettext('Contact'), id='contacts', coerce=int, validators=[Optional()])
-    q_num = StringField(gettext('Quotation Number'), validators=[DataRequired()])
+    q_num = StringField(gettext('Quotation Number (YY###)'), validators=[DataRequired()])
     e_id = QuerySelectField(gettext('Employee'), query_factory=lambda: Employee.query.all(),
                             get_label="username")
     date = DateField(gettext('Quotaton Date'))

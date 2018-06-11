@@ -69,4 +69,20 @@ $(function() {
     $('form').on('change', function() {
         updateForm();
     });
+
+    // Add logic for signature pad here
+    var wrapper = document.getElementById("signature-pad");
+    var canvas = wrapper.querySelector("canvas");
+    canvas.width = 500;
+    // canvas.height = 100;
+    var signaturePad = new SignaturePad(canvas, {
+      // It's Necessary to use an opaque color when saving image as JPEG;
+      // this option can be omitted if only saving as PNG or SVG
+      backgroundColor: 'rgb(255, 255, 255)'
+    });
+
+
+
+
+
 });
