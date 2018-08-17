@@ -1,6 +1,5 @@
 from flask import abort, flash, redirect, render_template, url_for, make_response, request, jsonify, session
 from flask_login import current_user, login_required
-import pdfkit
 
 from . import admin
 from forms import *
